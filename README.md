@@ -1,6 +1,6 @@
 # JP App
 
-App that helps you study <b>Japanese</b> language with game elements.
+An app designed to help you learn Japanese through real-life conversations, practical phrases, flashcards, with gamification elements.
 
 ### Purpose
 
