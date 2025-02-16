@@ -1,23 +1,28 @@
-import { useState } from "react";
-import SafeScrollView from "@/components/spy/SafeScrollView";
-import Button from "@/components/spy/Button";
+import React, { useState } from "react";
+import SpyScrollView from "@/components/spy/SpyScrollView";
+import SpyButton from "@/components/spy/SpyButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { getTabBarYOffsetPosition } from "@/components/spy/utitlities";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 
-export default function IndexPage() {
+const IndexPage = () => {
   const [isAdmin] = useState(true);
   const isLarge = useIsLargeScreen();
 
   return (
-    <SafeScrollView>
-      <Button href='/projects/projects'>Projects</Button>
-      <Button
+    <SpyScrollView>
+      <SpyButton href="/projects">Projects</SpyButton>
+      <SpyButton
         className="bg-primary-300 absolute right-0"
         style={{ bottom: getTabBarYOffsetPosition(isLarge) }}
       >
         <Ionicons name="add" size={24} color={"white"} />
-      </Button>
-    </SafeScrollView>
+      </SpyButton>
+      {/* <Button>Project 1</Button>
+      <Button>Project 2</Button>
+      <Button>Project 3</Button> */}
+    </SpyScrollView>
   );
-}
+};
+
+export default IndexPage;

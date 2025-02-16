@@ -3,6 +3,7 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import useIsLargeScreen from "./useIsLargeScreen ";
 import { TAB_BAR_LEFT_PADDING_CLASS } from "./constants";
+import SpyView from "./SpyView";
 
 type SafeScrollViewProps = {
   children?: React.ReactNode;
@@ -10,7 +11,7 @@ type SafeScrollViewProps = {
   scrollViewClassName?: string;
 };
 
-const SafeScrollView = (props: SafeScrollViewProps) => {
+const SpyScrollView = (props: SafeScrollViewProps) => {
   const isLargeScreen = useIsLargeScreen();
 
   return (
@@ -24,10 +25,10 @@ const SafeScrollView = (props: SafeScrollViewProps) => {
           props.scrollViewClassName
         }`}
       >
-        <View className="relative w-full h-full gap-2">{props.children}</View>
+        <SpyView>{props.children}</SpyView>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default SafeScrollView;
+export default SpyScrollView;

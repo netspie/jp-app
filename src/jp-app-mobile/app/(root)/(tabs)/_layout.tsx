@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Image, Platform, Text, useWindowDimensions, View } from "react-native";
+import { Platform, Text, useWindowDimensions, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import { TAB_BAR_HEIGHT } from "@/components/spy/constants";
@@ -55,24 +55,29 @@ const TabsLayout = () => {
           margin: 0,
         },
         tabBarStyle: {
+          display: "flex",
           backgroundColor: "white",
           position: "absolute",
           borderTopColor: "#FF3B301A",
           borderTopWidth: 1,
           width: isLargeScreen ? 75 : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
-          paddingBottom: isLargeScreen ? 0 : (Platform.OS !== 'android' ? 75 : 0),
+          paddingBottom: isLargeScreen ? 0 : Platform.OS !== "android" ? 75 : 0,
         },
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(home)"
         options={{
           title: "Home",
           headerShown: false,
+          headerTitle: "Home",
+          headerBackTitleStyle: {
+            fontSize: 0
+          },
           tabBarIcon: ({ focused }) => (
             <TabIcon
-              icon={<Ionicons name="home" size={18} color="black" />}
+              icon={<Ionicons name="home" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
               focused={focused}
               title="Home"
             />
@@ -86,7 +91,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon
-              icon={<Ionicons name="expand-outline" size={18} color="black" />}
+              icon={<Ionicons name="expand-outline" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
               focused={focused}
               title="Explore"
             />
@@ -100,7 +105,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon
-              icon={<Ionicons name="settings" size={18} color="black" />}
+              icon={<Ionicons name="settings" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
               focused={focused}
               title="Settings"
             />
