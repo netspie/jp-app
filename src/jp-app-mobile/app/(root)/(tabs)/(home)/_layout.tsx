@@ -15,13 +15,14 @@ const RootLayout = () => {
       <Stack
         screenOptions={{
           contentStyle: { backgroundColor: "#ffffff" },
+          headerShown: false,
           title: ""
         }}
       >
         <Stack.Screen
           name="index"
           options={{
-            statusBarHidden: false,
+            headerShown: false,
             headerShadowVisible: false,
             headerBackTitle: "Back",
           }}

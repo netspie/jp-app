@@ -1,9 +1,11 @@
-import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "./constants";
+import { Platform } from "react-native";
+import { TAB_BAR_HEIGHT } from "./constants";
 
 export function getHorizontalTabBarHeight(isLargeScreen: boolean) {
   return isLargeScreen ? 0 : TAB_BAR_HEIGHT;
 }
 
 export function getTabBarYOffsetPosition(isLargeScreen: boolean) {
-  return getHorizontalTabBarHeight(isLargeScreen) + (isLargeScreen ? 0 : 8);
+  const extraOffset = Platform.OS === 'ios' ? -20 : 0;
+  return getHorizontalTabBarHeight(isLargeScreen) + (isLargeScreen ? 0 : extraOffset);
 }

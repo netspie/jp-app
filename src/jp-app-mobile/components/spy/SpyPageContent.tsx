@@ -1,6 +1,7 @@
-import { ScrollView, View } from "react-native";
+import { ScrollView } from "react-native";
 import React from "react";
 import SpyView from "./SpyView";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type SafeScrollViewProps = {
   children?: React.ReactNode;
@@ -10,7 +11,7 @@ type SafeScrollViewProps = {
 
 const SpyPageContent = (props: SafeScrollViewProps) => {
   return (
-    <View
+    <SafeAreaView
       className={`relative flex-col bg-white w-full h-full ${props.className}`}
     >
       <ScrollView
@@ -18,7 +19,7 @@ const SpyPageContent = (props: SafeScrollViewProps) => {
       >
         <SpyView>{props.children}</SpyView>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
