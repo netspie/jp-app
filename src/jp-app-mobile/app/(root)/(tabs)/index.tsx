@@ -1,27 +1,18 @@
-import { Link, Stack } from "expo-router";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import SafeScrollView from "@/components/spy/SafeScrollView";
+import Button from "@/components/spy/Button";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export default function Index() {
+export default function IndexPage() {
+  const [isAdmin] = useState(true);
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <View className="gap-10 items-center">
-        <Text className="font-bold text-lg">
-          Welcome to the application
-        </Text>
-        <View className="items-center">
-          <Link href="/settings">Settings</Link>
-          <Link href="/explore">Explore</Link>
-          <Link href="/dialogues/1">Dialogue</Link>
-        </View>
-        <Ionicons name="checkmark-circle" size={32} color="green" />
-      </View>
-    </View>
+    <SafeScrollView>
+      <Button>Projects</Button>
+      <Button className="bg-primary-300 absolute bottom-1/2 right-0">
+        <Ionicons name="add" size={24} />
+      </Button>
+    </SafeScrollView>
   );
 }
