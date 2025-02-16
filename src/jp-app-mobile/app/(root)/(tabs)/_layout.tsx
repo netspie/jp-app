@@ -1,18 +1,21 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Image, Text, View } from "react-native";
+import { Image, Text, useWindowDimensions, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const TabIcon = ({
-  focused,
-  icon,
-  title,
-}: {
-  focused: boolean;
-  icon: any;
-  title: string;
-}) => (
-  <View className="flex-1 mt-3 flex flex-col items-center">
+const TabIcon = (
+  {
+    focused,
+    icon,
+    title,
+  }: {
+    focused: boolean;
+    icon: any;
+    title: string;
+  },
+  className?: string
+) => (
+  <View className={`flex-1 flex flex-col items-center ${className}`}>
     {icon}
     <Text
       className={`${
@@ -25,16 +28,39 @@ const TabIcon = ({
 );
 
 const TabsLayout = () => {
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width > 600;
+
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
+        tabBarVariant: isLargeScreen ? "material" : "uikit",
+        tabBarPosition: isLargeScreen ? "left" : "bottom",
+        tabBarLabelPosition: "below-icon",
+        tabBarActiveBackgroundColor: "transparent",
+        tabBarItemStyle: {
+          padding: 0,
+          margin: 0,
+          marginTop: isLargeScreen ? 0 : 12,
+          height: isLargeScreen ? 65 : undefined,
+        },
+        tabBarLabelStyle: {
+          padding: 0,
+          margin: 0,
+        },
+        tabBarIconStyle: {
+          padding: 0,
+          margin: 0,
+        },
         tabBarStyle: {
           backgroundColor: "white",
           position: "absolute",
           borderTopColor: "#FF3B301A",
           borderTopWidth: 1,
-          minHeight: 70,
+          width: isLargeScreen ? 75 : "100%",
+          height: isLargeScreen ? "100%" : 65,
+          paddingBottom: isLargeScreen ? 0 : 75,
         },
       }}
     >
@@ -52,7 +78,7 @@ const TabsLayout = () => {
           ),
         }}
       />
-     <Tabs.Screen
+      <Tabs.Screen
         name="explore"
         options={{
           title: "Explore",
