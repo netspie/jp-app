@@ -1,14 +1,14 @@
 import React from "react";
-import SpyScrollView from "@/components/spy/SpyScrollView";
+import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 
 const ProjectsPage = () => {
   return (
-    <SpyScrollView>
+    <SpyPageContent>
       <SpyButton href='/(root)/(tabs)/(home)/project/1'>Project 1</SpyButton>
       <SpyButton>Project 2</SpyButton>
       <SpyButton>Project 3</SpyButton>
-    </SpyScrollView>
+    </SpyPageContent>
   );
 };
 

@@ -1,12 +1,12 @@
 import React from "react";
-import SpyScrollView from "@/components/spy/SpyScrollView";
+import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import { Text } from "react-native";
 import SpyView from "@/components/spy/SpyView";
 
 const ProjectPage = () => {
   return (
-    <SpyScrollView>
+    <SpyPageContent>
       <Text className="font-bold text-3xl">Project X</Text>
       <SpyView>
         <Text className="font-bold uppercase">Collections</Text>
@@ -17,7 +17,7 @@ const ProjectPage = () => {
           <SpyButton>Collection 4</SpyButton>
         </SpyView>
       </SpyView>
-    </SpyScrollView>
+    </SpyPageContent>
   );
 };
 

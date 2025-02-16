@@ -11,7 +11,7 @@ type SafeScrollViewProps = {
   scrollViewClassName?: string;
 };
 
-const SpyScrollView = (props: SafeScrollViewProps) => {
+const SpyPageContent = (props: SafeScrollViewProps) => {
   const isLargeScreen = useIsLargeScreen();
 
   return (
@@ -31,4 +31,4 @@ const SpyScrollView = (props: SafeScrollViewProps) => {
   );
 };
 
-export default SpyScrollView;
+export default SpyPageContent;
