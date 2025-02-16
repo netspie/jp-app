@@ -4,6 +4,8 @@ import SpyButton from "@/components/spy/SpyButton";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { getTabBarYOffsetPosition } from "@/components/spy/utitlities";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
+import { View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const IndexPage = () => {
   const [isAdmin] = useState(true);
@@ -18,10 +20,10 @@ const IndexPage = () => {
       >
         <Ionicons name="add" size={24} color={"white"} />
       </SpyButton>
-      {/* <Button>Project 1</Button>
-      <Button>Project 2</Button>
-      <Button>Project 3</Button> */}
     </SpyPageContent>
+    // <SpyPageContent>
+
+    // </SpyPageContent>
   );
 };
 

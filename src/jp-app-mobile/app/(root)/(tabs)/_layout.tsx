@@ -3,7 +3,7 @@ import { Tabs } from "expo-router";
 import { Platform, Text, useWindowDimensions, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
-import { TAB_BAR_HEIGHT } from "@/components/spy/constants";
+import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "@/components/spy/constants";
 
 const TabIcon = (
   {
@@ -60,7 +60,7 @@ const TabsLayout = () => {
           position: "absolute",
           borderTopColor: "#FF3B301A",
           borderTopWidth: 1,
-          width: isLargeScreen ? 75 : "100%",
+          width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
           paddingBottom: isLargeScreen ? 0 : Platform.OS !== "android" ? 75 : 0,
         },

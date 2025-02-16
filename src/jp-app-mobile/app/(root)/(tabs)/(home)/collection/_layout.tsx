@@ -9,14 +9,7 @@ const RootLayout = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen
-        name="index"
-        options={{
-          headerShadowVisible: false,
-          title: "Projects",
-          headerTitle: "Projects"
-        }}
-      ></Stack.Screen>
+      <Stack.Screen name="[id]"></Stack.Screen>
     </Stack>
   );
 };

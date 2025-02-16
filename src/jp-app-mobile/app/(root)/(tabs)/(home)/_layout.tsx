@@ -1,19 +1,33 @@
 import React from "react";
 import { Stack } from "expo-router";
+import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
+import { View } from "react-native";
+import { TAB_BAR_WIDTH } from "@/components/spy/constants";
 
 const RootLayout = () => {
+  const isLargeScreen = useIsLargeScreen();
+
   return (
-    <Stack screenOptions={{ contentStyle: { backgroundColor: "#ffffff" }, title: "Projects"}}>
-      <Stack.Screen
-        name="index"
-        options={{
-          headerShown: false,
-          headerShadowVisible: false,
-          headerBackTitle: "Back",
-          title: "Home",
+    <View
+      className={`w-full h-full`}
+      style={{ paddingLeft: isLargeScreen ? TAB_BAR_WIDTH : 0 }}
+    >
+      <Stack
+        screenOptions={{
+          contentStyle: { backgroundColor: "#ffffff" },
+          title: ""
         }}
-      ></Stack.Screen>
-    </Stack>
+      >
+        <Stack.Screen
+          name="index"
+          options={{
+            statusBarHidden: false,
+            headerShadowVisible: false,
+            headerBackTitle: "Back",
+          }}
+        />
+      </Stack>
+    </View>
   );
 };
 

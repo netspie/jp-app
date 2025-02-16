@@ -11,7 +11,9 @@ const ProjectPage = () => {
       <SpyView>
         <Text className="font-bold uppercase">Collections</Text>
         <SpyView>
-          <SpyButton>Collection 1</SpyButton>
+          <SpyButton href="/(root)/(tabs)/(home)/collection/1">
+            Collection 1
+          </SpyButton>
           <SpyButton>Collection 2</SpyButton>
           <SpyButton>Collection 3</SpyButton>
           <SpyButton>Collection 4</SpyButton>
