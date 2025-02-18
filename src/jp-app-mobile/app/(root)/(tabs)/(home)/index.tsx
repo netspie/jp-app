@@ -15,9 +15,6 @@ const IndexPage = () => {
     <SpyPageContent>
       <SpyButton href="/projects">Projects</SpyButton>
     </SpyPageContent>
-    // <SpyPageContent>
-
-    // </SpyPageContent>
   );
 };
 

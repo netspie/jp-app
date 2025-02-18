@@ -17,12 +17,12 @@ const SpyEditableList = (props: SpyEditableListProps) => {
   return (
     <View className={`relative gap-2 ${props.className}`}>
       <View className="relative flex-row items-end">
-        {props.title && (
+        {props.title ? (
           <Text className="font-bold text-md max-w-full flex-grow">
             {props.title}
           </Text>
-        )}
-        {(props.createButtonShown === undefined || props.createButtonShown) && (
+        ) : null}
+        {(props.createButtonShown === undefined || props.createButtonShown) ? (
           <View className="">
             <SpyButton
               href={props.createHref}
@@ -36,7 +36,7 @@ const SpyEditableList = (props: SpyEditableListProps) => {
               />
             </SpyButton>
           </View>
-        )}
+        ) : null}
       </View>
       {props.children}
     </View>

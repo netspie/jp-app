@@ -19,13 +19,6 @@ const TabIcon = (
 ) => (
   <View className={`flex-1 flex flex-col items-center ${className}`}>
     {icon}
-    {/* <Text
-      className={`${
-        focused ? "text-primary-300" : "text-black-200"
-      } text-xs w-full text-center mt-1`}
-    >
-      {title}
-    </Text> */}
   </View>
 );
 
@@ -35,7 +28,6 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        // tabBarShowLabel: false,
         tabBarVariant: isLargeScreen ? "material" : "uikit",
         tabBarPosition: isLargeScreen ? "left" : "bottom",
         tabBarLabelPosition: "below-icon",

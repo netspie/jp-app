@@ -23,12 +23,12 @@ type ButtonProps = {
 const SpyButton = (props: ButtonProps) => {
   return (
     <>
-      {props.href && (
+      {props.href ? (
         <Link href={props.href} asChild>
           <ButtonTouchable {...props} />
         </Link>
-      )}
-      {props.href === undefined && <ButtonTouchable {...props} />}
+      ) : null}
+      {props.href === undefined ? <ButtonTouchable {...props} /> : null}
     </>
   );
 };
@@ -39,15 +39,20 @@ const ButtonTouchable = React.forwardRef(
       <TouchableOpacity
         ref={ref}
         onPress={props.onPress}
-        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${clsx(props.className)}`}
+        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${clsx(
+          props.className
+        )}`}
         style={props.style}
       >
-        {typeof props.children === 'string' && (
-          <Text className="font-bold text-center" style={props.textStyle}>{props.children}</Text>
-        )}
+        {typeof props.children === "string" ? (
+          <Text className="font-bold text-center" style={props.textStyle}>
+            {String(props.children)}
+          </Text>
+        ) : null}
 
-        {(React.isValidElement(props.children) || Array.isArray(props.children)) &&
-          props.children}
+        {React.isValidElement(props.children) || Array.isArray(props.children)
+          ? props.children
+          : null}
       </TouchableOpacity>
     );
   }
