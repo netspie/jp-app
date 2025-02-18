@@ -19,13 +19,13 @@ const TabIcon = (
 ) => (
   <View className={`flex-1 flex flex-col items-center ${className}`}>
     {icon}
-    <Text
+    {/* <Text
       className={`${
         focused ? "text-primary-300" : "text-black-200"
       } text-xs w-full text-center mt-1`}
     >
       {title}
-    </Text>
+    </Text> */}
   </View>
 );
 
@@ -35,7 +35,7 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarShowLabel: false,
+        // tabBarShowLabel: false,
         tabBarVariant: isLargeScreen ? "material" : "uikit",
         tabBarPosition: isLargeScreen ? "left" : "bottom",
         tabBarLabelPosition: "below-icon",
@@ -49,11 +49,13 @@ const TabsLayout = () => {
         tabBarLabelStyle: {
           padding: 0,
           margin: 0,
+          minHeight: 200,
         },
         tabBarIconStyle: {
           padding: 0,
           margin: 0,
         },
+        tabBarActiveTintColor: "red",
         tabBarStyle: {
           display: "flex",
           backgroundColor: "white",
@@ -75,6 +77,7 @@ const TabsLayout = () => {
           headerBackTitleStyle: {
             fontSize: 0
           },
+          tabBarLabelPosition: "below-icon",
           tabBarIcon: ({ focused }) => (
             <TabIcon
               icon={<Ionicons name="home" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}

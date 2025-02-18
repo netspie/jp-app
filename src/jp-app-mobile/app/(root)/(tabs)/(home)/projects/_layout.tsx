@@ -14,9 +14,15 @@ const RootLayout = () => {
         options={{
           headerShadowVisible: false,
           title: "Projects",
-          headerTitle: "Projects"
+          headerTitle: "Projects",
         }}
-      ></Stack.Screen>
+      />
+      <Stack.Screen
+        name="create"
+        options={{
+          presentation: "modal"
+        }}
+      />
     </Stack>
   );
 };

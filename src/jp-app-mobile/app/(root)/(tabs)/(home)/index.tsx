@@ -14,12 +14,6 @@ const IndexPage = () => {
   return (
     <SpyPageContent>
       <SpyButton href="/projects">Projects</SpyButton>
-      <SpyButton
-        className="bg-primary-300 absolute right-0"
-        style={{ bottom: getTabBarYOffsetPosition(isLarge) }}
-      >
-        <Ionicons name="add" size={24} color={"white"} />
-      </SpyButton>
     </SpyPageContent>
     // <SpyPageContent>
 

@@ -2,6 +2,7 @@ import {
   GestureResponderEvent,
   StyleProp,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
@@ -15,6 +16,7 @@ type ButtonProps = {
   className?: string;
   href?: Href;
   style?: StyleProp<ViewStyle> | undefined;
+  textStyle?: StyleProp<TextStyle> | undefined;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 };
 
@@ -23,7 +25,7 @@ const SpyButton = (props: ButtonProps) => {
     <>
       {props.href && (
         <Link href={props.href} asChild>
-          <ButtonTouchable {...props} className="w-full"/>
+          <ButtonTouchable {...props} />
         </Link>
       )}
       {props.href === undefined && <ButtonTouchable {...props} />}
@@ -37,11 +39,11 @@ const ButtonTouchable = React.forwardRef(
       <TouchableOpacity
         ref={ref}
         onPress={props.onPress}
-        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${props.className}`}
+        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${clsx(props.className)}`}
         style={props.style}
       >
         {typeof props.children === 'string' && (
-          <Text className="font-bold text-center">{props.children}</Text>
+          <Text className="font-bold text-center" style={props.textStyle}>{props.children}</Text>
         )}
 
         {(React.isValidElement(props.children) || Array.isArray(props.children)) &&
