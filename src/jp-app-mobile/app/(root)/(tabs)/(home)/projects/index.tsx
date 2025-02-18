@@ -1,10 +1,20 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import SpyEditableList from "@/components/spy/SpyEditableList";
-import { BottomSheetModal, BottomSheetView } from "@gorhom/bottom-sheet";
-import { Button, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetTextInput,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
+import { Button, Text, StyleSheet, TouchableOpacity, View } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types";
+import { SearchBar } from "react-native-screens";
+import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
+import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 
 const ProjectsPage = () => {
   const isLarge = useIsLargeScreen();
@@ -15,51 +25,28 @@ const ProjectsPage = () => {
   const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
-  }, []);
 
   return (
     <SpyPageContent>
-      <SpyEditableList title="Projects" createHref="/projects/create">
-        <SpyButton href="/(root)/(tabs)/(home)/project/1">Project 1</SpyButton>
-      </SpyEditableList>
-      <SpyEditableList title="Boba" createHref="/projects/create">
-        <SpyButton href="/(root)/(tabs)/(home)/project/1">Project 1</SpyButton>
-      </SpyEditableList>
-      <SpyButton className="bg-primary-300" onPress={handlePresentModalPress}>Open</SpyButton>
-      <BottomSheetModal
-        ref={bottomSheetModalRef}
-        onChange={handleSheetChanges}
-        handleStyle={{
-          backgroundColor: "#F4F5F5",
-          borderTopEndRadius: 20,
-          borderTopStartRadius: 20,
-        }}
-        style={{}}
-      >
-        <BottomSheetView
-          style={{
-            padding: 12,
-            paddingTop: 0,
-            paddingBottom: 36,
-            backgroundColor: "#F4F5F5",
-          }}
+      <View className="flex-row gap-4 justify-end">
+        <SpyButton
+          onPress={handlePresentModalPress}
+          className={`bg-primary-300 p-0 m-0`}
         >
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-          <Text>Awesome 🎉</Text>
-        </BottomSheetView>
-      </BottomSheetModal>
+          <Ionicons name="add" size={20} color={"white"} />
+        </SpyButton>
+      </View>
+      <SpyEditableList
+        title="Boba"
+        createHref="/projects/create"
+        createButtonShown={false}
+      >
+        <SpyButton href="/(root)/(tabs)/(home)/project/1">Project 1</SpyButton>
+      </SpyEditableList>
+      <SpyBottomSheetModal ref={bottomSheetModalRef} className="gap-4 pb-12">
+          <SpyBottomSheetTextInput label="Name" />
+          <SpyButton>Submit</SpyButton>
+      </SpyBottomSheetModal>
     </SpyPageContent>
   );
 };

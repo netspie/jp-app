@@ -39,9 +39,9 @@ const ButtonTouchable = React.forwardRef(
       <TouchableOpacity
         ref={ref}
         onPress={props.onPress}
-        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${clsx(
+        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${
           props.className
-        )}`}
+        }`}
         style={props.style}
       >
         {typeof props.children === "string" ? (
