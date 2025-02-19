@@ -4,12 +4,17 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 import "./globals.css";
 
+import { ThemeProvider } from "@/components/spy/SpyThemeProvider";
+import { themes } from "./themes";
+
 export default function RootLayout() {
   return (
-    <GestureHandlerRootView>
-      <BottomSheetModalProvider>
-        <Stack screenOptions={{ headerShown: false }} />
-      </BottomSheetModalProvider>
-    </GestureHandlerRootView>
+    <ThemeProvider themes={themes}>
+      <GestureHandlerRootView>
+        <BottomSheetModalProvider>
+          <Stack screenOptions={{ headerShown: false }} />
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </ThemeProvider>
   );
 }

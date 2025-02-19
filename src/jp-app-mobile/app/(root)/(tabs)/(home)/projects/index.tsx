@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { createContext, useCallback, useRef, useState } from "react";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
@@ -18,14 +18,18 @@ import {
   GestureResponderEvent,
   FlatList,
   ScrollView,
+  Pressable,
+  Platform,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types";
-import { SearchBar } from "react-native-screens";
 import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
 import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 import SpyIconButton from "@/components/spy/SpyIconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { themes } from "@/app/themes";
+import { ThemeProvider } from "@/components/spy/SpyThemeProvider";
+import { useColorScheme } from "nativewind";
+import { useAppColorScheme } from "@/components/spy/useAppColorScheme";
 
 type ProjectViewProps = {
   title: string;
@@ -53,6 +57,7 @@ const ProjectsPage = () => {
   const isLarge = useIsLargeScreen();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const { toggleAppColorScheme } = useAppColorScheme();
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -71,6 +76,16 @@ const ProjectsPage = () => {
           </SpyIconButton>
         </View>
         <SpyPageContent safe={false}>
+          <Pressable
+            className="flex-1 items-center justify-center bg-neutral-100 "
+            onPress={toggleAppColorScheme}
+          >
+            <Text className="text-black">
+              {`Try clicking me!`}
+            </Text>
+          </Pressable>
+          <Text className="text-primary">This is primary text</Text>
+          <Text className="text-secondary">This is secondary text</Text>
           <View className="">
             <ScrollView horizontal>
               <View className="flex flex-row gap-2">
