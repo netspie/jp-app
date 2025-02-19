@@ -20,16 +20,11 @@ export const ThemeContext = createContext<{
 });
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const { appColorScheme } = useAppColorScheme();
-  const [colorScheme, setColorScheme] = useState<"light" | "dark">("light");
-
-  useEffect(() => {
-    setColorScheme(colorScheme)
-  }, [appColorScheme]);
+  const { value } = useAppColorScheme();
 
   return (
-    <ThemeContext.Provider value={{ theme: colorScheme }}>
-      <View style={props.themes["classic"][colorScheme]} className="flex-1">
+    <ThemeContext.Provider value={{ theme: value }}>
+      <View style={props.themes["classic"][value]} className="flex-1">
         {props.children}
       </View>
     </ThemeContext.Provider>

@@ -5,7 +5,7 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import "./globals.css";
 
 import { ThemeProvider } from "@/components/spy/SpyThemeProvider";
-import { themes } from "./themes";
+import themes from "./themes";
 
 export default function RootLayout() {
   return (

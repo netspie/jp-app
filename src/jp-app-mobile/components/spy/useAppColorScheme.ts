@@ -1,12 +1,11 @@
 import { useColorScheme } from "nativewind";
 import { Platform } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useColorSchemeStore } from "./colorSchemeStore";
 
 export const useAppColorScheme = () => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
-  const [appColorScheme, setAppColorScheme] = useState<"light" | "dark">(
-    "light"
-  );
+  const store = useColorSchemeStore();
 
   useEffect(() => {
     const currentColorScheme =
@@ -17,22 +16,23 @@ export const useAppColorScheme = () => {
         ? "light"
         : "dark";
 
-    setAppColorScheme(newColorScheme);
+    store.setValue(newColorScheme);
   }, []);
 
-  const toggleAppColorScheme = () => {
+  const toggleAppColorScheme = useCallback(() => {
     if (Platform.OS === "web") {
       const colorScheme = localStorage.getItem("colorScheme");
       const newColorScheme =
         colorScheme == null || colorScheme == "light" ? "dark" : "light";
 
-      setAppColorScheme(newColorScheme);
+      store.setValue(newColorScheme);
       localStorage.setItem("colorScheme", newColorScheme);
     } else {
-      setAppColorScheme(colorScheme == undefined || "light" ? "dark" : "light");
       toggleColorScheme();
+      store.setValue(store.value == "light" ? "dark" : "light");
     }
-  };
+  }, [store.value]);
 
-  return { appColorScheme, toggleAppColorScheme };
+  const value = store.value;
+  return { value, toggleAppColorScheme };
 };

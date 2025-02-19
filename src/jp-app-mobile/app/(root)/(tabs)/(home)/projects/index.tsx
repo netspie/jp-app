@@ -1,34 +1,15 @@
-import React, { createContext, useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import SpyEditableList from "@/components/spy/SpyEditableList";
-import {
-  BottomSheetBackdrop,
-  BottomSheetModal,
-  BottomSheetTextInput,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
-import {
-  Button,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  GestureResponderEvent,
-  FlatList,
-  ScrollView,
-  Pressable,
-  Platform,
-} from "react-native";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { Text, StyleSheet, View, ScrollView, Pressable } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
 import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 import SpyIconButton from "@/components/spy/SpyIconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { themes } from "@/app/themes";
-import { ThemeProvider } from "@/components/spy/SpyThemeProvider";
-import { useColorScheme } from "nativewind";
 import { useAppColorScheme } from "@/components/spy/useAppColorScheme";
 
 type ProjectViewProps = {
@@ -76,14 +57,9 @@ const ProjectsPage = () => {
           </SpyIconButton>
         </View>
         <SpyPageContent safe={false}>
-          <Pressable
-            className="flex-1 items-center justify-center bg-neutral-100 "
-            onPress={toggleAppColorScheme}
-          >
-            <Text className="text-black">
-              {`Try clicking me!`}
-            </Text>
-          </Pressable>
+          <SpyIconButton onPress={toggleAppColorScheme}>
+            <Ionicons name="partly-sunny" size={20} />
+          </SpyIconButton>
           <Text className="text-primary">This is primary text</Text>
           <Text className="text-secondary">This is secondary text</Text>
           <View className="">

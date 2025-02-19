@@ -1,6 +1,6 @@
 import { vars } from "nativewind";
 
-export const themes = {
+const themes = {
   classic: {
     light: vars({
       "--color-primary-default": "#593DA4",
@@ -18,3 +18,5 @@ export const themes = {
     }),
   },
 };
+
+export default themes;
