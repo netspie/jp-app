@@ -12,10 +12,11 @@ import clsx from "clsx";
 import { Href, Link } from "expo-router";
 
 type ButtonProps = {
-  children: React.ReactNode | string;
+  children?: React.ReactNode | string;
   className?: string;
   href?: Href;
   style?: StyleProp<ViewStyle> | undefined;
+  textClassName?: string
   textStyle?: StyleProp<TextStyle> | undefined;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 };
@@ -45,7 +46,7 @@ const ButtonTouchable = React.forwardRef(
         style={props.style}
       >
         {typeof props.children === "string" ? (
-          <Text className="font-bold text-center" style={props.textStyle}>
+          <Text className={`font-bold text-center ${props.textClassName}`} style={props.textStyle}>
             {String(props.children)}
           </Text>
         ) : null}

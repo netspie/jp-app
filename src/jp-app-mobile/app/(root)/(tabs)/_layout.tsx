@@ -4,6 +4,7 @@ import { Platform, Text, useWindowDimensions, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "@/components/spy/constants";
+import SpyIconButton from "@/components/spy/SpyIconButton";
 
 const TabIcon = (
   {
@@ -67,18 +68,28 @@ const TabsLayout = () => {
           headerShown: false,
           headerTitle: "Home",
           headerBackTitleStyle: {
-            fontSize: 0
+            fontSize: 0,
           },
           tabBarLabelPosition: "below-icon",
           tabBarIcon: ({ focused }) => (
             <TabIcon
-              icon={<Ionicons name="home" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
+              icon={
+                <Ionicons
+                  name="home"
+                  size={18}
+                  color="black"
+                  style={{ color: focused ? "red" : "unset" }}
+                />
+              }
               focused={focused}
               title="Home"
             />
           ),
         }}
       />
+      <SpyIconButton>
+        <Ionicons name="add" size={20} color={"white"} />
+      </SpyIconButton>
       <Tabs.Screen
         name="explore"
         options={{
@@ -86,14 +97,21 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <TabIcon
-              icon={<Ionicons name="expand-outline" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
+              icon={
+                <Ionicons
+                  name="expand-outline"
+                  size={18}
+                  color="black"
+                  style={{ color: focused ? "red" : "unset" }}
+                />
+              }
               focused={focused}
               title="Explore"
             />
           ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="settings"
         options={{
           title: "Settings",
@@ -106,7 +124,7 @@ const TabsLayout = () => {
             />
           ),
         }}
-      />
+      /> */}
     </Tabs>
   );
 };
