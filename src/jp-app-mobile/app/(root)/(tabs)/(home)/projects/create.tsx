@@ -2,7 +2,7 @@ import { View, Text, TextInput, Button } from "react-native";
 import React, { useState } from "react";
 import { Link } from "expo-router";
 import SpyButton from "@/components/spy/SpyButton";
-import clsx from "clsx";
+import SpyText from "@/components/spy/SpyText";
 
 const ProjectForm = () => {
   const [name, setName] = useState("");
@@ -10,7 +10,7 @@ const ProjectForm = () => {
   return (
     <View className="flex flex-col h-full p-3 gap-2">
       <View className="gap-1">
-        <Text className="text-xs">Project Name</Text>
+        <SpyText className="text-xs">Project Name</SpyText>
         <TextInput
           style={{ height: 40, borderColor: "gray", borderWidth: 1 }}
           onChangeText={setName}

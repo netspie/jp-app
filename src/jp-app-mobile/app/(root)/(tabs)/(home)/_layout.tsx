@@ -16,7 +16,7 @@ const RootLayout = () => {
         screenOptions={{
           contentStyle: { backgroundColor: "#ffffff" },
           headerShown: false,
-          title: ""
+          title: "",
         }}
       >
         <Stack.Screen

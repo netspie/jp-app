@@ -7,6 +7,7 @@ export type ThemeColors = {
   accent: string;
   grey: string;
   greyLight: string;
+  normal: string;
 };
 
 export type DynamicThemes = {
@@ -17,8 +18,8 @@ export type DynamicThemes = {
 };
 
 export const useCurrentThemeColors = (themeColors: DynamicThemes) => {
-  const { appColorScheme } = useAppColorScheme()
+  const { appColorScheme } = useAppColorScheme();
 
-  const currentThemeColors = themeColors?.["classic"]?.[appColorScheme]
-  return { currentThemeColors }
-}
+  const currentThemeColors = themeColors?.["classic"]?.[appColorScheme];
+  return { currentThemeColors };
+};

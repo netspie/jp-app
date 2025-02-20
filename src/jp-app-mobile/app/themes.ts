@@ -4,7 +4,7 @@ import {
 } from "@/components/spy/themeTypes";
 import { vars } from "nativewind";
 
-export const jpThemeColors: DynamicThemes = {
+const jpThemeColors: DynamicThemes = {
   classic: {
     light: {
       primary: "#593DA4",
@@ -13,6 +13,7 @@ export const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#F1F3F5",
+      normal: "black"
     },
     dark: {
       primary: "#FC94A0",
@@ -21,6 +22,7 @@ export const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#B2B2B2",
+      normal: "#E2E2E2"
     },
   },
 };
@@ -34,6 +36,7 @@ const themes = {
       "--color-accent-default": jpThemeColors.classic.light.accent,
       "--color-grey-default": jpThemeColors.classic.light.grey,
       "--color-grey-light-default": jpThemeColors.classic.light.greyLight,
+      "--color-normal-default": jpThemeColors.classic.light.normal
     }),
     dark: vars({
       "--color-primary-default": jpThemeColors.classic.dark.primary,
@@ -42,6 +45,7 @@ const themes = {
       "--color-accent-default": jpThemeColors.classic.dark.accent,
       "--color-grey-default": jpThemeColors.classic.dark.grey,
       "--color-grey-light-default": jpThemeColors.classic.dark.greyLight,
+      "--color-normal-default": jpThemeColors.classic.dark.normal
     }),
   },
 };

@@ -1,6 +1,5 @@
-import { useColorScheme } from "nativewind";
-import { createContext, useEffect, useState } from "react";
-import { Platform, View } from "react-native";
+import { createContext } from "react";
+import { View } from "react-native";
 import { useAppColorScheme } from "./useAppColorScheme";
 
 interface ThemeProviderProps {

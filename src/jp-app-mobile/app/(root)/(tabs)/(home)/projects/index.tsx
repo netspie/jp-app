@@ -17,6 +17,8 @@ import SpyIconButton from "@/components/spy/SpyIconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
 import SpyDarkModeSwitch from "@/components/spy/SpyDarkModeSwitch";
 import { useThemeColors } from "@/app/themes";
+import SpyText from "@/components/spy/SpyText";
+import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 
 type ProjectViewProps = {
   title: string;
@@ -32,8 +34,8 @@ const ProjectView = (props: ProjectViewProps) => {
     >
       {props.icon}
       <View className="gap-1">
-        <Text className="font-bold">{props.title}</Text>
-        {props.author && <Text className="text-black-100">{props.author}</Text>}
+        <SpyText className="font-bold">{props.title}</SpyText>
+        {props.author && <SpyText className="text-black-100">{props.author}</SpyText>}
       </View>
     </SpyButton>
   );
@@ -51,7 +53,7 @@ const ProjectsPage = () => {
   }, []);
 
   return (
-    <SafeAreaView>
+    <SpySafeAreaView>
       <View>
         <View className="flex-row gap-2 justify-end mx-2 mb-2">
           <SpyDarkModeSwitch
@@ -124,7 +126,7 @@ const ProjectsPage = () => {
           </SpyBottomSheetModal>
         </SpyPageContent>
       </View>
-    </SafeAreaView>
+    </SpySafeAreaView>
   );
 };
 
