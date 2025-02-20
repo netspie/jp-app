@@ -10,6 +10,7 @@ module.exports = {
         tertiary: "var(--color-tertiary-default)",
         accent: "var(--color-accent-default)",
         grey: "var(--color-grey-default)",
+        "grey-light": "var(--color-grey-light-default)",
       },
     },
   },

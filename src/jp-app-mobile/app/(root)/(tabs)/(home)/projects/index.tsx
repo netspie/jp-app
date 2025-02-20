@@ -4,13 +4,19 @@ import SpyButton from "@/components/spy/SpyButton";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import SpyEditableList from "@/components/spy/SpyEditableList";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { Text, StyleSheet, View, ScrollView, Pressable } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+} from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
 import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 import SpyIconButton from "@/components/spy/SpyIconButton";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppColorScheme } from "@/components/spy/useAppColorScheme";
+import SpyDarkModeSwitch from "@/components/spy/SpyDarkModeSwitch";
+import { useThemeColors } from "@/app/themes";
 
 type ProjectViewProps = {
   title: string;
@@ -22,8 +28,7 @@ const ProjectView = (props: ProjectViewProps) => {
   return (
     <SpyButton
       href="/(root)/(tabs)/(home)/project/1"
-      className="w-full flex-row border rounded-md p-4 gap-6"
-      style={{ backgroundColor: "transparent" }}
+      className="w-full flex-row rounded-md p-4 gap-6 bg-grey-light"
     >
       {props.icon}
       <View className="gap-1">
@@ -36,9 +41,9 @@ const ProjectView = (props: ProjectViewProps) => {
 
 const ProjectsPage = () => {
   const isLarge = useIsLargeScreen();
+  const { themeColors } = useThemeColors()
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const { toggleAppColorScheme } = useAppColorScheme();
 
   // callbacks
   const handlePresentModalPress = useCallback(() => {
@@ -49,7 +54,14 @@ const ProjectsPage = () => {
     <SafeAreaView>
       <View>
         <View className="flex-row gap-2 justify-end mx-2 mb-2">
-          <SpyIconButton onPress={handlePresentModalPress}>
+          <SpyDarkModeSwitch
+            mainColor={themeColors.secondary}
+            disabledColor={themeColors.greyLight}
+          />
+          <SpyIconButton
+            className="bg-secondary"
+            onPress={handlePresentModalPress}
+          >
             <Ionicons name="add" size={20} color={"white"} />
           </SpyIconButton>
           <SpyIconButton className="bg-[#d4af37]">
@@ -57,9 +69,6 @@ const ProjectsPage = () => {
           </SpyIconButton>
         </View>
         <SpyPageContent safe={false}>
-          <SpyIconButton onPress={toggleAppColorScheme}>
-            <Ionicons name="partly-sunny" size={20} />
-          </SpyIconButton>
           <Text className="text-primary">This is primary text</Text>
           <Text className="text-secondary">This is secondary text</Text>
           <View className="">

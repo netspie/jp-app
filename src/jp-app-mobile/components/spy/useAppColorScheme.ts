@@ -1,6 +1,6 @@
 import { useColorScheme } from "nativewind";
 import { Platform } from "react-native";
-import { useState, useEffect, useCallback } from "react";
+import { useEffect, useCallback } from "react";
 import { useColorSchemeStore } from "./colorSchemeStore";
 
 export const useAppColorScheme = () => {
@@ -33,6 +33,6 @@ export const useAppColorScheme = () => {
     }
   }, [store.value]);
 
-  const value = store.value;
-  return { value, toggleAppColorScheme };
+  const appColorScheme = store.value;
+  return { appColorScheme, toggleAppColorScheme };
 };

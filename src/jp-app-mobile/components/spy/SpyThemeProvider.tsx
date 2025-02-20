@@ -20,11 +20,11 @@ export const ThemeContext = createContext<{
 });
 
 export const ThemeProvider = (props: ThemeProviderProps) => {
-  const { value } = useAppColorScheme();
+  const { appColorScheme } = useAppColorScheme();
 
   return (
-    <ThemeContext.Provider value={{ theme: value }}>
-      <View style={props.themes["classic"][value]} className="flex-1">
+    <ThemeContext.Provider value={{ theme: appColorScheme }}>
+      <View style={props.themes["classic"][appColorScheme]} className="flex-1">
         {props.children}
       </View>
     </ThemeContext.Provider>
