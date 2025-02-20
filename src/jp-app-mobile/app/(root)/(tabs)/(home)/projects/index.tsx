@@ -64,7 +64,7 @@ const ProjectsPage = () => {
           >
             <Ionicons name="add" size={20} color={"white"} />
           </SpyIconButton>
-          <SpyIconButton className="bg-[#d4af37]">
+          <SpyIconButton className="bg-yellow-500">
             <Ionicons name="bag" size={20} color={"white"} />
           </SpyIconButton>
         </View>

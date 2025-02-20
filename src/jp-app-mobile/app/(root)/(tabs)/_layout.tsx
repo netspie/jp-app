@@ -1,131 +1,17 @@
 import React from "react";
-import { Tabs } from "expo-router";
-import { Platform, Text, useWindowDimensions, View } from "react-native";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
-import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "@/components/spy/constants";
-import SpyIconButton from "@/components/spy/SpyIconButton";
-
-const TabIcon = (
-  {
-    focused,
-    icon,
-    title,
-  }: {
-    focused: boolean;
-    icon: any;
-    title: string;
-  },
-  className?: string
-) => (
-  <View className={`flex-1 flex flex-col items-center ${className}`}>
-    {icon}
-  </View>
-);
+import { Tabs } from "expo-router"
+import SpyTabs, { createOptions } from "@/components/spy/SpyTabs";
+import { useThemeColors } from "@/app/themes";
 
 const TabsLayout = () => {
-  const isLargeScreen = useIsLargeScreen();
+  const { themeColors } = useThemeColors()
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarVariant: isLargeScreen ? "material" : "uikit",
-        tabBarPosition: isLargeScreen ? "left" : "bottom",
-        tabBarLabelPosition: "below-icon",
-        tabBarActiveBackgroundColor: "transparent",
-        tabBarItemStyle: {
-          padding: 0,
-          margin: 0,
-          marginTop: isLargeScreen ? 0 : 12,
-          height: isLargeScreen ? TAB_BAR_HEIGHT : undefined,
-        },
-        tabBarLabelStyle: {
-          padding: 0,
-          margin: 0,
-          minHeight: 200,
-        },
-        tabBarIconStyle: {
-          padding: 0,
-          margin: 0,
-        },
-        tabBarActiveTintColor: "red",
-        tabBarStyle: {
-          display: "flex",
-          backgroundColor: "white",
-          position: "absolute",
-          borderTopColor: "#FF3B301A",
-          borderTopWidth: 1,
-          width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
-          height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
-          paddingBottom: isLargeScreen ? 0 : Platform.OS !== "android" ? 75 : 0,
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="(home)"
-        options={{
-          title: "Home",
-          headerShown: false,
-          headerTitle: "Home",
-          headerBackTitleStyle: {
-            fontSize: 0,
-          },
-          tabBarLabelPosition: "below-icon",
-          tabBarIcon: ({ focused }) => (
-            <TabIcon
-              icon={
-                <Ionicons
-                  name="home"
-                  size={18}
-                  color="black"
-                  style={{ color: focused ? "red" : "unset" }}
-                />
-              }
-              focused={focused}
-              title="Home"
-            />
-          ),
-        }}
-      />
-      <SpyIconButton>
-        <Ionicons name="add" size={20} color={"white"} />
-      </SpyIconButton>
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon
-              icon={
-                <Ionicons
-                  name="expand-outline"
-                  size={18}
-                  color="black"
-                  style={{ color: focused ? "red" : "unset" }}
-                />
-              }
-              focused={focused}
-              title="Explore"
-            />
-          ),
-        }}
-      />
-      {/* <Tabs.Screen
-        name="settings"
-        options={{
-          title: "Settings",
-          headerShown: false,
-          tabBarIcon: ({ focused }) => (
-            <TabIcon
-              icon={<Ionicons name="settings" size={18} color="black" style={{ color: focused ? "red" : "unset"}} />}
-              focused={focused}
-              title="Settings"
-            />
-          ),
-        }}
-      /> */}
-    </Tabs>
+    <SpyTabs>
+      <Tabs.Screen name="(home)" options={createOptions("Home", "home", themeColors.secondary)} />
+      <Tabs.Screen name="explore" options={createOptions("Explore", "airplane", themeColors.secondary)} />
+      <Tabs.Screen name="settings" options={createOptions("Settings", "settings", themeColors.secondary)} />
+    </SpyTabs>
   );
 };
 
