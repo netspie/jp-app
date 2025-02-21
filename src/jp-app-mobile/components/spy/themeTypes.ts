@@ -44,7 +44,7 @@ export const defaultThemeVariables = vars({
   "--color-tertiary-default": "green", // Green
   "--color-accent-default": "#f9c04a", // Yellow
   "--color-grey-default": "#979797", // Grey
-  "--color-grey-light-default": "#F1F3F5", // Light grey
+  "--color-greyLight-default": "#F1F3F5", // Light grey
   "--color-normal-default": "black", // Black
   "--color-background": "#F4F4F4", // Light background grey
 });
@@ -54,7 +54,7 @@ export const useCurrentThemeColors = () => {
   const theme = useColorThemeStore((x) => x.theme);
 
   const currentThemeColors = theme?.["classic"]?.[appColorScheme];
-  return { currentThemeColors };
+  return { currentThemeColors, appColorScheme };
 };
 
 export const useCurrentThemeColorVariables = () => {
@@ -64,6 +64,7 @@ export const useCurrentThemeColorVariables = () => {
   return {
     currentThemeColorVariables:
       themeVariables["classic"]?.[appColorScheme] ?? defaultThemeVariables,
+    appColorScheme,
   };
 };
 
@@ -78,7 +79,7 @@ export function createThemes(themes: DynamicThemes) {
     };
   });
 
-  return Object.fromEntries(themeVariableEntries.map(x => [x.key, x.value]));
+  return Object.fromEntries(themeVariableEntries.map((x) => [x.key, x.value]));
 }
 
 function createSchemeVariables(themeColors: ThemeColors) {
@@ -93,4 +94,3 @@ function createSchemeVariables(themeColors: ThemeColors) {
 
   return schemeVariables;
 }
-

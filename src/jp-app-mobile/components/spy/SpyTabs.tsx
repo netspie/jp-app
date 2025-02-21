@@ -4,6 +4,7 @@ import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "./constants";
 import { Platform, View } from "react-native";
 import useIsLargeScreen from "./useIsLargeScreen ";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useCurrentThemeColors } from "./themeTypes";
 
 const TabIcon = (
   {
@@ -32,6 +33,7 @@ type SpyTabsProps = {
 
 const SpyTabs = (props: SpyTabsProps) => {
   const isLargeScreen = useIsLargeScreen();
+  const { currentThemeColors, appColorScheme } = useCurrentThemeColors();
 
   return (
     <Tabs
@@ -58,7 +60,7 @@ const SpyTabs = (props: SpyTabsProps) => {
         },
         tabBarStyle: {
           display: "flex",
-          backgroundColor: "white",
+          backgroundColor: currentThemeColors.primary,
           position: "absolute",
           borderTopColor: "#FF3B301A",
           borderTopWidth: 1,
@@ -78,16 +80,19 @@ export default SpyTabs;
 export const createOptions = (
   title: string,
   icon: string,
-  focusedColor: string
+  focusedColor?: string
 ): BottomTabNavigationOptions & {
   href?: Href | null;
 } => {
+  const { currentThemeColors } = useCurrentThemeColors();
+  const getFocusedColor = () => focusedColor ?? currentThemeColors.secondary;
+
   return {
     title: title,
     headerShown: false,
-    tabBarActiveTintColor: focusedColor,
+    tabBarActiveTintColor: getFocusedColor(),
     tabBarIcon: ({ focused }) => (
-      <TabIcon focusedColor={focusedColor} icon={icon} focused={focused} />
+      <TabIcon focusedColor={getFocusedColor()} icon={icon} focused={focused} />
     ),
   };
 };

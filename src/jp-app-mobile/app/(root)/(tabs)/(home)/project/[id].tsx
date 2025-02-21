@@ -3,12 +3,16 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import { Text } from "react-native";
 import SpyView from "@/components/spy/SpyView";
+import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
+import JPToolbar from "@/app/(root)/JPToolbar";
+import SpyHeader from "@/components/spy/SpyHeader";
 
 const ProjectPage = () => {
   return (
-    <SpyPageContent>
-      <Text className="font-bold text-3xl">Project X</Text>
-      <SpyView>
+    <SpySafeAreaView>
+      <JPToolbar />
+      <SpyHeader>Project 17</SpyHeader>
+      <SpyPageContent safe={false}>
         <Text className="font-bold uppercase">Collections</Text>
         <SpyView>
           <SpyButton href="/(root)/(tabs)/(home)/collection/1">
@@ -18,8 +22,8 @@ const ProjectPage = () => {
           <SpyButton>Collection 3</SpyButton>
           <SpyButton>Collection 4</SpyButton>
         </SpyView>
-      </SpyView>
-    </SpyPageContent>
+      </SpyPageContent>
+    </SpySafeAreaView>
   );
 };
 

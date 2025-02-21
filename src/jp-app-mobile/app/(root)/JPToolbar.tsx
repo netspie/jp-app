@@ -1,0 +1,41 @@
+import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
+import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
+import SpyButton from "@/components/spy/SpyButton";
+import SpyDarkModeSwitch from "@/components/spy/SpyDarkModeSwitch";
+import SpyIconButton from "@/components/spy/SpyIconButton";
+import { useCurrentThemeColors } from "@/components/spy/themeTypes";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useRef } from "react";
+import { View } from "react-native";
+
+const JPToolbar = () => {
+    const { currentThemeColors } = useCurrentThemeColors();
+    const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  
+    return (
+      <>
+        <View className="flex-row gap-2 justify-end mx-2 mb-2">
+          <SpyDarkModeSwitch
+            mainColor={currentThemeColors.secondary}
+            disabledColor={currentThemeColors.greyLight}
+          />
+          <SpyIconButton
+            className="bg-secondary"
+            onPress={() => bottomSheetModalRef.current?.present()}
+          >
+            <Ionicons name="add" size={20} color={"white"} />
+          </SpyIconButton>
+          <SpyIconButton className="bg-yellow-500">
+            <Ionicons name="bag" size={20} color={"white"} />
+          </SpyIconButton>
+        </View>
+        <SpyBottomSheetModal ref={bottomSheetModalRef} className="gap-4 pb-12">
+          <SpyBottomSheetTextInput label="Name" />
+          <SpyButton>Submit</SpyButton>
+        </SpyBottomSheetModal>
+      </>
+    );
+  };
+
+  export default JPToolbar;

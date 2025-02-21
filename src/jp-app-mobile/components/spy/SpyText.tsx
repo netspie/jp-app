@@ -1,16 +1,19 @@
-import { Text, TextStyle } from "react-native";
+import { StyleProp, Text, TextStyle } from "react-native";
 import React from "react";
-import clsx from "clsx";
+import { twMerge } from "tailwind-merge";
 
 type SpyTextProps = {
   className?: string;
-  style?: TextStyle;
+  style?: StyleProp<TextStyle>;
   children?: string;
 };
 
 const SpyText = (props: SpyTextProps) => {
   return (
-    <Text className={`${clsx('text-paragraph')} ${props.className}`} style={props.style}>
+    <Text
+      className={twMerge("text-paragraph", props.className)}
+      style={props.style}
+    >
       {props.children}
     </Text>
   );

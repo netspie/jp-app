@@ -11,7 +11,7 @@ type SpyIconButtonProps = {
 
 const SpyIconButton = (props: SpyIconButtonProps) => {
   return (
-    <SpyButton onPress={props.onPress} className={`bg-primary-300 p-0 m-0 ${props.className}`} style={props.style}>
+    <SpyButton onPress={props.onPress} className={`bg-primary-300 p-2 ${props.className}`} style={props.style}>
       {props.children}
     </SpyButton>
   );

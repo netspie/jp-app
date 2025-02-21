@@ -17,8 +17,7 @@ export const ThemeContext = createContext<{
 });
 
 export const SpyThemeProvider = (props: ThemeProviderProps) => {
-  const { appColorScheme } = useAppColorScheme();
-  const { currentThemeColorVariables } = useCurrentThemeColorVariables();
+  const { currentThemeColorVariables, appColorScheme } = useCurrentThemeColorVariables();
 
   return (
     <ThemeContext.Provider value={{ theme: appColorScheme }}>

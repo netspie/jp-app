@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs } from "expo-router"
-import SpyTabs, { createOptions } from "@/components/spy/SpyTabs";
+import SpyTabs, { createOptions as createDefaulTabScreenOptions } from "@/components/spy/SpyTabs";
 import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 
 const TabsLayout = () => {
@@ -8,9 +8,9 @@ const TabsLayout = () => {
 
   return (
     <SpyTabs>
-      <Tabs.Screen name="(home)" options={createOptions("Home", "home", currentThemeColors.secondary)} />
-      <Tabs.Screen name="explore" options={createOptions("Explore", "airplane", currentThemeColors.secondary)} />
-      <Tabs.Screen name="settings" options={createOptions("Settings", "settings", currentThemeColors.secondary)} />
+      <Tabs.Screen name="(home)" options={createDefaulTabScreenOptions("Home", "home")} />
+      <Tabs.Screen name="explore" options={createDefaulTabScreenOptions("Explore", "airplane")} />
+      <Tabs.Screen name="settings" options={createDefaulTabScreenOptions("Settings", "settings")} />
     </SpyTabs>
   );
 };

@@ -1,6 +1,5 @@
 import { View, Text, TextInput, Button } from "react-native";
 import React, { useState } from "react";
-import { Link } from "expo-router";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyText from "@/components/spy/SpyText";
 

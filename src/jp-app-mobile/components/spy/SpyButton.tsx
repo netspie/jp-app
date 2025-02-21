@@ -1,15 +1,16 @@
 import {
   GestureResponderEvent,
   StyleProp,
-  Text,
   TextStyle,
   TouchableOpacity,
   View,
   ViewStyle,
 } from "react-native";
 import React, { ForwardedRef } from "react";
-import clsx from "clsx";
 import { Href, Link } from "expo-router";
+import SpyText from "./SpyText";
+import { twMerge } from 'tailwind-merge'
+import { clsx } from 'clsx'
 
 type ButtonProps = {
   children?: React.ReactNode | string;
@@ -17,7 +18,7 @@ type ButtonProps = {
   href?: Href;
   style?: StyleProp<ViewStyle> | undefined;
   textClassName?: string
-  textStyle?: StyleProp<TextStyle> | undefined;
+  textStyle?: StyleProp<TextStyle>;
   onPress?: ((event: GestureResponderEvent) => void) | undefined;
 };
 
@@ -25,7 +26,7 @@ const SpyButton = (props: ButtonProps) => {
   return (
     <>
       {props.href ? (
-        <Link href={props.href} asChild>
+        <Link className="h-fit" href={props.href} asChild>
           <ButtonTouchable {...props} />
         </Link>
       ) : null}
@@ -40,15 +41,13 @@ const ButtonTouchable = React.forwardRef(
       <TouchableOpacity
         ref={ref}
         onPress={props.onPress}
-        className={`${clsx("bg-primary-200 rounded-md px-4 py-4")} ${
-          props.className
-        }`}
+        className={twMerge("rounded-md p-4 bg-gray-100", clsx(props.className))}
         style={props.style}
       >
         {typeof props.children === "string" ? (
-          <Text className={`font-bold text-center ${props.textClassName}`} style={props.textStyle}>
-            {String(props.children)}
-          </Text>
+          <SpyText className={twMerge("font-bold text-center", props.textClassName)} style={props.textStyle}>
+            {props.children}
+          </SpyText>
         ) : null}
 
         {React.isValidElement(props.children) || Array.isArray(props.children)
