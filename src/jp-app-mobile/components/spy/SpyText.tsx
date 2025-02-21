@@ -1,5 +1,6 @@
 import { Text, TextStyle } from "react-native";
 import React from "react";
+import clsx from "clsx";
 
 type SpyTextProps = {
   className?: string;
@@ -9,7 +10,7 @@ type SpyTextProps = {
 
 const SpyText = (props: SpyTextProps) => {
   return (
-    <Text className={`text-normal ${props.className}`} style={props.style}>
+    <Text className={`${clsx('text-normal')} ${props.className}`} style={props.style}>
       {props.children}
     </Text>
   );

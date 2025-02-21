@@ -1,17 +1,12 @@
 import React from "react";
-import { Stack } from "expo-router";
+import SpyStack from "@/components/spy/SpyStack";
+import SpyStackScreen from "@/components/spy/SpyStackScreen";
 
 const RootLayout = () => {
   return (
-    <Stack screenOptions={{ contentStyle: { backgroundColor: "#ffffff" }, headerShown: false, title: "Project" }}>
-      <Stack.Screen
-        name="[id]"
-        options={{
-          headerShown: false,
-          headerShadowVisible: false,
-        }}
-      ></Stack.Screen>
-    </Stack>
+    <SpyStack>
+      <SpyStackScreen name="[id]" />
+    </SpyStack>
   );
 };
 

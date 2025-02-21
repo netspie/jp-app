@@ -1,24 +1,18 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef } from "react";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpyButton from "@/components/spy/SpyButton";
 import useIsLargeScreen from "@/components/spy/useIsLargeScreen ";
 import SpyEditableList from "@/components/spy/SpyEditableList";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import {
-  Text,
-  StyleSheet,
-  View,
-  ScrollView,
-} from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SpyBottomSheetModal from "@/components/spy/SpyBottomSheet";
 import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 import SpyIconButton from "@/components/spy/SpyIconButton";
-import { SafeAreaView } from "react-native-safe-area-context";
 import SpyDarkModeSwitch from "@/components/spy/SpyDarkModeSwitch";
-import { useThemeColors } from "@/app/themes";
 import SpyText from "@/components/spy/SpyText";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
+import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 
 type ProjectViewProps = {
   title: string;
@@ -35,7 +29,9 @@ const ProjectView = (props: ProjectViewProps) => {
       {props.icon}
       <View className="gap-1">
         <SpyText className="font-bold">{props.title}</SpyText>
-        {props.author && <SpyText className="text-black-100">{props.author}</SpyText>}
+        {props.author && (
+          <SpyText>{props.author}</SpyText>
+        )}
       </View>
     </SpyButton>
   );
@@ -43,7 +39,7 @@ const ProjectView = (props: ProjectViewProps) => {
 
 const ProjectsPage = () => {
   const isLarge = useIsLargeScreen();
-  const { themeColors } = useThemeColors()
+  const { currentThemeColors } = useCurrentThemeColors();
 
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
@@ -57,8 +53,8 @@ const ProjectsPage = () => {
       <View>
         <View className="flex-row gap-2 justify-end mx-2 mb-2">
           <SpyDarkModeSwitch
-            mainColor={themeColors.secondary}
-            disabledColor={themeColors.greyLight}
+            mainColor={currentThemeColors.secondary}
+            disabledColor={currentThemeColors.greyLight}
           />
           <SpyIconButton
             className="bg-secondary"
@@ -129,18 +125,5 @@ const ProjectsPage = () => {
     </SpySafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    justifyContent: "center",
-    backgroundColor: "grey",
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: "center",
-  },
-});
 
 export default ProjectsPage;

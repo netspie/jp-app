@@ -8,7 +8,7 @@ type SpySafeAreaViewProps = {
 
 const SpySafeAreaView = (props: SpySafeAreaViewProps) => {
   return (
-    <SafeAreaView className={Platform.OS === "web" ? "mt-2" : ""}>
+    <SafeAreaView className={["web", "android"].includes(Platform.OS)  ? "mt-2" : ""}>
       {props.children}
     </SafeAreaView>
   );

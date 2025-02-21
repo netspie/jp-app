@@ -1,10 +1,7 @@
-import {
-  DynamicThemes,
-  useCurrentThemeColors,
-} from "@/components/spy/themeTypes";
+import { DynamicThemes } from "@/components/spy/themeTypes";
 import { vars } from "nativewind";
 
-const jpThemeColors: DynamicThemes = {
+export const jpThemeColors: DynamicThemes = {
   classic: {
     light: {
       primary: "#593DA4",
@@ -13,7 +10,8 @@ const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#F1F3F5",
-      normal: "black"
+      normal: "black",
+      background: "#F4F4F4",
     },
     dark: {
       primary: "#FC94A0",
@@ -22,38 +20,33 @@ const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#B2B2B2",
-      normal: "#E2E2E2"
+      normal: "#E2E2E2",
+      background: "#030303",
     },
   },
 };
 
-const themes = {
+export const jpThemeColorVariables = {
   classic: {
     light: vars({
-      "--color-primary-default": jpThemeColors.classic.light.primary,
-      "--color-secondary-default": jpThemeColors.classic.light.secondary,
-      "--color-tertiary-default": jpThemeColors.classic.light.tertiary,
-      "--color-accent-default": jpThemeColors.classic.light.accent,
-      "--color-grey-default": jpThemeColors.classic.light.grey,
-      "--color-grey-light-default": jpThemeColors.classic.light.greyLight,
-      "--color-normal-default": jpThemeColors.classic.light.normal
+      "--color-primary-default": "#593DA4",
+      "--color-secondary-default": "#FC94A0",
+      "--color-tertiary-default": "green",
+      "--color-accent-default": "#f9c04a",
+      "--color-grey-default": "#979797",
+      "--color-grey-light-default": "#F1F3F5",
+      "--color-normal-default": "black",
+      "--color-background": "#F4F4F4",
     }),
     dark: vars({
-      "--color-primary-default": jpThemeColors.classic.dark.primary,
-      "--color-secondary-default": jpThemeColors.classic.dark.secondary,
-      "--color-tertiary-default": jpThemeColors.classic.dark.tertiary,
-      "--color-accent-default": jpThemeColors.classic.dark.accent,
-      "--color-grey-default": jpThemeColors.classic.dark.grey,
-      "--color-grey-light-default": jpThemeColors.classic.dark.greyLight,
-      "--color-normal-default": jpThemeColors.classic.dark.normal
+      "--color-primary-default": "#FC94A0",
+      "--color-secondary-default": "#593DA4",
+      "--color-tertiary-default": "green",
+      "--color-accent-default": "#f9c04a",
+      "--color-grey-default": "#979797",
+      "--color-grey-light-default": "#B2B2B2",
+      "--color-normal-default": "#E2E2E2",
+      "--color-background-default": "#030303",
     }),
   },
-};
-
-export default themes;
-
-export const useThemeColors = () => {
-  const { currentThemeColors } = useCurrentThemeColors(jpThemeColors);
-  const themeColors = currentThemeColors;
-  return { themeColors };
 };

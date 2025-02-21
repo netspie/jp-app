@@ -4,17 +4,23 @@ import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 import "./globals.css";
 
-import { ThemeProvider } from "@/components/spy/SpyThemeProvider";
-import themes from "./themes";
+import { SpyThemeProvider } from "@/components/spy/SpyThemeProvider";
+import { useColorThemeStore } from "@/components/spy/colorThemeStore";
+import { useEffect } from "react";
+import { jpThemeColors, jpThemeColorVariables } from "./themes";
 
 export default function RootLayout() {
+  const setTheme = useColorThemeStore(x => x.setTheme);
+
+  useEffect(() => setTheme(jpThemeColors, jpThemeColorVariables), [])
+
   return (
-    <ThemeProvider themes={themes}>
+    <SpyThemeProvider>
       <GestureHandlerRootView>
         <BottomSheetModalProvider>
           <Stack screenOptions={{ headerShown: false }} />
         </BottomSheetModalProvider>
       </GestureHandlerRootView>
-    </ThemeProvider>
+    </SpyThemeProvider>
   );
 }

@@ -15,7 +15,7 @@ const SpyPageContent = (props: SafeScrollViewProps) => {
     <>
       {(props.safe === undefined || props.safe) && (
         <SafeAreaView
-          className={`relative flex-col bg-white w-full h-full ${props.className}`}
+          className={`relative flex-col bg-transparent w-full h-full ${props.className}`}
         >
           <ScrollView contentContainerClassName={`relative h-fit w-full p-3`}>
             <SpyView>{props.children}</SpyView>
@@ -25,7 +25,7 @@ const SpyPageContent = (props: SafeScrollViewProps) => {
 
       {!props.safe && (
         <View
-          className={`relative flex-col bg-white w-full h-full ${props.className}`}
+          className={`relative flex-col bg-transparent w-full h-full ${props.className}`}
         >
           <ScrollView contentContainerClassName={`relative h-fit w-full p-3`}>
             <SpyView>{props.children}</SpyView>

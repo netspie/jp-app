@@ -1,4 +1,6 @@
 import { useAppColorScheme } from "./useAppColorScheme";
+import { useColorThemeStore } from "./colorThemeStore";
+import { vars } from "nativewind";
 
 export type ThemeColors = {
   primary: string;
@@ -8,6 +10,7 @@ export type ThemeColors = {
   grey: string;
   greyLight: string;
   normal: string;
+  background: string;
 };
 
 export type DynamicThemes = {
@@ -17,9 +20,46 @@ export type DynamicThemes = {
   };
 };
 
-export const useCurrentThemeColors = (themeColors: DynamicThemes) => {
-  const { appColorScheme } = useAppColorScheme();
+export const defaultThemeColors: ThemeColors = {
+  primary: "#593DA4", // Purple
+  secondary: "#FC94A0", // Light pink
+  tertiary: "green", // Green
+  accent: "#f9c04a", // Yellow
+  grey: "#979797", // Grey
+  greyLight: "#F1F3F5", // Light grey
+  normal: "black", // Black
+  background: "#F4F4F4", // Light background grey
+};
 
-  const currentThemeColors = themeColors?.["classic"]?.[appColorScheme];
+export type ThemeVariables = {
+  [key: string]: {
+    light: { [key: string]: string };
+    dark: { [key: string]: string };
+  };
+};
+
+export const defaultThemeVariables = vars({
+  "--color-primary-default": "#593DA4", // Purple
+  "--color-secondary-default": "#FC94A0", // Light pink
+  "--color-tertiary-default": "green", // Green
+  "--color-accent-default": "#f9c04a", // Yellow
+  "--color-grey-default": "#979797", // Grey
+  "--color-grey-light-default": "#F1F3F5", // Light grey
+  "--color-normal-default": "black", // Black
+  "--color-background": "#F4F4F4", // Light background grey
+});
+
+export const useCurrentThemeColors = () => {
+  const { appColorScheme } = useAppColorScheme();
+  const theme = useColorThemeStore((x) => x.theme);
+
+  const currentThemeColors = theme?.["classic"]?.[appColorScheme];
   return { currentThemeColors };
+};
+
+export const useCurrentThemeColorVariables = () => {
+  const { appColorScheme } = useAppColorScheme();
+  const themeVariables = useColorThemeStore((x) => x.themeVariables);
+
+  return { currentThemeColorVariables: themeVariables["classic"]?.[appColorScheme] ?? defaultThemeVariables };
 };
