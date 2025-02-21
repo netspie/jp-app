@@ -60,13 +60,18 @@ const SpyTabs = (props: SpyTabsProps) => {
         },
         tabBarStyle: {
           display: "flex",
-          backgroundColor: currentThemeColors.primary,
+          backgroundColor:
+            appColorScheme === "light"
+              ? currentThemeColors.primary
+              : currentThemeColors.secondary,
           position: "absolute",
-          borderTopColor: "#FF3B301A",
+          borderTopColor: appColorScheme === "light" ? "white" : "transparent",
+          borderRightColor:
+            appColorScheme === "light" ? "white" : "transparent",
           borderTopWidth: 1,
           width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
-          paddingBottom: isLargeScreen ? 0 : 75,
+          paddingBottom: isLargeScreen ? 0 : Platform.OS === "ios" ? 85 : 75,
         },
       }}
     >
@@ -84,12 +89,20 @@ export const createOptions = (
 ): BottomTabNavigationOptions & {
   href?: Href | null;
 } => {
-  const { currentThemeColors } = useCurrentThemeColors();
-  const getFocusedColor = () => focusedColor ?? currentThemeColors.secondary;
+  const { currentThemeColors, appColorScheme } = useCurrentThemeColors();
+  const getFocusedColor = () =>
+    focusedColor ??
+    (appColorScheme === "light"
+      ? currentThemeColors.secondary
+      : currentThemeColors.primary);
 
   return {
     title: title,
     headerShown: false,
+    tabBarInactiveTintColor:
+      appColorScheme === "light"
+        ? currentThemeColors.greyLight
+        : currentThemeColors.grey,
     tabBarActiveTintColor: getFocusedColor(),
     tabBarIcon: ({ focused }) => (
       <TabIcon focusedColor={getFocusedColor()} icon={icon} focused={focused} />

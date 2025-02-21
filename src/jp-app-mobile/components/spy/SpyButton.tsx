@@ -41,11 +41,11 @@ const ButtonTouchable = React.forwardRef(
       <TouchableOpacity
         ref={ref}
         onPress={props.onPress}
-        className={twMerge("rounded-md p-4 bg-gray-100", clsx(props.className))}
+        className={twMerge("rounded-md p-4 bg-greyLight", clsx(props.className))}
         style={props.style}
       >
         {typeof props.children === "string" ? (
-          <SpyText className={twMerge("font-bold text-center", props.textClassName)} style={props.textStyle}>
+          <SpyText className={twMerge(clsx("font-bold text-center"), props.textClassName)} style={props.textStyle}>
             {props.children}
           </SpyText>
         ) : null}

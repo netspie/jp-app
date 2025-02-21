@@ -1,6 +1,6 @@
 import { DynamicThemes } from "@/components/spy/themeTypes";
 
-export const jpThemes: DynamicThemes = {
+const jpThemes: DynamicThemes = {
   classic: {
     light: {
       primary: "#32357C",
@@ -9,18 +9,20 @@ export const jpThemes: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#F7F7F7",
-      paragraph: "black",
+      paragraph: "#000000",
       background: "white",
     },
     dark: {
-      primary: "#32357C",
-      secondary: "#FC94A0",
+      primary: "#FC94A0",
+      secondary: "#32357C",
       tertiary: "green",
       accent: "#f9c04a",
       grey: "#979797",
-      greyLight: "#B2B2B2",
-      paragraph: "white",
+      greyLight: "#222222",
+      paragraph: "#ffffff",
       background: "black",
     },
   },
 };
+
+export default jpThemes;
