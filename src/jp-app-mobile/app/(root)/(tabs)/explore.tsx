@@ -1,12 +1,86 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { getTotalTabBarBottomPadding } from "@/components/spy/constants";
+import React from "react";
+import { Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 const ExplorePage = () => {
-  return (
-    <View>
-      <Text>ExplorePage</Text>
-    </View>
-  )
-}
+  const insets = useSafeAreaInsets();
 
-export default ExplorePage
+  return (
+    <SafeAreaView
+      style={{
+        paddingLeft: 96,
+        paddingBottom: getTotalTabBarBottomPadding() - insets.bottom,
+      }}
+    >
+      <ScrollView className="h-full">
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+        <Text>ExplorePage</Text>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default ExplorePage;

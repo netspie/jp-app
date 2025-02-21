@@ -19,7 +19,7 @@ const JPToolbar = (props: JPToolbarProps) => {
 
   return (
     <>
-      <View className="flex-row gap-2 justify-end mx-2 mb-2">
+      <View className="relative flex-row gap-2 justify-end mx-2 mb-2">
         <SpyDarkModeSwitch
           mainColor={currentThemeColors.secondary}
           disabledColor={currentThemeColors.greyLight}
@@ -32,8 +32,8 @@ const JPToolbar = (props: JPToolbarProps) => {
             <Ionicons name="add" size={20} color={"white"} />
           </SpyIconButton>
         )}
-        <SpyIconButton className="bg-yellow-500">
-          <Ionicons name="bag" size={20} color={"white"} />
+        <SpyIconButton className="bg-yellow-400">
+          <Ionicons name="diamond" size={20} color={"white"} />
         </SpyIconButton>
       </View>
       <SpyBottomSheetModal ref={bottomSheetModalRef} className="gap-4 pb-12">

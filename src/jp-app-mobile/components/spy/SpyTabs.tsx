@@ -1,6 +1,6 @@
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { Href, Tabs } from "expo-router";
-import { TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "./constants";
+import { getTotalTabBarHeight, TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "./constants";
 import { Platform, View } from "react-native";
 import useIsLargeScreen from "./useIsLargeScreen ";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -47,7 +47,6 @@ const SpyTabs = (props: SpyTabsProps) => {
           padding: 0,
           margin: 0,
           marginTop: isLargeScreen ? 0 : 12,
-          width: "100%",
         },
         tabBarLabelStyle: {
           padding: 0,
@@ -55,7 +54,7 @@ const SpyTabs = (props: SpyTabsProps) => {
           minHeight: 20,
           width: "100%",
           textOverflow: "none",
-          display: isLargeScreen ? "none" : "flex"
+          display: isLargeScreen ? "none" : undefined
         },
         tabBarIconStyle: {
           padding: 0,
@@ -80,7 +79,7 @@ const SpyTabs = (props: SpyTabsProps) => {
           borderTopWidth: 1,
           width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
-          paddingBottom: isLargeScreen ? 0 : Platform.OS === "ios" ? 85 : 75,
+          paddingBottom: isLargeScreen ? 0 : getTotalTabBarHeight() - TAB_BAR_HEIGHT,
         },
       }}
     >

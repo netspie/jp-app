@@ -17,9 +17,10 @@ const SpyStack = (props: SpyTabStackProps) => {
 
   return (
     <View
-      className={`w-full h-full`}
+      className={`relative flex flex-col w-full h-full`}
       style={{
         paddingLeft: isLargeScreen && props.top === true ? TAB_BAR_WIDTH : 0,
+        position: "relative",
       }}
     >
       <Stack
@@ -27,6 +28,10 @@ const SpyStack = (props: SpyTabStackProps) => {
           headerShown: false,
           contentStyle: {
             backgroundColor: currentThemeColors.background,
+            margin: 0,
+            height: "auto",
+            position: "relative",
+            display: "flex"
           },
         }}
       >

@@ -1,5 +1,6 @@
-import { Platform, Text } from "react-native";
+import clsx from "clsx";
 import React from "react";
+import { Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type SpySafeAreaViewProps = {
@@ -8,7 +9,9 @@ type SpySafeAreaViewProps = {
 
 const SpySafeAreaView = (props: SpySafeAreaViewProps) => {
   return (
-    <SafeAreaView className={["web", "android"].includes(Platform.OS)  ? "mt-2" : ""}>
+    <SafeAreaView
+      style={{ marginTop: ["web", "android"].includes(Platform.OS) ? 8 : 0, flexShrink: 1 }}
+    >
       {props.children}
     </SafeAreaView>
   );

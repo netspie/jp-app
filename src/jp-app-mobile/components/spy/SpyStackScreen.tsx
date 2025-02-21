@@ -11,6 +11,9 @@ const SpyStackScreen = (props: SpyStackScreenProps) => {
     <Stack.Screen
       name="index"
       options={{
+        contentStyle: {
+          height: "100%"
+        },
         headerShown: false,
         headerShadowVisible: false,
         ...props.options,

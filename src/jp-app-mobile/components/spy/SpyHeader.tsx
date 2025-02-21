@@ -12,7 +12,7 @@ const SpyHeader = (props: SpyHeaderProps) => {
   return (
     <SpyText
       className={twMerge(
-        "text-center text-3xl uppercase font-bold text-primary my-4",
+        "text-center text-3xl uppercase font-bold text-primary my-4 px-8",
         props.className
       )}
       style={props.style}

@@ -1,5 +1,6 @@
 import React from "react";
 import { View } from "react-native";
+import { twMerge } from "tailwind-merge";
 
 export type SpyViewProps = {
   children?: React.ReactNode;
@@ -8,10 +9,10 @@ export type SpyViewProps = {
 
 const SpyView = (props: SpyViewProps) => {
   return (
-    <View className={`relative w-full h-full gap-2 ${props.className}`}>
+    <View className={twMerge("relative w-full h-fit gap-2", props.className)}>
       {props.children}
     </View>
   );
 };
 
-export default SpyView; 
+export default SpyView;
