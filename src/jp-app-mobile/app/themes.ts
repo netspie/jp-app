@@ -1,7 +1,6 @@
-import { createThemes, DynamicThemes, ThemeColors } from "@/components/spy/themeTypes";
-import { vars } from "nativewind";
+import { DynamicThemes } from "@/components/spy/themeTypes";
 
-export const jpThemeColors: DynamicThemes = {
+export const jpThemes: DynamicThemes = {
   classic: {
     light: {
       primary: "#593DA4",
@@ -10,7 +9,7 @@ export const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#F7F7F7",
-      normal: "black",
+      paragraph: "black",
       background: "white",
     },
     dark: {
@@ -20,7 +19,7 @@ export const jpThemeColors: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#B2B2B2",
-      normal: "#E2E2E2",
+      paragraph: "#E2E2E2",
       background: "#030303",
     },
   },

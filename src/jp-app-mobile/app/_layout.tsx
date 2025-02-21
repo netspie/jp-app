@@ -7,11 +7,11 @@ import "./globals.css";
 import { SpyThemeProvider } from "@/components/spy/SpyThemeProvider";
 import { useColorThemeStore } from "@/components/spy/colorThemeStore";
 import { useEffect } from "react";
-import { jpThemeColors} from "./themes";
+import { jpThemes} from "./themes";
 
 export default function RootLayout() {
   const setTheme = useColorThemeStore(x => x.setTheme);
-  useEffect(() => setTheme(jpThemeColors), [])
+  useEffect(() => setTheme(jpThemes), [])
 
   return (
     <SpyThemeProvider>

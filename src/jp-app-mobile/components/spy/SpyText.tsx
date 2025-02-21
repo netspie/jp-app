@@ -10,7 +10,7 @@ type SpyTextProps = {
 
 const SpyText = (props: SpyTextProps) => {
   return (
-    <Text className={`${clsx('text-normal')} ${props.className}`} style={props.style}>
+    <Text className={`${clsx('text-paragraph')} ${props.className}`} style={props.style}>
       {props.children}
     </Text>
   );

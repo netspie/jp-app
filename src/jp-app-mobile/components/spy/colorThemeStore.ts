@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import {
   createThemes as createVariableThemes,
-  defaultThemeVariables,
   DynamicThemes,
   ThemeVariables,
 } from "./themeTypes";
@@ -15,7 +14,7 @@ const defaultTheme = {
       accent: "#FFF",
       grey: "#FFF",
       greyLight: "#FFF",
-      normal: "#FFF",
+      paragraph: "#FFF",
       background: "#FFF",
     },
     dark: {
@@ -25,7 +24,7 @@ const defaultTheme = {
       accent: "#FFF",
       grey: "#FFF",
       greyLight: "#FFF",
-      normal: "#FFF",
+      paragraph: "#FFF",
       background: "#FFF",
     },
   },

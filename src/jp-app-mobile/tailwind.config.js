@@ -11,7 +11,7 @@ module.exports = {
         accent: "var(--color-accent-default)",
         grey: "var(--color-grey-default)",
         "grey-light": "var(--color-grey-light-default)",
-        normal: "var(--color-normal-default)",
+        paragraph: "var(--color-paragraph-default)",
         background: "var(--color-background-default)",
       },
     },

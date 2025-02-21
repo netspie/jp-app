@@ -9,7 +9,7 @@ export type ThemeColors = {
   accent: string;
   grey: string;
   greyLight: string;
-  normal: string;
+  paragraph: string;
   background: string;
 };
 
@@ -27,7 +27,7 @@ export const defaultThemeColors: ThemeColors = {
   accent: "#f9c04a", // Yellow
   grey: "#979797", // Grey
   greyLight: "#F1F3F5", // Light grey
-  normal: "black", // Black
+  paragraph: "black", // Black
   background: "#F4F4F4", // Light background grey
 };
 
