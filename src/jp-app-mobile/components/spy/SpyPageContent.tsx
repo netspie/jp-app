@@ -1,7 +1,8 @@
-import { ScrollView, View } from "react-native";
 import React from "react";
-import SpyView from "./SpyView";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { twMerge } from "tailwind-merge";
+import SpyView from "./SpyView";
 
 type SafeScrollViewProps = {
   children?: React.ReactNode;
@@ -15,7 +16,10 @@ const SpyPageContent = (props: SafeScrollViewProps) => {
     <>
       {(props.safe === undefined || props.safe) && (
         <SafeAreaView
-          className={`relative flex-col bg-transparent w-full h-full ${props.className}`}
+          className={twMerge(
+            "relative flex-col bg-transparent w-full h-full",
+            props.className
+          )}
         >
           <ScrollView contentContainerClassName={`relative h-fit w-full p-3`}>
             <SpyView>{props.children}</SpyView>
@@ -25,9 +29,12 @@ const SpyPageContent = (props: SafeScrollViewProps) => {
 
       {!props.safe && (
         <View
-          className={`relative flex-col bg-transparent w-full h-full ${props.className}`}
+          className={twMerge(
+            "relative flex-col md:items-center bg-transparent w-full h-full",
+            props.className
+          )}
         >
-          <ScrollView contentContainerClassName={`relative h-fit w-full p-3`}>
+          <ScrollView contentContainerClassName={`relative h-fit w-full p-3 md:w-[672px] md:w-[672px] lg:w-[872px]`}>
             <SpyView>{props.children}</SpyView>
           </ScrollView>
         </View>

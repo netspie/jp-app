@@ -18,7 +18,7 @@ const ProjectForm = () => {
       </View>
       <SpyButton
         href="../"
-        className="bg-primary-300 w-[100px]"
+        className="bg-primary w-[100px]"
         textStyle={{ color: "white" }}
       >
         Create

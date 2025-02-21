@@ -47,16 +47,20 @@ const SpyTabs = (props: SpyTabsProps) => {
           padding: 0,
           margin: 0,
           marginTop: isLargeScreen ? 0 : 12,
-          height: isLargeScreen ? TAB_BAR_HEIGHT : undefined,
+          width: "100%",
         },
         tabBarLabelStyle: {
           padding: 0,
           margin: 0,
-          minHeight: 200,
+          minHeight: 20,
+          width: "100%",
+          textOverflow: "none",
+          display: isLargeScreen ? "none" : "flex"
         },
         tabBarIconStyle: {
           padding: 0,
           margin: 0,
+          width: "100%",
         },
         tabBarStyle: {
           display: "flex",
@@ -65,9 +69,14 @@ const SpyTabs = (props: SpyTabsProps) => {
               ? currentThemeColors.primary
               : currentThemeColors.secondary,
           position: "absolute",
-          borderTopColor: appColorScheme === "light" ? "white" : "transparent",
+          borderTopColor:
+            appColorScheme === "light" && !isLargeScreen
+              ? "white"
+              : "transparent",
           borderRightColor:
-            appColorScheme === "light" ? "white" : "transparent",
+            appColorScheme === "light" && isLargeScreen
+              ? "white"
+              : "transparent",
           borderTopWidth: 1,
           width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
@@ -82,7 +91,7 @@ const SpyTabs = (props: SpyTabsProps) => {
 
 export default SpyTabs;
 
-export const createOptions = (
+export const createDefaultTabScreenOptions = (
   title: string,
   icon: string,
   focusedColor?: string

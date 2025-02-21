@@ -9,7 +9,7 @@ const jpThemes: DynamicThemes = {
       accent: "#f9c04a",
       grey: "#979797",
       greyLight: "#F7F7F7",
-      paragraph: "#000000",
+      paragraph: "black",
       background: "white",
     },
     dark: {
@@ -18,9 +18,9 @@ const jpThemes: DynamicThemes = {
       tertiary: "green",
       accent: "#f9c04a",
       grey: "#979797",
-      greyLight: "#222222",
+      greyLight: "#333333",
       paragraph: "#ffffff",
-      background: "black",
+      background: "#0B0B0B",
     },
   },
 };

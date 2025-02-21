@@ -26,7 +26,7 @@ const SpyEditableList = (props: SpyEditableListProps) => {
           <View className="">
             <SpyButton
               href={props.createHref}
-              className={`bg-primary-300 right-0 w-3 h-3 items-center justify-center ${props.addButtonClassName}`}
+              className={`bg-primary right-0 w-3 h-3 items-center justify-center ${props.addButtonClassName}`}
             >
               <Ionicons
                 name="add"

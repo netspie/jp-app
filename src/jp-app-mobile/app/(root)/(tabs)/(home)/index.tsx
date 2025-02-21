@@ -4,6 +4,7 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import React from "react";
 import JPToolbar from "../../JPToolbar";
+import { Text } from "react-native";
 
 const IndexPage = () => {
   return (

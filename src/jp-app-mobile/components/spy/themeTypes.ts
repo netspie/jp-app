@@ -21,8 +21,8 @@ export type DynamicThemes = {
 };
 
 export const defaultThemeColors: ThemeColors = {
-  primary: "#593DA4", // Purple
-  secondary: "#FC94A0", // Light pink
+  primary: "black", // Purple
+  secondary: "gray", // Light pink
   tertiary: "green", // Green
   accent: "#f9c04a", // Yellow
   grey: "#979797", // Grey
@@ -45,7 +45,7 @@ export const defaultThemeVariables = vars({
   "--color-accent-default": "#f9c04a", // Yellow
   "--color-grey-default": "#979797", // Grey
   "--color-greyLight-default": "#F1F3F5", // Light grey
-  "--color-normal-default": "black", // Black
+  "--color-paragraph-default": "black", // Black
   "--color-background": "#F4F4F4", // Light background grey
 });
 
