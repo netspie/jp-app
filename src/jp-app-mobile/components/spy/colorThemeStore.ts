@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import {
+  createThemes as createVariableThemes,
   defaultThemeVariables,
   DynamicThemes,
   ThemeVariables,
@@ -33,13 +34,14 @@ const defaultTheme = {
 type ColorThemeStore = {
   theme: DynamicThemes;
   themeVariables: ThemeVariables;
-  setTheme: (theme: DynamicThemes, themeVariables: ThemeVariables) => void;
+  setTheme: (theme: DynamicThemes) => void;
 };
 
 export const useColorThemeStore = create<ColorThemeStore>((set) => ({
   theme: defaultTheme,
   themeVariables: {},
-  setTheme: (theme: DynamicThemes, themeVariables: ThemeVariables) => {
+  setTheme: (theme: DynamicThemes) => {
+    var themeVariables = createVariableThemes(theme);
     set(() => ({ theme: theme, themeVariables: themeVariables }));
   },
 }));

@@ -61,5 +61,36 @@ export const useCurrentThemeColorVariables = () => {
   const { appColorScheme } = useAppColorScheme();
   const themeVariables = useColorThemeStore((x) => x.themeVariables);
 
-  return { currentThemeColorVariables: themeVariables["classic"]?.[appColorScheme] ?? defaultThemeVariables };
+  return {
+    currentThemeColorVariables:
+      themeVariables["classic"]?.[appColorScheme] ?? defaultThemeVariables,
+  };
 };
+
+export function createThemes(themes: DynamicThemes) {
+  var themeVariableEntries = Object.entries(themes).map((theme) => {
+    return {
+      key: theme[0],
+      value: {
+        light: vars(createSchemeVariables(theme[1].light)),
+        dark: vars(createSchemeVariables(theme[1].dark)),
+      },
+    };
+  });
+
+  return Object.fromEntries(themeVariableEntries.map(x => [x.key, x.value]));
+}
+
+function createSchemeVariables(themeColors: ThemeColors) {
+  const themeColorsEntries = Object.entries(themeColors);
+  const variablesEntries = themeColorsEntries.map((x) => ({
+    key: "--color-" + x[0] + "-default",
+    value: x[1],
+  }));
+
+  const schemeVariables = Object.create(null);
+  variablesEntries.forEach((kv) => (schemeVariables[kv.key] = kv.value));
+
+  return schemeVariables;
+}
+
