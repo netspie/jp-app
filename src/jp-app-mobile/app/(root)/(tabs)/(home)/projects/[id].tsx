@@ -22,7 +22,7 @@ const CollectionView = (props: CollectionViewProps) => {
 
   return (
     <SpyButton
-      href="/(root)/(tabs)/(home)/collection/1"
+      href="/(root)/(tabs)/(home)/collections/1"
       className={twMerge("items-center gap-6", props.className)}
     >
       <Ionicons name="folder" size={36} color={currentThemeColors.secondary} />

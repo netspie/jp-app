@@ -6,6 +6,7 @@ const RootLayout = () => {
   return (
     <SpyStack>
       <SpyStackScreen name="index" />
+      <SpyStackScreen name="[id]" />
       <SpyStackScreen name="create" options={{ presentation: "modal" }} />
     </SpyStack>
   );

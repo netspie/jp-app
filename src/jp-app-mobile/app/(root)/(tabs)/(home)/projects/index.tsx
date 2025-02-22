@@ -21,7 +21,7 @@ const ProjectView = (props: ProjectViewProps) => {
 
   return (
     <SpyButton
-      href="/(root)/(tabs)/(home)/project/1"
+      href="/(root)/(tabs)/(home)/projects/1"
       className="w-full flex-row rounded-md p-4 gap-6 bg-greyLight"
     >
       <Ionicons name="cube" size={36} color={currentThemeColors.secondary} />
