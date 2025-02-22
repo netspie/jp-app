@@ -21,6 +21,7 @@ const DialogueView = (props: DialogueViewProps) => {
 
   return (
     <SpyButton
+      href="/(root)/(tabs)/(home)/dialogues/1"
       className={twMerge(
         "flex-row items-center h-fit gap-4 w-full",
         props.className
