@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import React from "react";
+import { Switch } from "react-native";
 import { useAppColorScheme } from "./useAppColorScheme";
-import tailwindConfig from "@/tailwind.config.js";
-import { Switch, Text } from "react-native";
 
-import { View, Platform } from "react-native";
+import { Platform, View } from "react-native";
 
 type SpyDarkModeSwitchProps = {
   disabledColor: string;

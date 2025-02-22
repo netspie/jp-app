@@ -1,6 +1,10 @@
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { Href, Tabs } from "expo-router";
-import { getTotalTabBarHeight, TAB_BAR_HEIGHT, TAB_BAR_WIDTH } from "./constants";
+import {
+  getTotalTabBarHeight,
+  TAB_BAR_HEIGHT,
+  TAB_BAR_WIDTH,
+} from "./constants";
 import { Platform, View } from "react-native";
 import useIsLargeScreen from "./useIsLargeScreen ";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -22,7 +26,7 @@ const TabIcon = (
     <Ionicons
       name={icon}
       size={18}
-      style={{ color: focused ? focusedColor : "#CACACA" }}
+      style={{ color: focused ? focusedColor : "white" }}
     />
   </View>
 );
@@ -54,7 +58,7 @@ const SpyTabs = (props: SpyTabsProps) => {
           minHeight: 20,
           width: "100%",
           textOverflow: "none",
-          display: isLargeScreen ? "none" : undefined
+          display: isLargeScreen ? "none" : undefined,
         },
         tabBarIconStyle: {
           padding: 0,
@@ -63,10 +67,7 @@ const SpyTabs = (props: SpyTabsProps) => {
         },
         tabBarStyle: {
           display: "flex",
-          backgroundColor:
-            appColorScheme === "light"
-              ? currentThemeColors.primary
-              : currentThemeColors.secondary,
+          backgroundColor: currentThemeColors.primary,
           position: "absolute",
           borderTopColor:
             appColorScheme === "light" && !isLargeScreen
@@ -79,7 +80,9 @@ const SpyTabs = (props: SpyTabsProps) => {
           borderTopWidth: 1,
           width: isLargeScreen ? TAB_BAR_WIDTH : "100%",
           height: isLargeScreen ? "100%" : TAB_BAR_HEIGHT,
-          paddingBottom: isLargeScreen ? 0 : getTotalTabBarHeight() - TAB_BAR_HEIGHT,
+          paddingBottom: isLargeScreen
+            ? 0
+            : getTotalTabBarHeight() - TAB_BAR_HEIGHT,
         },
       }}
     >
@@ -97,20 +100,13 @@ export const createDefaultTabScreenOptions = (
 ): BottomTabNavigationOptions & {
   href?: Href | null;
 } => {
-  const { currentThemeColors, appColorScheme } = useCurrentThemeColors();
-  const getFocusedColor = () =>
-    focusedColor ??
-    (appColorScheme === "light"
-      ? currentThemeColors.secondary
-      : currentThemeColors.primary);
+  const { currentThemeColors } = useCurrentThemeColors();
+  const getFocusedColor = () => focusedColor ?? currentThemeColors.secondary;
 
   return {
     title: title,
     headerShown: false,
-    tabBarInactiveTintColor:
-      appColorScheme === "light"
-        ? currentThemeColors.greyLight
-        : currentThemeColors.grey,
+    tabBarInactiveTintColor: "white",
     tabBarActiveTintColor: getFocusedColor(),
     tabBarIcon: ({ focused }) => (
       <TabIcon focusedColor={getFocusedColor()} icon={icon} focused={focused} />

@@ -14,14 +14,18 @@ type JPToolbarProps = {
 };
 
 const JPToolbar = (props: JPToolbarProps) => {
-  const { currentThemeColors } = useCurrentThemeColors();
+  const { currentThemeColors, appColorScheme } = useCurrentThemeColors();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   return (
     <>
       <View className="relative flex-row gap-2 justify-end mx-2 mb-2">
         <SpyDarkModeSwitch
-          mainColor={currentThemeColors.secondary}
+          mainColor={
+            appColorScheme === "light"
+              ? currentThemeColors.secondary
+              : currentThemeColors.primary
+          }
           disabledColor={currentThemeColors.greyLight}
         />
         {(props.addButton === undefined || props.addButton === true) && (

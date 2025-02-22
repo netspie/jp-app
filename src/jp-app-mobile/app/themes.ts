@@ -1,24 +1,29 @@
 import { DynamicThemes } from "@/components/spy/themeTypes";
 
+const primary = "#32357C";
+const secondary = "#F34F60";
+const tertiary = "green";
+const grey = "#979797";
+
 const jpThemes: DynamicThemes = {
   classic: {
     light: {
-      primary: "#32357C",
-      secondary: "#FC94A0",
-      tertiary: "green",
+      primary: primary,
+      secondary: secondary,
+      tertiary: tertiary,
       accent: "#f9c04a",
-      grey: "#979797",
+      grey: grey,
       greyLight: "#F7F7F7",
       paragraph: "black",
       background: "white",
     },
     dark: {
-      primary: "#FC94A0",
-      secondary: "#32357C",
-      tertiary: "green",
+      primary: primary,
+      secondary: secondary,
+      tertiary: tertiary,
       accent: "#f9c04a",
-      grey: "#979797",
-      greyLight: "#333333",
+      grey: grey,
+      greyLight: "#121212",
       paragraph: "#ffffff",
       background: "#0B0B0B",
     },
