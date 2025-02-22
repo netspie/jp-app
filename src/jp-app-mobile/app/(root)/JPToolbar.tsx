@@ -6,6 +6,7 @@ import SpyIconButton from "@/components/spy/SpyIconButton";
 import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { useNavigation, useRootNavigationState } from "expo-router";
 import { useRef } from "react";
 import { View } from "react-native";
 
@@ -17,9 +18,21 @@ const JPToolbar = (props: JPToolbarProps) => {
   const { currentThemeColors, appColorScheme } = useCurrentThemeColors();
   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
 
+  const navigation = useNavigation();
+
   return (
     <>
-      <View className="relative flex-row gap-2 justify-end mx-2 mb-2">
+      <View className="relative flex-row gap-2 items-center justify-end mx-2 mb-2">
+        <View className="relative flex-row gap-2 flex-grow">
+          {navigation.canGoBack() && (
+            <SpyIconButton
+              className="bg-none justify-self-start"
+              onPress={() => navigation.goBack()}
+            >
+              <Ionicons name="arrow-back" size={20} color={"black"} />
+            </SpyIconButton>
+          )}
+        </View>
         <SpyDarkModeSwitch
           mainColor={
             appColorScheme === "light"
