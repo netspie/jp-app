@@ -4,8 +4,10 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
-import React from "react";
+import React, { useState } from "react";
 import { Platform, View } from "react-native";
+import Checkbox from "expo-checkbox";
+import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 
 type ConversationDTO = {
   id: string;
@@ -176,7 +178,28 @@ const conversation: ConversationDTO = {
   ],
 };
 
+type SpyCheckboxProps = {
+  label: string;
+};
+
+const SpyCheckbox = (props: SpyCheckboxProps) => {
+  const [isChecked, setChecked] = useState(false);
+  const { currentThemeColors } = useCurrentThemeColors();
+
+  return (
+    <SpyView fit className={`flex-row ${Platform.OS !== 'web' && "items-center"}`}>
+      <Checkbox
+        value={isChecked}
+        onValueChange={setChecked}
+        color={isChecked ? currentThemeColors.secondary : undefined}
+      />  
+      <SpyText className={`text-[12px] font-bold ${isChecked ? "text-secondary" : "text-primary"}`}>{props.label}</SpyText>
+    </SpyView>
+  );
+};
+
 const DialoguePage = () => {
+
   return (
     <SpySafeAreaView>
       <JPToolbar />
@@ -193,6 +216,12 @@ const DialoguePage = () => {
             Aki greets her friends at a café and chats about weekend plans.
           </SpyText>
           <SpyView>
+            <SpyView row className="gap-3">
+              <SpyCheckbox label="人" />
+              <SpyCheckbox label="あ" />
+              <SpyCheckbox label="EN" />
+              <SpyCheckbox label="W" />
+            </SpyView>
             <ConversationView conversation={conversation} config={config} />
             {/* <DialogueLineView author="アキ" line="おーい！久しぶり！" />
             <DialogueLineView author="サユリ" line="アキ！元気？" />
@@ -309,8 +338,12 @@ const WordView = (props: WordViewProps) => {
         <View>
           {props.furiganaSpacePreferred && (
             <SpyText
-              className={`${Platform.OS === "web" && "h-full"} text-[9px] text-transparent`}
-            >xd</SpyText>
+              className={`${
+                Platform.OS === "web" && "h-full"
+              } text-[9px] text-transparent`}
+            >
+              &#8203;
+            </SpyText>
           )}
           <SpyText>{word.native}</SpyText>
         </View>
@@ -339,8 +372,12 @@ const FragmentView = (props: FragmentProps) => {
         <>
           {props.furiganaSpacePreferred && (
             <SpyText
-              className={`${Platform.OS === "web" && "h-full"} text-[9px] text-transparent`}
-            >xd</SpyText>
+              className={`${
+                Platform.OS === "web" && "h-full"
+              } text-[9px] text-transparent`}
+            >
+              &#8203;
+            </SpyText>
           )}
           <SpyText>{props.fragment[0]}</SpyText>
         </>
