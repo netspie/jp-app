@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { Platform, View } from "react-native";
 import Checkbox from "expo-checkbox";
 import { useCurrentThemeColors } from "@/components/spy/themeTypes";
+import SpyCheckbox from "@/components/spy/SpyCheckbox";
 
 type ConversationDTO = {
   id: string;
@@ -48,14 +49,6 @@ type ConversationConfigDTO = {
   hiragana: boolean;
   translation: boolean;
   speakers: boolean;
-};
-
-const config: ConversationConfigDTO = {
-  native: true,
-  furigana: true,
-  hiragana: true,
-  translation: true,
-  speakers: true,
 };
 
 const conversation: ConversationDTO = {
@@ -182,36 +175,9 @@ const conversation: ConversationDTO = {
   ],
 };
 
-type SpyCheckboxProps = {
-  label: string;
-};
-
-const SpyCheckbox = (props: SpyCheckboxProps) => {
-  const [isChecked, setChecked] = useState(false);
-  const { currentThemeColors } = useCurrentThemeColors();
-
-  return (
-    <SpyView
-      fit
-      className={`flex-row ${Platform.OS !== "web" && "items-center"}`}
-    >
-      <Checkbox
-        value={isChecked}
-        onValueChange={setChecked}
-        color={isChecked ? currentThemeColors.secondary : undefined}
-      />
-      <SpyText
-        className={`text-[12px] font-bold ${
-          isChecked ? "text-secondary" : "text-primary"
-        }`}
-      >
-        {props.label}
-      </SpyText>
-    </SpyView>
-  );
-};
-
 const DialoguePage = () => {
+  const [isSpeakersVisible, setSpeakersVisible] = useState(false);
+
   return (
     <SpySafeAreaView>
       <JPToolbar />
@@ -229,12 +195,25 @@ const DialoguePage = () => {
           </SpyText>
           <SpyView>
             <SpyView row className="gap-3">
-              <SpyCheckbox label="人" />
+              <SpyCheckbox
+                label="人"
+                value={isSpeakersVisible}
+                onValueChange={setSpeakersVisible}
+              />
               <SpyCheckbox label="あ" />
               <SpyCheckbox label="EN" />
               <SpyCheckbox label="W" />
             </SpyView>
-            <ConversationView conversation={conversation} config={config} />
+            <ConversationView
+              conversation={conversation}
+              config={{
+                native: true,
+                furigana: true,
+                hiragana: true,
+                translation: true,
+                speakers: isSpeakersVisible,
+              }}
+            />
             {/* <DialogueLineView author="アキ" line="おーい！久しぶり！" />
             <DialogueLineView author="サユリ" line="アキ！元気？" />
             <DialogueLineView author="アキ" line="うん！みんなは？" />
@@ -278,15 +257,15 @@ const ConversationView = (props: NativeConversationViewProps) => {
     <>
       {props.conversation.lines.map(
         (line, i) =>
-          config.native && (
+          props.config.native && (
             <NativeConversationLineView
               key={i}
               line={line}
               speakers={conversation.speakers}
               words={conversation.words}
-              speakersVisible={config.speakers}
-              furiganaVisible={config.furigana}
-              furiganaSpacePreferred={config.furigana && hasAnyFurigana}
+              speakersVisible={props.config.speakers}
+              furiganaVisible={props.config.furigana}
+              furiganaSpacePreferred={props.config.furigana && hasAnyFurigana}
             />
           )
       )}
@@ -306,6 +285,11 @@ type NativeConversationLineViewProps = {
 const NativeConversationLineView = (props: NativeConversationLineViewProps) => {
   return (
     <View className="flex-row">
+      <CharacterWithEmptyFurigana
+        furiganaSpacePreferred={props.furiganaSpacePreferred}
+      >
+        {Platform.OS !== 'web' ? "▫ " : <SpyText className="-translate-y-[2px]">{"▪ "}</SpyText>}
+      </CharacterWithEmptyFurigana>
       {props.speakersVisible && (
         <View className="flex-row items-end">
           <SpyText className="font-bold">
@@ -350,9 +334,10 @@ const WordView = (props: WordViewProps) => {
     <View className="flex-row">
       {word.fragments === undefined && (
         <CharacterWithEmptyFurigana
-          character={word.native}
           furiganaSpacePreferred={props.furiganaSpacePreferred}
-        />
+        >
+          {word.native}
+        </CharacterWithEmptyFurigana>
       )}
       {word.fragments &&
         word.fragments.map((fragment, i) => (
@@ -376,9 +361,10 @@ const FragmentView = (props: FragmentProps) => {
     <View>
       {props.fragment.length == 1 && (
         <CharacterWithEmptyFurigana
-          character={props.fragment[0]}
           furiganaSpacePreferred={props.furiganaSpacePreferred}
-        />
+        >
+          {props.fragment[0]}
+        </CharacterWithEmptyFurigana>
       )}
       {props.fragment.length >= 2 && (
         <>
@@ -391,7 +377,7 @@ const FragmentView = (props: FragmentProps) => {
 };
 
 type CharacterWithFuriganaProps = {
-  character: string;
+  children: React.ReactNode;
   furiganaSpacePreferred: boolean;
 };
 
@@ -407,7 +393,12 @@ function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
           &#8203;
         </SpyText>
       )}
-      <SpyText>{props.character}</SpyText>
+
+      {typeof props.children === "string" ? (
+        <SpyText>{props.children}</SpyText>
+      ) : (
+        props.children
+      )}
     </View>
   );
 }
