@@ -135,6 +135,7 @@ const conversation: ConversationDTO = {
 
 const DialoguePage = () => {
   const [isSpeakersVisible, setSpeakersVisible] = useState(true);
+  const [isNativeVisible, setNativeVisible] = useState(true);
   const [isTranslationsVisible, setTranslationsVisible] = useState(true);
   const [isFuriganaVisible, setFuriganaVisible] = useState(true);
 
@@ -160,7 +161,11 @@ const DialoguePage = () => {
                 value={isSpeakersVisible}
                 onValueChange={setSpeakersVisible}
               />
-              <SpyCheckbox label="あ" />
+              <SpyCheckbox
+                label="あ"
+                value={isNativeVisible}
+                onValueChange={setNativeVisible}
+              />
               <SpyCheckbox
                 label="〻"
                 value={isFuriganaVisible}
@@ -171,12 +176,12 @@ const DialoguePage = () => {
                 value={isTranslationsVisible}
                 onValueChange={setTranslationsVisible}
               />
-              <SpyCheckbox label="W" />
+              {/* <SpyCheckbox label="W" /> */}
             </SpyView>
             <ConversationView
               conversation={conversation}
               config={{
-                native: true,
+                native: isNativeVisible,
                 furigana: isFuriganaVisible,
                 hiragana: true,
                 translation: isTranslationsVisible,
