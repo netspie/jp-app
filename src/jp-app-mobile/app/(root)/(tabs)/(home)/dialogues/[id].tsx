@@ -74,7 +74,7 @@ const conversation: ConversationDTO = {
           phraseId: 1,
           native: "これやってくれる？",
           translation: "Can you do this for me?",
-          wordIdxs: [0, 1, 2],
+          wordIdxs: [0, 1, 2, 16],
         },
       ],
     },
@@ -83,9 +83,9 @@ const conversation: ConversationDTO = {
       phrases: [
         {
           phraseId: 2,
-          native: "えー自分でやって。",
+          native: "えー、自分でやって。",
           translation: "Eh? Do it yourself.",
-          wordIdxs: [3, 4, 5, 1],
+          wordIdxs: [3, 14, 4, 5, 1, 15],
         },
       ],
     },
@@ -96,13 +96,13 @@ const conversation: ConversationDTO = {
           phraseId: 1,
           native: "やってよ！",
           translation: "Do it!",
-          wordIdxs: [1, 6, 7, 8],
+          wordIdxs: [1, 6, 7, 8, 17],
         },
         {
           phraseId: 1,
           native: "いいじゃん！",
           translation: "Come on!",
-          wordIdxs: [1, 6, 7, 8],
+          wordIdxs: [1, 6, 7, 8, 17],
         },
       ],
     },
@@ -113,7 +113,7 @@ const conversation: ConversationDTO = {
           phraseId: 2,
           native: "自分でできるでしょ。",
           translation: "You can do it yourself, right?",
-          wordIdxs: [4, 5, 9, 10],
+          wordIdxs: [4, 5, 9, 10, 15],
         },
       ],
     },
@@ -124,7 +124,7 @@ const conversation: ConversationDTO = {
           phraseId: 1,
           native: "できない！",
           translation: "I can't!",
-          wordIdxs: [9, 11],
+          wordIdxs: [9, 11, 17],
         },
       ],
     },
@@ -135,7 +135,7 @@ const conversation: ConversationDTO = {
           phraseId: 2,
           native: "子供みたい…。",
           translation: "You're like a child…",
-          wordIdxs: [12, 13],
+          wordIdxs: [12, 13, 15],
         },
       ],
     },
@@ -175,6 +175,10 @@ const conversation: ConversationDTO = {
       ],
     },
     { wordId: 14, native: "みたい", translation: "like" },
+    { wordId: 15, native: "、", translation: "delimiter ','" },
+    { wordId: 16, native: "。", translation: "dot '.'" },
+    { wordId: 17, native: "？", translation: "question mark '?'" },
+    { wordId: 18, native: "！", translation: "exclamation mark '!'" },
   ],
 };
 
@@ -187,19 +191,27 @@ const SpyCheckbox = (props: SpyCheckboxProps) => {
   const { currentThemeColors } = useCurrentThemeColors();
 
   return (
-    <SpyView fit className={`flex-row ${Platform.OS !== 'web' && "items-center"}`}>
+    <SpyView
+      fit
+      className={`flex-row ${Platform.OS !== "web" && "items-center"}`}
+    >
       <Checkbox
         value={isChecked}
         onValueChange={setChecked}
         color={isChecked ? currentThemeColors.secondary : undefined}
-      />  
-      <SpyText className={`text-[12px] font-bold ${isChecked ? "text-secondary" : "text-primary"}`}>{props.label}</SpyText>
+      />
+      <SpyText
+        className={`text-[12px] font-bold ${
+          isChecked ? "text-secondary" : "text-primary"
+        }`}
+      >
+        {props.label}
+      </SpyText>
     </SpyView>
   );
 };
 
 const DialoguePage = () => {
-
   return (
     <SpySafeAreaView>
       <JPToolbar />
@@ -309,16 +321,18 @@ const NativeConversationLineView = (props: NativeConversationLineViewProps) => {
         </View>
       )}
 
-      {props.line.phrases.map((phrase, i) =>
-        phrase.wordIdxs.map((wordId, j) => (
-          <WordView
-            key={`${i}-${j}`}
-            wordId={wordId}
-            words={props.words}
-            furiganaSpacePreferred={props.furiganaSpacePreferred}
-          />
-        ))
-      )}
+      {props.line.phrases.map((phrase, i) => (
+        <>
+          {phrase.wordIdxs.map((wordId, j) => (
+            <WordView
+              key={`${i}-${j}`}
+              wordId={wordId}
+              words={props.words}
+              furiganaSpacePreferred={props.furiganaSpacePreferred}
+            />
+          ))}
+        </>
+      ))}
     </View>
   );
 };
@@ -335,18 +349,10 @@ const WordView = (props: WordViewProps) => {
   return (
     <View className="flex-row">
       {word.fragments === undefined && (
-        <View>
-          {props.furiganaSpacePreferred && (
-            <SpyText
-              className={`${
-                Platform.OS === "web" && "h-full"
-              } text-[9px] text-transparent`}
-            >
-              &#8203;
-            </SpyText>
-          )}
-          <SpyText>{word.native}</SpyText>
-        </View>
+        <CharacterWithEmptyFurigana
+          character={word.native}
+          furiganaSpacePreferred={props.furiganaSpacePreferred}
+        />
       )}
       {word.fragments &&
         word.fragments.map((fragment, i) => (
@@ -369,18 +375,10 @@ const FragmentView = (props: FragmentProps) => {
   return (
     <View>
       {props.fragment.length == 1 && (
-        <>
-          {props.furiganaSpacePreferred && (
-            <SpyText
-              className={`${
-                Platform.OS === "web" && "h-full"
-              } text-[9px] text-transparent`}
-            >
-              &#8203;
-            </SpyText>
-          )}
-          <SpyText>{props.fragment[0]}</SpyText>
-        </>
+        <CharacterWithEmptyFurigana
+          character={props.fragment[0]}
+          furiganaSpacePreferred={props.furiganaSpacePreferred}
+        />
       )}
       {props.fragment.length >= 2 && (
         <>
@@ -391,6 +389,28 @@ const FragmentView = (props: FragmentProps) => {
     </View>
   );
 };
+
+type CharacterWithFuriganaProps = {
+  character: string;
+  furiganaSpacePreferred: boolean;
+};
+
+function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
+  return (
+    <View>
+      {props.furiganaSpacePreferred && (
+        <SpyText
+          className={`${
+            Platform.OS === "web" && "h-full"
+          } text-[9px] text-transparent`}
+        >
+          &#8203;
+        </SpyText>
+      )}
+      <SpyText>{props.character}</SpyText>
+    </View>
+  );
+}
 
 function hasConversationAnyFurigana(conv: ConversationDTO) {
   return conv.lines.some((x) => hasConversationLineAnyFurigana(x, conv.words));
@@ -404,6 +424,17 @@ function hasConversationLineAnyFurigana(
   wordIdxs = [...new Set(wordIdxs)];
 
   return words.some((word) => word.fragments && word.fragments.length > 1);
+}
+
+function getLastPunctuation(sentence: string): string {
+  const punctuation = new Set(["。", "！", "？", "…"]); // Common JP punctuation
+  let i = sentence.length - 1;
+
+  while (i >= 0 && punctuation.has(sentence[i])) {
+    i--;
+  }
+
+  return sentence.slice(i + 1); // Return only the punctuation characters
 }
 
 export default DialoguePage;
