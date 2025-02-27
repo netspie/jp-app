@@ -80,7 +80,10 @@ export const NativeConversationLineView = (
               key={`${i}-${j}`}
               wordId={wordId}
               words={props.words}
-              furiganaSpacePreferred={props.furiganaSpacePreferred}
+              furiganaVisible={props.furiganaVisible}
+              furiganaSpacePreferred={
+                props.furiganaVisible && props.furiganaSpacePreferred
+              }
             />
           ))}
         </>
@@ -92,6 +95,7 @@ export const NativeConversationLineView = (
 export type WordViewProps = {
   wordId: number;
   words: WordDTO[];
+  furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
 };
 
@@ -100,18 +104,22 @@ export const WordView = (props: WordViewProps) => {
 
   return (
     <View className="flex-row">
-      {word.fragments === undefined && (
-        <CharacterWithEmptyFurigana
-          furiganaSpacePreferred={props.furiganaSpacePreferred}
-        >
-          {word.native}
-        </CharacterWithEmptyFurigana>
-      )}
+      {word.fragments === undefined &&
+        (props.furiganaVisible ? (
+          <CharacterWithEmptyFurigana
+            furiganaSpacePreferred={props.furiganaSpacePreferred}
+          >
+            {word.native}
+          </CharacterWithEmptyFurigana>
+        ) : (
+          <SpyText>{word.native}</SpyText>
+        ))}
       {word.fragments &&
         word.fragments.map((fragment, i) => (
           <FragmentView
             key={i}
             fragment={fragment}
+            furiganaVisible={props.furiganaVisible}
             furiganaSpacePreferred={props.furiganaSpacePreferred}
           />
         ))}
@@ -121,6 +129,7 @@ export const WordView = (props: WordViewProps) => {
 
 export type FragmentProps = {
   fragment: string[];
+  furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
 };
 
@@ -136,7 +145,9 @@ export const FragmentView = (props: FragmentProps) => {
       )}
       {props.fragment.length >= 2 && (
         <>
-          <SpyText className="text-[9px]">{props.fragment[1]}</SpyText>
+          {props.furiganaVisible && (
+            <SpyText className="text-[9px]">{props.fragment[1]}</SpyText>
+          )}
           <SpyText>{props.fragment[0]}</SpyText>
         </>
       )}
@@ -214,8 +225,8 @@ export const TranslationConversationLineView = (
 
       {props.line.phrases.map((phrase, i) => (
         <>
-            <SpyText key={i}>{phrase.translation}</SpyText>
-            {(i !== props.line.phrases.length - 1) && <SpyText>&nbsp;</SpyText>}
+          <SpyText key={i}>{phrase.translation}</SpyText>
+          {i !== props.line.phrases.length - 1 && <SpyText>&nbsp;</SpyText>}
         </>
       ))}
     </View>

@@ -6,9 +6,8 @@ import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
 import React, { useState } from "react";
-import { View } from "react-native";
-import ConversationView from "./ConversationView";
 import { ConversationDTO } from "./ConversationDTO";
+import ConversationView from "./ConversationView";
 
 const conversation: ConversationDTO = {
   id: "1",
@@ -137,6 +136,7 @@ const conversation: ConversationDTO = {
 const DialoguePage = () => {
   const [isSpeakersVisible, setSpeakersVisible] = useState(true);
   const [isTranslationsVisible, setTranslationsVisible] = useState(true);
+  const [isFuriganaVisible, setFuriganaVisible] = useState(true);
 
   return (
     <SpySafeAreaView>
@@ -162,7 +162,12 @@ const DialoguePage = () => {
               />
               <SpyCheckbox label="あ" />
               <SpyCheckbox
-                label="EN"
+                label="〻"
+                value={isFuriganaVisible}
+                onValueChange={setFuriganaVisible}
+              />
+              <SpyCheckbox
+                label="A"
                 value={isTranslationsVisible}
                 onValueChange={setTranslationsVisible}
               />
@@ -172,7 +177,7 @@ const DialoguePage = () => {
               conversation={conversation}
               config={{
                 native: true,
-                furigana: true,
+                furigana: isFuriganaVisible,
                 hiragana: true,
                 translation: isTranslationsVisible,
                 speakers: isSpeakersVisible,
