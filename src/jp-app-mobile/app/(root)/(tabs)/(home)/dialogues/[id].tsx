@@ -1,55 +1,14 @@
 import JPToolbar from "@/app/(root)/JPToolbar";
+import SpyCheckbox from "@/components/spy/SpyCheckbox";
 import SpyHeader from "@/components/spy/SpyHeader";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
 import React, { useState } from "react";
-import { Platform, View } from "react-native";
-import Checkbox from "expo-checkbox";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
-import SpyCheckbox from "@/components/spy/SpyCheckbox";
-
-type ConversationDTO = {
-  id: string;
-  nameNative: string;
-  nameTranslation: string;
-  speakers: SpeakerDTO[];
-  lines: ConversationLineDTO[];
-  words: WordDTO[];
-};
-
-type SpeakerDTO = {
-  nameNative: string;
-  nameTranslation: string;
-};
-
-type ConversationLineDTO = {
-  speakerIdx: number;
-  phrases: PhraseDTO[];
-};
-
-type PhraseDTO = {
-  phraseId: number;
-  native: string;
-  translation: string;
-  wordIdxs: number[];
-};
-
-type WordDTO = {
-  wordId: number;
-  native: string;
-  translation: string;
-  fragments?: string[][];
-};
-
-type ConversationConfigDTO = {
-  native: boolean;
-  furigana: boolean;
-  hiragana: boolean;
-  translation: boolean;
-  speakers: boolean;
-};
+import { View } from "react-native";
+import ConversationView from "./ConversationView";
+import { ConversationDTO } from "./ConversationDTO";
 
 const conversation: ConversationDTO = {
   id: "1",
@@ -176,7 +135,8 @@ const conversation: ConversationDTO = {
 };
 
 const DialoguePage = () => {
-  const [isSpeakersVisible, setSpeakersVisible] = useState(false);
+  const [isSpeakersVisible, setSpeakersVisible] = useState(true);
+  const [isTranslationsVisible, setTranslationsVisible] = useState(true);
 
   return (
     <SpySafeAreaView>
@@ -201,7 +161,11 @@ const DialoguePage = () => {
                 onValueChange={setSpeakersVisible}
               />
               <SpyCheckbox label="あ" />
-              <SpyCheckbox label="EN" />
+              <SpyCheckbox
+                label="EN"
+                value={isTranslationsVisible}
+                onValueChange={setTranslationsVisible}
+              />
               <SpyCheckbox label="W" />
             </SpyView>
             <ConversationView
@@ -210,17 +174,10 @@ const DialoguePage = () => {
                 native: true,
                 furigana: true,
                 hiragana: true,
-                translation: true,
+                translation: isTranslationsVisible,
                 speakers: isSpeakersVisible,
               }}
             />
-            {/* <DialogueLineView author="アキ" line="おーい！久しぶり！" />
-            <DialogueLineView author="サユリ" line="アキ！元気？" />
-            <DialogueLineView author="アキ" line="うん！みんなは？" />
-            <DialogueLineView author="サユリ" line="アキ！元気？" />
-            <DialogueLineView author="アキ" line="まぁまぁかな。" />
-            <DialogueLineView author="サユリ" line="私は忙しい〜。" />
-            <DialogueLineView author="アキ" line="今日はゆっくりしよ！" /> */}
           </SpyView>
         </SpyView>
       </SpyPageContent>
@@ -232,200 +189,5 @@ type DialogueLineProps = {
   author: string;
   line: string;
 };
-
-const DialogueLineView = (props: DialogueLineProps) => {
-  return (
-    <SpyView className="flex-row">
-      <View className="flex-row">
-        <SpyText className="font-bold">{props.author}</SpyText>
-        <SpyText>:</SpyText>
-      </View>
-      <SpyText>{props.line}</SpyText>
-    </SpyView>
-  );
-};
-
-type NativeConversationViewProps = {
-  conversation: ConversationDTO;
-  config: ConversationConfigDTO;
-};
-
-const ConversationView = (props: NativeConversationViewProps) => {
-  const hasAnyFurigana = hasConversationAnyFurigana(props.conversation);
-
-  return (
-    <>
-      {props.conversation.lines.map(
-        (line, i) =>
-          props.config.native && (
-            <NativeConversationLineView
-              key={i}
-              line={line}
-              speakers={conversation.speakers}
-              words={conversation.words}
-              speakersVisible={props.config.speakers}
-              furiganaVisible={props.config.furigana}
-              furiganaSpacePreferred={props.config.furigana && hasAnyFurigana}
-            />
-          )
-      )}
-    </>
-  );
-};
-
-type NativeConversationLineViewProps = {
-  line: ConversationLineDTO;
-  speakers: SpeakerDTO[];
-  words: WordDTO[];
-  speakersVisible: boolean;
-  furiganaVisible: boolean;
-  furiganaSpacePreferred: boolean;
-};
-
-const NativeConversationLineView = (props: NativeConversationLineViewProps) => {
-  return (
-    <View className="flex-row">
-      <CharacterWithEmptyFurigana
-        furiganaSpacePreferred={props.furiganaSpacePreferred}
-      >
-        {Platform.OS !== 'web' ? "▫ " : <SpyText className="-translate-y-[2px]">{"▪ "}</SpyText>}
-      </CharacterWithEmptyFurigana>
-      {props.speakersVisible && (
-        <View className="flex-row items-end">
-          <SpyText className="font-bold">
-            {props.speakers[props.line.speakerIdx].nameNative}
-          </SpyText>
-          <SpyText
-            className={`font-bold mr-2 ${
-              Platform.OS === "web" && "-translate-y-[2px]"
-            }`}
-          >
-            :
-          </SpyText>
-        </View>
-      )}
-
-      {props.line.phrases.map((phrase, i) => (
-        <>
-          {phrase.wordIdxs.map((wordId, j) => (
-            <WordView
-              key={`${i}-${j}`}
-              wordId={wordId}
-              words={props.words}
-              furiganaSpacePreferred={props.furiganaSpacePreferred}
-            />
-          ))}
-        </>
-      ))}
-    </View>
-  );
-};
-
-type WordViewProps = {
-  wordId: number;
-  words: WordDTO[];
-  furiganaSpacePreferred: boolean;
-};
-
-const WordView = (props: WordViewProps) => {
-  const word = props.words[props.wordId];
-
-  return (
-    <View className="flex-row">
-      {word.fragments === undefined && (
-        <CharacterWithEmptyFurigana
-          furiganaSpacePreferred={props.furiganaSpacePreferred}
-        >
-          {word.native}
-        </CharacterWithEmptyFurigana>
-      )}
-      {word.fragments &&
-        word.fragments.map((fragment, i) => (
-          <FragmentView
-            key={i}
-            fragment={fragment}
-            furiganaSpacePreferred={props.furiganaSpacePreferred}
-          />
-        ))}
-    </View>
-  );
-};
-
-type FragmentProps = {
-  fragment: string[];
-  furiganaSpacePreferred: boolean;
-};
-
-const FragmentView = (props: FragmentProps) => {
-  return (
-    <View>
-      {props.fragment.length == 1 && (
-        <CharacterWithEmptyFurigana
-          furiganaSpacePreferred={props.furiganaSpacePreferred}
-        >
-          {props.fragment[0]}
-        </CharacterWithEmptyFurigana>
-      )}
-      {props.fragment.length >= 2 && (
-        <>
-          <SpyText className="text-[9px]">{props.fragment[1]}</SpyText>
-          <SpyText>{props.fragment[0]}</SpyText>
-        </>
-      )}
-    </View>
-  );
-};
-
-type CharacterWithFuriganaProps = {
-  children: React.ReactNode;
-  furiganaSpacePreferred: boolean;
-};
-
-function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
-  return (
-    <View>
-      {props.furiganaSpacePreferred && (
-        <SpyText
-          className={`${
-            Platform.OS === "web" && "h-full"
-          } text-[9px] text-transparent`}
-        >
-          &#8203;
-        </SpyText>
-      )}
-
-      {typeof props.children === "string" ? (
-        <SpyText>{props.children}</SpyText>
-      ) : (
-        props.children
-      )}
-    </View>
-  );
-}
-
-function hasConversationAnyFurigana(conv: ConversationDTO) {
-  return conv.lines.some((x) => hasConversationLineAnyFurigana(x, conv.words));
-}
-
-function hasConversationLineAnyFurigana(
-  line: ConversationLineDTO,
-  words: WordDTO[]
-) {
-  let wordIdxs = line.phrases.flatMap((x) => x.wordIdxs);
-  wordIdxs = [...new Set(wordIdxs)];
-
-  return words.some((word) => word.fragments && word.fragments.length > 1);
-}
-
-function getLastPunctuation(sentence: string): string {
-  const punctuation = new Set(["。", "！", "？", "…"]); // Common JP punctuation
-  let i = sentence.length - 1;
-
-  while (i >= 0 && punctuation.has(sentence[i])) {
-    i--;
-  }
-
-  return sentence.slice(i + 1); // Return only the punctuation characters
-}
 
 export default DialoguePage;
