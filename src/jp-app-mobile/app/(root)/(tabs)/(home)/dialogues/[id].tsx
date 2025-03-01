@@ -8,6 +8,7 @@ import SpyView from "@/components/spy/SpyView";
 import React, { useState } from "react";
 import { ConversationDTO } from "./ConversationDTO";
 import ConversationView from "./ConversationView";
+import VocabularyView from "./VocabularyView";
 
 const conversation: ConversationDTO = {
   id: "1",
@@ -139,6 +140,10 @@ const DialoguePage = () => {
   const [isTranslationsVisible, setTranslationsVisible] = useState(true);
   const [isFuriganaVisible, setFuriganaVisible] = useState(true);
 
+  const [isVocabularyVisible, setVocabularyVisible] = useState(true);
+  const [isLineVocabularyVisible, setLineVocabularyVisible] = useState(true);
+  const [isAllVocabularyVisible, setAllVocabularyVisible] = useState(true);
+
   return (
     <SpySafeAreaView>
       <JPToolbar />
@@ -176,7 +181,25 @@ const DialoguePage = () => {
                 value={isTranslationsVisible}
                 onValueChange={setTranslationsVisible}
               />
-              {/* <SpyCheckbox label="W" /> */}
+              <SpyCheckbox
+                label="W"
+                value={isVocabularyVisible}
+                onValueChange={setVocabularyVisible}
+              />
+              {isVocabularyVisible && (
+                <>
+                  <SpyCheckbox
+                    label="W-"
+                    value={isLineVocabularyVisible}
+                    onValueChange={setLineVocabularyVisible}
+                  />
+                  <SpyCheckbox
+                    label="W*"
+                    value={isAllVocabularyVisible}
+                    onValueChange={setAllVocabularyVisible}
+                  />
+                </>
+              )}
             </SpyView>
             <ConversationView
               conversation={conversation}
@@ -186,8 +209,20 @@ const DialoguePage = () => {
                 hiragana: true,
                 translation: isTranslationsVisible,
                 speakers: isSpeakersVisible,
+                words: isVocabularyVisible && isLineVocabularyVisible,
               }}
             />
+            {isVocabularyVisible && isAllVocabularyVisible && (
+              <SpyView>
+                <SpyText className="font-bold mt-4 text-grey">
+                  Vocabulary
+                </SpyText>
+                <VocabularyView
+                  words={conversation.words}
+                  furiganaVisible={isFuriganaVisible}
+                />
+              </SpyView>
+            )}
           </SpyView>
         </SpyView>
       </SpyPageContent>

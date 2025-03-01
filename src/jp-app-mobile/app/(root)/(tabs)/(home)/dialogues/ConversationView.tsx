@@ -7,6 +7,7 @@ import {
   SpeakerDTO,
   WordDTO,
 } from "./ConversationDTO";
+import SpyView from "@/components/spy/SpyView";
 
 export type ConversationViewProps = {
   conversation: ConversationDTO;
@@ -38,6 +39,27 @@ export const ConversationView = (props: ConversationViewProps) => {
               speakers={props.conversation.speakers}
               speakersVisible={props.config.speakers}
             />
+          )}
+          {props.config.words && (
+            <View className="ml-4 mt-2">
+              {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
+                (wordIdx) => (
+                  <SpyView key={wordIdx} row className="items-end gap-1">
+                    <SpyText>- </SpyText>
+                    <WordView
+                      wordId={wordIdx}
+                      words={props.conversation.words}
+                      furiganaVisible={props.config.furigana}
+                      furiganaSpacePreferred={false}
+                    />
+                    <SpyText className="">-</SpyText>
+                    <SpyText className="">
+                      {props.conversation.words[wordIdx].translation}
+                    </SpyText>
+                  </SpyView>
+                )
+              )}
+            </View>
           )}
         </View>
       ))}
@@ -219,7 +241,7 @@ export const TranslationConversationLineView = (
           <SpyText className="font-bold">
             {props.speakers[props.line.speakerIdx].nameTranslation}
           </SpyText>
-          <SpySafeText>:</SpySafeText>
+          <SpyText className="font-bold mr-2">:</SpyText>
         </View>
       )}
 
@@ -256,3 +278,12 @@ const Bullet = () => {
 
   return <SpyText className="-translate-y-[2px]">▪ </SpyText>;
 };
+
+function distinctFlatMap<TFrom, TTo>(
+  source: TFrom[],
+  mapper: (from: TFrom) => TTo[]
+): TTo[] {
+  const result = new Set<TTo>();
+  source.flatMap(mapper).forEach((item) => result.add(item));
+  return Array.from(result);
+}

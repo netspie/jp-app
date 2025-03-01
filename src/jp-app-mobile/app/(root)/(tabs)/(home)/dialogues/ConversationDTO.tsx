@@ -37,4 +37,5 @@ export type ConversationConfigDTO = {
   hiragana: boolean;
   translation: boolean;
   speakers: boolean;
+  words: boolean;
 };
