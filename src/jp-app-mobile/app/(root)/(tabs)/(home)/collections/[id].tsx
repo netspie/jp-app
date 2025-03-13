@@ -7,11 +7,18 @@ import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
 import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { twMerge } from "tailwind-merge";
+import {
+  getCollection,
+  getCollectionConversations,
+} from "../dialogues/data/getConv";
 
 type DialogueViewProps = {
+  id: string;
   title: string;
+  subTitle: string;
   author?: string;
   className?: string;
 };
@@ -21,7 +28,7 @@ const DialogueView = (props: DialogueViewProps) => {
 
   return (
     <SpyButton
-      href="/(root)/(tabs)/(home)/dialogues/1"
+      href={`/(root)/(tabs)/(home)/dialogues/${props.id}`}
       className={twMerge(
         "flex-row items-center h-fit gap-4 w-full",
         props.className
@@ -30,71 +37,34 @@ const DialogueView = (props: DialogueViewProps) => {
       <Ionicons name="chatbox" size={36} color={currentThemeColors.secondary} />
       <SpyView className="gap-1">
         <SpyText className="font-bold text-primary">{props.title}</SpyText>
+        <SpyText className="text-grey">{props.subTitle}</SpyText>
       </SpyView>
     </SpyButton>
   );
 };
 
 const CollectionPage = () => {
+  const { id } = useLocalSearchParams();
+
+  if (typeof id !== "string") return;
+
+  const collection = getCollection(id);
+  const conversations = getCollectionConversations(id);
+  if (collection === undefined || conversations === undefined) return;
+
   return (
     <SpySafeAreaView>
       <JPToolbar />
+      <SpyHeader>{collection?.name}</SpyHeader>
       <SpyPageContent safe={false}>
-        <SpyHeader>L3 - 800 Words Used</SpyHeader>
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
-        <DialogueView title="Haruto Wants to Escape the City" />
-        <DialogueView title="Aiko Yearns for Her Childhood Village" />
-        <DialogueView title="Yuki’s Escape from the Storm" />
-        <DialogueView title="Sora's Quest for Tranquility" />
-        <DialogueView title="Emi Seeks Refuge from the Crowds" />
-        <DialogueView title="Ren Wants to Reconnect with His Roots" />
-        <DialogueView title="Miko’s Search for Peace Amidst Chaos" />
-        <DialogueView title="Hiroshi Wants to Leave the Chaos Behind" />
-        <DialogueView title="Natsuki Needs a Break from Reality" />
+        {Object.values(conversations).map((conversation, i) => (
+          <DialogueView
+            key={i}
+            id={conversation.id}
+            title={conversation.nameTranslation}
+            subTitle={conversation.nameNative}
+          />
+        ))}
       </SpyPageContent>
     </SpySafeAreaView>
   );

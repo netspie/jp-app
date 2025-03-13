@@ -44,8 +44,8 @@ export const ConversationView = (props: ConversationViewProps) => {
             <View className="ml-4 mt-2">
               {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
                 (wordIdx) => (
-                  <SpyView key={wordIdx} row className="items-end gap-1">
-                    <SpyText>- </SpyText>
+                  <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
+                    <SpyText> </SpyText>
                     <WordView
                       wordId={wordIdx}
                       words={props.conversation.words}

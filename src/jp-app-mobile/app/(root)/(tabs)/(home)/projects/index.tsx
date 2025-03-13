@@ -1,5 +1,4 @@
 import JPToolbar from "@/app/(root)/JPToolbar";
-import HorizontalList from "@/components/spy/HorizontalList";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyEditableList from "@/components/spy/SpyEditableList";
 import SpyHeader from "@/components/spy/SpyHeader";
@@ -12,6 +11,7 @@ import React from "react";
 import { View } from "react-native";
 
 type ProjectViewProps = {
+  id: string;
   title: string;
   author?: string;
 };
@@ -21,7 +21,7 @@ const ProjectView = (props: ProjectViewProps) => {
 
   return (
     <SpyButton
-      href="/(root)/(tabs)/(home)/projects/1"
+      href={`/(root)/(tabs)/(home)/projects/${props.id}`}
       className="w-full flex-row rounded-md p-4 gap-6 bg-greyLight"
     >
       <Ionicons name="cube" size={36} color={currentThemeColors.secondary} />
@@ -39,62 +39,20 @@ const ProjectsPage = () => {
       <JPToolbar />
       <SpyPageContent safe={false}>
         <SpyHeader>Projects</SpyHeader>
-        <HorizontalList>
+        {/* <HorizontalList>
           <SpyButton
             className="w-fit bg-primary p-2"
             textClassName="text-white"
           >
             Mine
           </SpyButton>
-        </HorizontalList>
+        </HorizontalList> */}
         <SpyEditableList
           createHref="/projects/create"
           createButtonShown={false}
         >
-          <ProjectView title="Yuta Vocabulary Course" author="Yuta Aoki" />
-          <ProjectView
-            title="Yuta Real Life Japanese Course"
-            author="Yuta Aoki"
-          />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
-          <ProjectView title="Misa Ammo YT Videos" author="Misa Ammo" />
+          <ProjectView id="yuta" title="Yuta Vocabulary Course" />
+          <ProjectView id="public" title="Public Conversations" />
         </SpyEditableList>
       </SpyPageContent>
     </SpySafeAreaView>
