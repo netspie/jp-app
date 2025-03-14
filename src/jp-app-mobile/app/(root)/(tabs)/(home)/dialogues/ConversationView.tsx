@@ -8,6 +8,8 @@ import {
   WordDTO,
 } from "./ConversationDTO";
 import SpyView from "@/components/spy/SpyView";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { twMerge } from "tailwind-merge";
 
 export type ConversationViewProps = {
   conversation: ConversationDTO;
@@ -20,7 +22,7 @@ export const ConversationView = (props: ConversationViewProps) => {
   return (
     <>
       {props.conversation.lines.map((line, i) => (
-        <View>
+        <View key={i}>
           {props.config.native && (
             <NativeConversationLineView
               key={i}
@@ -41,23 +43,36 @@ export const ConversationView = (props: ConversationViewProps) => {
             />
           )}
           {props.config.words && (
-            <View className="ml-4 mt-2">
+            <View className="ml-7 mt-2">
               {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
-                (wordIdx) => (
-                  <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
-                    <SpyText> </SpyText>
-                    <WordView
-                      wordId={wordIdx}
-                      words={props.conversation.words}
-                      furiganaVisible={props.config.furigana}
-                      furiganaSpacePreferred={false}
-                    />
-                    <SpyText className="">-</SpyText>
-                    <SpyText className="">
-                      {props.conversation.words[wordIdx].translation}
-                    </SpyText>
-                  </SpyView>
-                )
+                (wordIdx) =>
+                  !isJapanesePunctuation(
+                    props.conversation.words[wordIdx].native
+                  ) && (
+                    <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
+                      <CharacterWithEmptyFurigana
+                        furiganaSpacePreferred={false}
+                      >
+                        <Ionicons
+                          name="send"
+                          size={8}
+                          color={"black"}
+                          className="mb-1 mr-1"
+                        />
+                      </CharacterWithEmptyFurigana>
+                      <WordView
+                        wordId={wordIdx}
+                        words={props.conversation.words}
+                        furiganaVisible={props.config.furigana}
+                        furiganaSpacePreferred={false}
+                        textClassName="text-gray-500"
+                      />
+                      <SpyText className="">-</SpyText>
+                      <SpyText className="">
+                        {props.conversation.words[wordIdx].translation}
+                      </SpyText>
+                    </SpyView>
+                  )
               )}
             </View>
           )}
@@ -96,7 +111,7 @@ export const NativeConversationLineView = (
       )}
 
       {props.line.phrases.map((phrase, i) => (
-        <>
+        <View key={i} className="flex-row">
           {phrase.wordIdxs.map((wordId, j) => (
             <WordView
               key={`${i}-${j}`}
@@ -108,7 +123,7 @@ export const NativeConversationLineView = (
               }
             />
           ))}
-        </>
+        </View>
       ))}
     </View>
   );
@@ -119,22 +134,25 @@ export type WordViewProps = {
   words: WordDTO[];
   furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
+  className?: string;
+  textClassName?: string;
 };
 
 export const WordView = (props: WordViewProps) => {
   const word = props.words[props.wordId];
 
   return (
-    <View className="flex-row">
+    <View className={twMerge("flex-row", props.className)}>
       {word.fragments === undefined &&
         (props.furiganaVisible ? (
           <CharacterWithEmptyFurigana
             furiganaSpacePreferred={props.furiganaSpacePreferred}
+            className={props.textClassName}
           >
             {word.native}
           </CharacterWithEmptyFurigana>
         ) : (
-          <SpyText>{word.native}</SpyText>
+          <SpyText className={props.textClassName}>{word.native}</SpyText>
         ))}
       {word.fragments &&
         word.fragments.map((fragment, i) => (
@@ -143,6 +161,7 @@ export const WordView = (props: WordViewProps) => {
             fragment={fragment}
             furiganaVisible={props.furiganaVisible}
             furiganaSpacePreferred={props.furiganaSpacePreferred}
+            textClassName={props.textClassName}
           />
         ))}
     </View>
@@ -153,6 +172,7 @@ export type FragmentProps = {
   fragment: string[];
   furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
+  textClassName?: string;
 };
 
 export const FragmentView = (props: FragmentProps) => {
@@ -161,6 +181,7 @@ export const FragmentView = (props: FragmentProps) => {
       {props.fragment.length == 1 && (
         <CharacterWithEmptyFurigana
           furiganaSpacePreferred={props.furiganaSpacePreferred}
+          className={props.textClassName}
         >
           {props.fragment[0]}
         </CharacterWithEmptyFurigana>
@@ -168,9 +189,11 @@ export const FragmentView = (props: FragmentProps) => {
       {props.fragment.length >= 2 && (
         <>
           {props.furiganaVisible && (
-            <SpyText className="text-[9px]">{props.fragment[1]}</SpyText>
+            <SpyText className={twMerge("text-[9px]", props.textClassName)}>
+              {props.fragment[1]}
+            </SpyText>
           )}
-          <SpyText>{props.fragment[0]}</SpyText>
+          <SpyText className={props.textClassName}>{props.fragment[0]}</SpyText>
         </>
       )}
     </View>
@@ -180,6 +203,7 @@ export const FragmentView = (props: FragmentProps) => {
 export type CharacterWithFuriganaProps = {
   children: React.ReactNode;
   furiganaSpacePreferred: boolean;
+  className?: string;
 };
 
 export function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
@@ -189,14 +213,14 @@ export function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
         <SpyText
           className={`${
             Platform.OS === "web" && "h-full"
-          } text-[9px] text-transparent`}
+          } text-[9px] text-transparent ${props.className}`}
         >
           &#8203;
         </SpyText>
       )}
 
       {typeof props.children === "string" ? (
-        <SpyText>{props.children}</SpyText>
+        <SpyText className={props.className}>{props.children}</SpyText>
       ) : (
         props.children
       )}
@@ -246,10 +270,10 @@ export const TranslationConversationLineView = (
       )}
 
       {props.line.phrases.map((phrase, i) => (
-        <>
+        <View className="flex-row" key={i}>
           <SpyText key={i}>{phrase.translation}</SpyText>
           {i !== props.line.phrases.length - 1 && <SpyText>&nbsp;</SpyText>}
-        </>
+        </View>
       ))}
     </View>
   );
@@ -271,12 +295,14 @@ const SpySafeText = (props: SpySafeTextProps) => {
   );
 };
 
-const Bullet = () => {
+type BulletProps = {};
+
+export const Bullet = (props: BulletProps) => {
   if (Platform.OS !== "web") {
     return <SpyText>▫ </SpyText>;
   }
 
-  return <SpyText className="-translate-y-[2px]">▪ </SpyText>;
+  return <SpyText className="-translate-y-[2px]">▪</SpyText>;
 };
 
 function distinctFlatMap<TFrom, TTo>(
@@ -286,4 +312,10 @@ function distinctFlatMap<TFrom, TTo>(
   const result = new Set<TTo>();
   source.flatMap(mapper).forEach((item) => result.add(item));
   return Array.from(result);
+}
+
+export function isJapanesePunctuation(char: string): boolean {
+  const japanesePunctuationRegex =
+    /^[、。・「」『』（）［］｛｝〈〉《》【】！？：；〜…—￥]+$/;
+  return japanesePunctuationRegex.test(char);
 }

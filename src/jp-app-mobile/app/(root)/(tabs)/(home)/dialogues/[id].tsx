@@ -9,15 +9,14 @@ import React, { useState } from "react";
 import ConversationView from "./ConversationView";
 import VocabularyView from "./VocabularyView";
 import { useLocalSearchParams } from "expo-router";
-import getConv from "./data/getConv";
+import getConversation from "./data/getConv";
 
 const DialoguePage = () => {
   const { id } = useLocalSearchParams();
+  if (typeof id !== "string") return;
 
-  const conversation = typeof id === 'string' ? getConv(id) : undefined;
-  if (conversation === undefined)
-    return;
-  
+  const conversation = getConversation(id);
+
   const [isSpeakersVisible, setSpeakersVisible] = useState(true);
   const [isNativeVisible, setNativeVisible] = useState(true);
   const [isTranslationsVisible, setTranslationsVisible] = useState(true);
@@ -111,11 +110,6 @@ const DialoguePage = () => {
       </SpyPageContent>
     </SpySafeAreaView>
   );
-};
-
-type DialogueLineProps = {
-  author: string;
-  line: string;
 };
 
 export default DialoguePage;

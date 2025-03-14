@@ -15,7 +15,7 @@ function getPublicConv(id: string) {
   return publicConversations_1[id];
 }
 
-export default function getConv(id: string) {
+export default function getConversation(id: string) {
   const conv = getPublicConv(id);
   if (conv !== undefined) return conv;
 
