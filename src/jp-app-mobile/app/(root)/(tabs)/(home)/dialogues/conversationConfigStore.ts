@@ -33,3 +33,5 @@ type ConversationConfigStore = {
     setLineVocabularyVisible: (value) => set({ isLineVocabularyVisible: value }),
     setAllVocabularyVisible: (value) => set({ isAllVocabularyVisible: value }),
   }));
+
+  export default {};

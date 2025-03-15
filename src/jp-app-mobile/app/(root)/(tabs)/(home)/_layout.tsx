@@ -1,11 +1,13 @@
 import React from "react";
-import SpyStack from "@/components/spy/SpyStack";
-import SpyStackScreen from "@/components/spy/SpyStackScreen";
+import SpyStack, {
+  createDefaultStackScreenOptions,
+} from "@/components/spy/SpyStack";
+import { Stack } from "expo-router";
 
 const RootLayout = () => {
   return (
     <SpyStack top>
-      <SpyStackScreen name="index" />
+      <Stack.Screen name="index" options={createDefaultStackScreenOptions()} />
     </SpyStack>
   );
 };

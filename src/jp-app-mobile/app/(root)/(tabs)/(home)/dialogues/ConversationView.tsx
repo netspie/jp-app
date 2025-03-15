@@ -3,8 +3,9 @@ import SpyView from "@/components/spy/SpyView";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Platform, View } from "react-native";
 import { twMerge } from "tailwind-merge";
-import ConversationDTO, {
+import  {
   ConversationConfigDTO,
+  ConversationDTO,
   ConversationLineDTO,
   SpeakerDTO,
   WordDTO,

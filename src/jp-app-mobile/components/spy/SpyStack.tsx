@@ -53,7 +53,7 @@ export const createDefaultStackOptions = (
 
 export const createDefaultStackScreenOptions = (
   options?: NativeStackNavigationOptions
-) => {
+): NativeStackNavigationOptions => {
   return {
     contentStyle: {
       height: "100%",

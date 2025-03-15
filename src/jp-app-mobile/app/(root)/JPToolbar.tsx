@@ -6,7 +6,7 @@ import SpyIconButton from "@/components/spy/SpyIconButton";
 import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
-import { useNavigation, useRootNavigationState } from "expo-router";
+import { useNavigation } from "expo-router";
 import { useRef } from "react";
 import { View } from "react-native";
 

@@ -1,7 +1,7 @@
-import { View, Text, TextInput, Button } from "react-native";
-import React, { useState } from "react";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyText from "@/components/spy/SpyText";
+import React, { useState } from "react";
+import { TextInput, View } from "react-native";
 
 const ProjectForm = () => {
   const [name, setName] = useState("");
