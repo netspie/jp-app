@@ -1,10 +1,6 @@
 import { createContext } from "react";
 import { View } from "react-native";
-import { useAppColorScheme } from "./useAppColorScheme";
-import {
-  ThemeVariables,
-  useCurrentThemeColorVariables,
-} from "./themeTypes";
+import { useCurrentThemeColorVariables } from "./themeHooks";
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -17,14 +13,12 @@ export const ThemeContext = createContext<{
 });
 
 export const SpyThemeProvider = (props: ThemeProviderProps) => {
-  const { currentThemeColorVariables, appColorScheme } = useCurrentThemeColorVariables();
+  const { currentThemeColorVariables, appColorScheme } =
+    useCurrentThemeColorVariables();
 
   return (
     <ThemeContext.Provider value={{ theme: appColorScheme }}>
-      <View
-        style={currentThemeColorVariables}
-        className="flex-1"
-      >
+      <View style={currentThemeColorVariables} className="flex-1">
         {props.children}
       </View>
     </ThemeContext.Provider>

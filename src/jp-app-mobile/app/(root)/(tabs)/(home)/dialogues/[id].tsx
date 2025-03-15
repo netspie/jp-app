@@ -5,80 +5,75 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
-import React, { useState } from "react";
-import ConversationView from "./ConversationView";
-import VocabularyView from "./VocabularyView";
 import { useLocalSearchParams } from "expo-router";
+import React from "react";
+import { useConversationConfigStore } from "./conversationConfigStore";
+import ConversationView from "./ConversationView";
 import getConversation from "./data/getConv";
+import VocabularyView from "./VocabularyView";
 
 const DialoguePage = () => {
   const { id } = useLocalSearchParams();
   if (typeof id !== "string") return;
 
+  const configStore = useConversationConfigStore()
   const conversation = getConversation(id);
-
-  const [isSpeakersVisible, setSpeakersVisible] = useState(true);
-  const [isNativeVisible, setNativeVisible] = useState(true);
-  const [isTranslationsVisible, setTranslationsVisible] = useState(true);
-  const [isFuriganaVisible, setFuriganaVisible] = useState(true);
-
-  const [isVocabularyVisible, setVocabularyVisible] = useState(true);
-  const [isLineVocabularyVisible, setLineVocabularyVisible] = useState(true);
-  const [isAllVocabularyVisible, setAllVocabularyVisible] = useState(true);
 
   return (
     <SpySafeAreaView>
       <JPToolbar />
       <SpyPageContent safe={false}>
-        <SpyHeader>Aki Meets Her Friends</SpyHeader>
+        <SpyHeader>{conversation.nameTranslation}</SpyHeader>
         <SpyView className="gap-8">
           <SpyView>
             {/* <SpyText className="font-bold">Aki Meets Her Friends</SpyText> */}
             <SpyText className="text-secondary text-center font-bold">
-              アキ、友達と会う
+              {conversation.nameNative}
             </SpyText>
           </SpyView>
-          <SpyText className="text-primary">
-            Aki greets her friends at a café and chats about weekend plans.
-          </SpyText>
+          {conversation.description && (
+            <SpyText className="text-primary">
+              {conversation.description}
+            </SpyText>
+          )}
           <SpyView>
             <SpyView row className="gap-3">
               <SpyCheckbox
                 label="人"
-                value={isSpeakersVisible}
-                onValueChange={setSpeakersVisible}
+                value={configStore.isSpeakersVisible}
+                onValueChange={configStore.setSpeakersVisible}
               />
               <SpyCheckbox
                 label="あ"
-                value={isNativeVisible}
-                onValueChange={setNativeVisible}
+                value={configStore.isNativeVisible}
+                onValueChange={configStore.setNativeVisible}
               />
               <SpyCheckbox
                 label="〻"
-                value={isFuriganaVisible}
-                onValueChange={setFuriganaVisible}
+                value={configStore.isFuriganaVisible}
+                onValueChange={configStore.setFuriganaVisible}
               />
               <SpyCheckbox
                 label="A"
-                value={isTranslationsVisible}
-                onValueChange={setTranslationsVisible}
+                value={configStore.isTranslationsVisible}
+                onValueChange={configStore.setTranslationsVisible}
               />
               <SpyCheckbox
                 label="W"
-                value={isVocabularyVisible}
-                onValueChange={setVocabularyVisible}
+                value={configStore.isVocabularyVisible}
+                onValueChange={configStore.setVocabularyVisible}
               />
-              {isVocabularyVisible && (
+              {configStore.isVocabularyVisible && (
                 <>
                   <SpyCheckbox
                     label="W-"
-                    value={isLineVocabularyVisible}
-                    onValueChange={setLineVocabularyVisible}
+                    value={configStore.isLineVocabularyVisible}
+                    onValueChange={configStore.setLineVocabularyVisible}
                   />
                   <SpyCheckbox
                     label="W*"
-                    value={isAllVocabularyVisible}
-                    onValueChange={setAllVocabularyVisible}
+                    value={configStore.isAllVocabularyVisible}
+                    onValueChange={configStore.setAllVocabularyVisible}
                   />
                 </>
               )}
@@ -86,22 +81,22 @@ const DialoguePage = () => {
             <ConversationView
               conversation={conversation}
               config={{
-                native: isNativeVisible,
-                furigana: isFuriganaVisible,
+                native: configStore.isNativeVisible,
+                furigana: configStore.isFuriganaVisible,
                 hiragana: true,
-                translation: isTranslationsVisible,
-                speakers: isSpeakersVisible,
-                words: isVocabularyVisible && isLineVocabularyVisible,
+                translation: configStore.isTranslationsVisible,
+                speakers: configStore.isSpeakersVisible,
+                words: configStore.isVocabularyVisible && configStore.isLineVocabularyVisible,
               }}
             />
-            {isVocabularyVisible && isAllVocabularyVisible && (
+            {configStore.isVocabularyVisible && configStore.isAllVocabularyVisible && (
               <SpyView>
                 <SpyText className="font-bold mt-4 text-grey">
                   Vocabulary
                 </SpyText>
                 <VocabularyView
                   words={conversation.words}
-                  furiganaVisible={isFuriganaVisible}
+                  furiganaVisible={configStore.isFuriganaVisible}
                 />
               </SpyView>
             )}

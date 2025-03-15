@@ -3,8 +3,8 @@ import React from "react";
 import { Stack } from "expo-router";
 import useIsLargeScreen from "./useIsLargeScreen ";
 import { TAB_BAR_WIDTH } from "./constants";
-import { useCurrentThemeColors } from "./themeTypes";
 import { NativeStackNavigationOptions } from "@react-navigation/native-stack";
+import { useCurrentThemeColors } from "./themeHooks";
 
 type SpyTabStackProps = {
   children?: React.ReactNode;
@@ -31,7 +31,7 @@ const SpyStack = (props: SpyTabStackProps) => {
             margin: 0,
             height: "auto",
             position: "relative",
-            display: "flex"
+            display: "flex",
           },
         }}
       >
@@ -45,6 +45,19 @@ export const createDefaultStackOptions = (
   options?: NativeStackNavigationOptions
 ) => {
   return {
+    headerShown: false,
+    headerShadowVisible: false,
+    ...options,
+  };
+};
+
+export const createDefaultStackScreenOptions = (
+  options?: NativeStackNavigationOptions
+) => {
+  return {
+    contentStyle: {
+      height: "100%",
+    },
     headerShown: false,
     headerShadowVisible: false,
     ...options,

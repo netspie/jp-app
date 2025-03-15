@@ -3,7 +3,7 @@ import SpyBottomSheetTextInput from "@/components/spy/SpyBottomSheetTextInput";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyDarkModeSwitch from "@/components/spy/SpyDarkModeSwitch";
 import SpyIconButton from "@/components/spy/SpyIconButton";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
+import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useNavigation, useRootNavigationState } from "expo-router";

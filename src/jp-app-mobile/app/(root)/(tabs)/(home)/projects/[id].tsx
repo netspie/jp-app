@@ -6,12 +6,12 @@ import SpyView from "@/components/spy/SpyView";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import JPToolbar from "@/app/(root)/JPToolbar";
 import SpyHeader from "@/components/spy/SpyHeader";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SpyText from "@/components/spy/SpyText";
 import { twMerge } from "tailwind-merge";
 import { useLocalSearchParams } from "expo-router";
 import { getProject, getProjectCollections } from "../dialogues/data/getConv";
+import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 
 type CollectionViewProps = {
   id: string;

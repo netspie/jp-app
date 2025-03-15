@@ -7,7 +7,7 @@ import JPToolbar from "../../JPToolbar";
 import { Text } from "react-native";
 import SpyText from "@/components/spy/SpyText";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
+import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 
 const IndexPage = () => {
   var { currentThemeColors } = useCurrentThemeColors();

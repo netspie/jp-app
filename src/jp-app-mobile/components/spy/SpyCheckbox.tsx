@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useCurrentThemeColors } from "./themeTypes";
 import { Platform } from "react-native";
 import SpyView from "./SpyView";
 import Checkbox from "expo-checkbox";
 import SpyText from "./SpyText";
+import { useCurrentThemeColors } from "./themeHooks";
 
 export type SpyCheckboxProps = {
   label: string;

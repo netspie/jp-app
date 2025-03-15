@@ -1,15 +1,14 @@
 import SpyText from "@/components/spy/SpyText";
+import SpyView from "@/components/spy/SpyView";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { Platform, View } from "react-native";
-import {
+import { twMerge } from "tailwind-merge";
+import ConversationDTO, {
   ConversationConfigDTO,
-  ConversationDTO,
   ConversationLineDTO,
   SpeakerDTO,
   WordDTO,
 } from "./ConversationDTO";
-import SpyView from "@/components/spy/SpyView";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { twMerge } from "tailwind-merge";
 
 export type ConversationViewProps = {
   conversation: ConversationDTO;

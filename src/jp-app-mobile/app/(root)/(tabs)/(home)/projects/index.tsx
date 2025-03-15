@@ -5,7 +5,7 @@ import SpyHeader from "@/components/spy/SpyHeader";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
+import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import React from "react";
 import { View } from "react-native";

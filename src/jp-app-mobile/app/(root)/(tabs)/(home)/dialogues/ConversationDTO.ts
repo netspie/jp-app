@@ -1,11 +1,14 @@
-export type ConversationDTO = {
+type ConversationDTO = {
   id: string;
   nameNative: string;
   nameTranslation: string;
+  description?: string;
   speakers: SpeakerDTO[];
   lines: ConversationLineDTO[];
   words: WordDTO[];
 };
+
+export default ConversationDTO;
 
 export type SpeakerDTO = {
   nameNative: string;

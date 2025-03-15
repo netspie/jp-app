@@ -5,7 +5,6 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
-import { useCurrentThemeColors } from "@/components/spy/themeTypes";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -14,6 +13,7 @@ import {
   getCollection,
   getCollectionConversations,
 } from "../dialogues/data/getConv";
+import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 
 type DialogueViewProps = {
   id: string;

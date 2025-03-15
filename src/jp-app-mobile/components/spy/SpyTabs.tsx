@@ -1,14 +1,14 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { BottomTabNavigationOptions } from "@react-navigation/bottom-tabs";
 import { Href, Tabs } from "expo-router";
+import { View } from "react-native";
 import {
   getTotalTabBarHeight,
   TAB_BAR_HEIGHT,
   TAB_BAR_WIDTH,
 } from "./constants";
-import { Platform, View } from "react-native";
+import { useCurrentThemeColors } from "./themeHooks";
 import useIsLargeScreen from "./useIsLargeScreen ";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { useCurrentThemeColors } from "./themeTypes";
 
 const TabIcon = (
   {
