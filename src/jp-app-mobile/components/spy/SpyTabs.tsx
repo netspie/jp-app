@@ -22,7 +22,7 @@ const TabIcon = (
   },
   className?: string
 ) => (
-  <View className={`flex-1 flex flex-col items-center ${className}`}>
+  <View className={`flex-1 flex flex-col items-center h-full w-full bg-primary ${className}`}>
     <Ionicons
       name={icon}
       size={18}
