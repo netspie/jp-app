@@ -33,14 +33,14 @@ const JPToolbar = (props: JPToolbarProps) => {
             </SpyIconButton>
           )}
         </View>
-        <SpyDarkModeSwitch
+        {/* <SpyDarkModeSwitch
           mainColor={
             appColorScheme === "light"
               ? currentThemeColors.secondary
               : currentThemeColors.primary
           }
           disabledColor={currentThemeColors.greyLight}
-        />
+        /> */}
         {(props.addButton === undefined || props.addButton === true) && (
           <SpyIconButton
             className="bg-secondary"

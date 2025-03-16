@@ -13,7 +13,6 @@ type SpyTabStackProps = {
 
 const SpyStack = (props: SpyTabStackProps) => {
   const isLargeScreen = useIsLargeScreen();
-  const { currentThemeColors } = useCurrentThemeColors();
 
   return (
     <View
@@ -27,7 +26,6 @@ const SpyStack = (props: SpyTabStackProps) => {
         screenOptions={{
           headerShown: false,
           contentStyle: {
-            backgroundColor: currentThemeColors.background,
             margin: 0,
             height: "auto",
             position: "relative",
@@ -54,8 +52,11 @@ export const createDefaultStackOptions = (
 export const createDefaultStackScreenOptions = (
   options?: NativeStackNavigationOptions
 ): NativeStackNavigationOptions => {
+  const { currentThemeColors } = useCurrentThemeColors();
+
   return {
     contentStyle: {
+      backgroundColor: currentThemeColors.background,
       height: "100%",
     },
     headerShown: false,

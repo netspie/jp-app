@@ -9,11 +9,7 @@ const TabsLayout = () => {
     <SpyTabs>
       <Tabs.Screen
         name="(home)"
-        options={createDefaultTabScreenOptions("Home", "home")}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={createDefaultTabScreenOptions("Explore", "airplane")}
+        options={createDefaultTabScreenOptions("Learn", "book")}
       />
       <Tabs.Screen
         name="settings"

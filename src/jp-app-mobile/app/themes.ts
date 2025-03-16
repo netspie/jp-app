@@ -23,11 +23,23 @@ const jpThemes: DynamicThemes = {
       tertiary: tertiary,
       accent: "#f9c04a",
       grey: grey,
-      greyLight: "#121212",
-      paragraph: "#ffffff",
-      background: "#0B0B0B",
+      greyLight: "#F7F7F7",
+      paragraph: "black",
+      background: "white",
     },
   },
 };
 
+
 export default jpThemes;
+
+// dark: {
+//   primary: primary,
+//   secondary: secondary,
+//   tertiary: tertiary,
+//   accent: "#f9c04a",
+//   grey: grey,
+//   greyLight: "#bbbbbb",
+//   paragraph: "#ffffff",
+//   background: "#0B0B0B",
+// },
