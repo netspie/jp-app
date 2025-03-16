@@ -37,7 +37,7 @@ const DialoguePage = () => {
             </SpyText>
           )}
           <SpyView>
-            <SpyView row className="gap-3">
+            <SpyView row className={`gap-3 ${!configStore.isFuriganaVisible && "mb-2"}`}>
               <SpyCheckbox
                 label="人"
                 value={configStore.isSpeakersVisible}

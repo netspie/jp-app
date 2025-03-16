@@ -3,7 +3,7 @@ import SpyView from "@/components/spy/SpyView";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Platform, View } from "react-native";
 import { twMerge } from "tailwind-merge";
-import  {
+import {
   ConversationConfigDTO,
   ConversationDTO,
   ConversationLineDTO,
@@ -43,32 +43,23 @@ export const ConversationView = (props: ConversationViewProps) => {
             />
           )}
           {props.config.words && (
-            <View className="ml-7 mt-2">
+            <View className="ml-4 mt-2">
               {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
                 (wordIdx) =>
                   !isJapanesePunctuation(
                     props.conversation.words[wordIdx].native
                   ) && (
                     <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
-                      <CharacterWithEmptyFurigana
-                        furiganaSpacePreferred={false}
-                      >
-                        <Ionicons
-                          name="send"
-                          size={8}
-                          color={"black"}
-                          className="mb-1 mr-1"
-                        />
-                      </CharacterWithEmptyFurigana>
+                      <Bullet color="gray" className="mr-1" />
                       <WordView
                         wordId={wordIdx}
                         words={props.conversation.words}
                         furiganaVisible={props.config.furigana}
                         furiganaSpacePreferred={false}
-                        textClassName="text-gray-500"
+                        textClassName="text-gray-700"
                       />
-                      <SpyText className="">-</SpyText>
-                      <SpyText className="">
+                      <SpyText className="text-gray-700">-</SpyText>
+                      <SpyText className="text-gray-700">
                         {props.conversation.words[wordIdx].translation}
                       </SpyText>
                     </SpyView>
@@ -96,11 +87,7 @@ export const NativeConversationLineView = (
 ) => {
   return (
     <View className="flex-row">
-      <CharacterWithEmptyFurigana
-        furiganaSpacePreferred={props.furiganaSpacePreferred}
-      >
-        <Bullet />
-      </CharacterWithEmptyFurigana>
+      <Bullet />
       {props.speakersVisible && (
         <View className="flex-row items-end">
           <SpyText className="font-bold">
@@ -295,14 +282,19 @@ const SpySafeText = (props: SpySafeTextProps) => {
   );
 };
 
-type BulletProps = {};
+type BulletProps = {
+  color?: string;
+  className?: string;
+};
 
 export const Bullet = (props: BulletProps) => {
-  if (Platform.OS !== "web") {
-    return <SpyText>▫ </SpyText>;
-  }
-
-  return <SpyText className="-translate-y-[2px]">▪</SpyText>;
+  return (
+    <View
+      className={twMerge("mr-2 -translate-y-[5px] self-end", props.className)}
+    >
+      <Ionicons name="square" size={8} color={props.color ?? "black"} />
+    </View>
+  );
 };
 
 function distinctFlatMap<TFrom, TTo>(

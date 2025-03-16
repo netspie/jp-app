@@ -17,7 +17,7 @@ const VocabularyView = (props: VocabularyViewProps) => {
         if (isJapanesePunctuation(word.native)) return null;
         return (
           <View className="flex-row items-end" key={i}>
-            <Bullet />
+            <Bullet color="gray"/>
             <WordView
               wordId={i}
               words={props.words}
