@@ -41,17 +41,17 @@ const JPToolbar = (props: JPToolbarProps) => {
           }
           disabledColor={currentThemeColors.greyLight}
         /> */}
-        {(props.addButton === undefined || props.addButton === true) && (
+        {/* {(props.addButton === undefined || props.addButton === true) && (
           <SpyIconButton
             className="bg-secondary"
             onPress={() => bottomSheetModalRef.current?.present()}
           >
             <Ionicons name="add" size={20} color={"white"} />
           </SpyIconButton>
-        )}
-        <SpyIconButton className="bg-yellow-400">
+        )} */}
+        {/* <SpyIconButton className="bg-yellow-400">
           <Ionicons name="diamond" size={20} color={"white"} />
-        </SpyIconButton>
+        </SpyIconButton> */}
       </View>
       <SpyBottomSheetModal ref={bottomSheetModalRef} className="gap-4 pb-12">
         <SpyBottomSheetTextInput label="Name" />
