@@ -19,10 +19,10 @@ type SettingSwitchProps = {
 const SettingSwitch = (props: SettingSwitchProps) => {
   return (
     <SpyView row className="w-full items-center">
-      <SpyText className="w-10 text-2xl font-bold text-secondary">
+      <SpyText className="w-10 text-lg font-bold text-secondary">
         {props.iconCharacter}
       </SpyText>
-      <SpyText className="text-xl w-full shrink">
+      <SpyText className="w-full shrink">
         {props.children}
       </SpyText>
       <SpySwitch value={props.value} onValueChanged={props.onValueChanged} />
