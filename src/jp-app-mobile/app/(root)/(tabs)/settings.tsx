@@ -65,7 +65,7 @@ const SettingsPage = () => {
             value={configStore.isTranslationsVisible}
             onValueChanged={configStore.setTranslationsVisible}
           >
-            Furigana
+            Translations
           </SettingSwitch>
           <SettingSwitch
             iconCharacter="W"
