@@ -5,8 +5,8 @@ import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import SpyView from "@/components/spy/SpyView";
-import { useLocalSearchParams } from "expo-router";
-import React from "react";
+import { useFocusEffect, useLocalSearchParams } from "expo-router";
+import React, { useCallback, useState } from "react";
 import { useConversationConfigStore } from "./conversationConfigStore";
 import ConversationView from "./ConversationView";
 import getConversation from "./data/getConv";
@@ -16,11 +16,18 @@ const DialoguePage = () => {
   const { id } = useLocalSearchParams();
   if (typeof id !== "string") return;
 
-  const configStore = useConversationConfigStore()
+  const configStore = useConversationConfigStore();
   const conversation = getConversation(id);
 
+  const [refreshKey, setRefreshKey] = useState(0);
+  useFocusEffect(
+    useCallback(() => {
+      setRefreshKey((prev) => prev + 1); // Force re-render
+    }, [])
+  );
+
   return (
-    <SpySafeAreaView>
+    <SpySafeAreaView key={refreshKey}>
       <JPToolbar />
       <SpyPageContent safe={false}>
         <SpyHeader>{conversation.nameTranslation}</SpyHeader>
@@ -37,7 +44,10 @@ const DialoguePage = () => {
             </SpyText>
           )}
           <SpyView>
-            <SpyView row className={`gap-3 ${!configStore.isFuriganaVisible && "mb-2"}`}>
+            <SpyView
+              row
+              className={`gap-3 ${!configStore.isFuriganaVisible && "mb-2"}`}
+            >
               <SpyCheckbox
                 label="人"
                 value={configStore.isSpeakersVisible}
@@ -86,20 +96,23 @@ const DialoguePage = () => {
                 hiragana: true,
                 translation: configStore.isTranslationsVisible,
                 speakers: configStore.isSpeakersVisible,
-                words: configStore.isVocabularyVisible && configStore.isLineVocabularyVisible,
+                words:
+                  configStore.isVocabularyVisible &&
+                  configStore.isLineVocabularyVisible,
               }}
             />
-            {configStore.isVocabularyVisible && configStore.isAllVocabularyVisible && (
-              <SpyView>
-                <SpyText className="font-bold mt-4 text-grey">
-                  Vocabulary
-                </SpyText>
-                <VocabularyView
-                  words={conversation.words}
-                  furiganaVisible={configStore.isFuriganaVisible}
-                />
-              </SpyView>
-            )}
+            {configStore.isVocabularyVisible &&
+              configStore.isAllVocabularyVisible && (
+                <SpyView>
+                  <SpyText className="font-bold mt-4 text-grey">
+                    Vocabulary
+                  </SpyText>
+                  <VocabularyView
+                    words={conversation.words}
+                    furiganaVisible={configStore.isFuriganaVisible}
+                  />
+                </SpyView>
+              )}
           </SpyView>
         </SpyView>
       </SpyPageContent>

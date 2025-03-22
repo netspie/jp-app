@@ -7,7 +7,6 @@ import {
   ConversationConfigDTO,
   ConversationDTO,
   ConversationLineDTO,
-  SpeakerDTO,
   WordDTO,
 } from "./ConversationDTO";
 
@@ -27,7 +26,6 @@ export const ConversationView = (props: ConversationViewProps) => {
             <NativeConversationLineView
               key={i}
               line={line}
-              speakers={props.conversation.speakers}
               words={props.conversation.words}
               speakersVisible={props.config.speakers}
               furiganaVisible={props.config.furigana}
@@ -38,8 +36,8 @@ export const ConversationView = (props: ConversationViewProps) => {
             <TranslationConversationLineView
               key={props.conversation.lines.length + i}
               line={line}
-              speakers={props.conversation.speakers}
               speakersVisible={props.config.speakers}
+              words={props.conversation.words}
             />
           )}
           {props.config.words && (
@@ -52,7 +50,7 @@ export const ConversationView = (props: ConversationViewProps) => {
                     <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
                       <Bullet color="gray" className="mr-1" />
                       <WordView
-                        wordId={wordIdx}
+                        wordIdx={wordIdx}
                         words={props.conversation.words}
                         furiganaVisible={props.config.furigana}
                         furiganaSpacePreferred={false}
@@ -75,7 +73,6 @@ export const ConversationView = (props: ConversationViewProps) => {
 
 export type NativeConversationLineViewProps = {
   line: ConversationLineDTO;
-  speakers: SpeakerDTO[];
   words: WordDTO[];
   speakersVisible: boolean;
   furiganaVisible: boolean;
@@ -89,11 +86,19 @@ export const NativeConversationLineView = (
     <View className="flex-row">
       <Bullet />
       {props.speakersVisible && (
-        <View className="flex-row items-end">
-          <SpyText className="font-bold">
-            {props.speakers[props.line.speakerIdx].nameNative}
-          </SpyText>
-          <SpySafeText>:</SpySafeText>
+        <View className="flex-row">
+          <WordView
+            wordIdx={props.line.speakerIdx}
+            words={props.words}
+            furiganaVisible={props.furiganaVisible}
+            furiganaSpacePreferred={
+              props.furiganaVisible && props.furiganaSpacePreferred
+            }
+            textClassName="font-bold"
+          />
+          <View className="flex-row items-end">
+            <SpySafeText>:</SpySafeText>
+          </View>
         </View>
       )}
 
@@ -102,7 +107,7 @@ export const NativeConversationLineView = (
           {phrase.wordIdxs.map((wordId, j) => (
             <WordView
               key={`${i}-${j}`}
-              wordId={wordId}
+              wordIdx={wordId}
               words={props.words}
               furiganaVisible={props.furiganaVisible}
               furiganaSpacePreferred={
@@ -117,7 +122,7 @@ export const NativeConversationLineView = (
 };
 
 export type WordViewProps = {
-  wordId: number;
+  wordIdx: number;
   words: WordDTO[];
   furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
@@ -126,7 +131,7 @@ export type WordViewProps = {
 };
 
 export const WordView = (props: WordViewProps) => {
-  const word = props.words[props.wordId];
+  const word = props.words[props.wordIdx];
 
   return (
     <View className={twMerge("flex-row", props.className)}>
@@ -237,8 +242,8 @@ export default ConversationView;
 
 export type TranslationConversationLineViewProps = {
   line: ConversationLineDTO;
-  speakers: SpeakerDTO[];
   speakersVisible: boolean;
+  words: WordDTO[];
 };
 
 export const TranslationConversationLineView = (
@@ -250,7 +255,7 @@ export const TranslationConversationLineView = (
       {props.speakersVisible && (
         <View className="flex-row items-end">
           <SpyText className="font-bold">
-            {props.speakers[props.line.speakerIdx].nameTranslation}
+            {props.words[props.line.speakerIdx].translation}
           </SpyText>
           <SpyText className="font-bold mr-2">:</SpyText>
         </View>

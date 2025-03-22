@@ -27,7 +27,7 @@ const SettingSwitch = (props: SettingSwitchProps) => {
       </SpyText>
       <SpySwitch value={props.value} onValueChanged={props.onValueChanged} />
     </SpyView>
-  );
+  );``
 };
 
 const SettingsPage = () => {

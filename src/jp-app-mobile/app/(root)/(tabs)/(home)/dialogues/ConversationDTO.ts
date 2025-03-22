@@ -3,14 +3,8 @@ export type ConversationDTO = {
   nameNative: string;
   nameTranslation: string;
   description?: string;
-  speakers: SpeakerDTO[];
   lines: ConversationLineDTO[];
   words: WordDTO[];
-};
-
-export type SpeakerDTO = {
-  nameNative: string;
-  nameTranslation: string;
 };
 
 export type ConversationLineDTO = {

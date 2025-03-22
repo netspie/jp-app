@@ -4,13 +4,9 @@ const yutaConv_1_1: ConversationDTO = {
   id: "550e8400-e29b-41d4-a716-446655440000",
   nameNative: "これやってくれる？",
   nameTranslation: "Can you do this for me?",
-  speakers: [
-    { nameNative: "ナオト", nameTranslation: "Naoto" },
-    { nameNative: "ユリ", nameTranslation: "Yuri" },
-  ],
   lines: [
     {
-      speakerIdx: 0,
+      speakerIdx: 18,
       phrases: [
         {
           phraseId: 1,
@@ -21,7 +17,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 1,
+      speakerIdx: 19,
       phrases: [
         {
           phraseId: 2,
@@ -32,7 +28,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 0,
+      speakerIdx: 18,
       phrases: [
         {
           phraseId: 1,
@@ -49,7 +45,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 0,
+      speakerIdx: 19,
       phrases: [
         {
           phraseId: 2,
@@ -60,7 +56,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 1,
+      speakerIdx: 18,
       phrases: [
         {
           phraseId: 1,
@@ -71,7 +67,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 0,
+      speakerIdx: 19,
       phrases: [
         {
           phraseId: 2,
@@ -121,7 +117,25 @@ const yutaConv_1_1: ConversationDTO = {
     { wordId: 16, native: "。", translation: "dot '.'" },
     { wordId: 17, native: "？", translation: "question mark '?'" },
     { wordId: 18, native: "！", translation: "exclamation mark '!'" },
+    {
+      wordId: 19,
+      native: "ナオト",
+      translation: "Naoto",
+      fragments: [
+        ["直", "ナ"],
+        ["人", "オト"],
+      ],
+    },
+    {
+      wordId: 20,
+      native: "ユリ",
+      translation: "Yuri",
+      fragments: [
+        ["百", "ユ"],
+        ["合", "リ"],
+      ],
+    },
   ],
 };
 
-export default yutaConv_1_1; 
+export default yutaConv_1_1;
