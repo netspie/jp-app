@@ -1,3 +1,5 @@
+import { checkRole } from "@/auth/auth";
+import RedirectNormalUser from "@/auth/RedirectNormalUser";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
@@ -8,12 +10,20 @@ import React from "react";
 import JPToolbar from "../../JPToolbar";
 
 const IndexPage = () => {
+  const isAdmin = checkRole("admin");
+  if (!isAdmin) {
+    return <RedirectNormalUser />
+  }
+
   var { currentThemeColors } = useCurrentThemeColors();
   return (
     <SpySafeAreaView>
       <JPToolbar addButton={false} />
       <SpyPageContent safe={false}>
-        <SpyButton href="/projects" className="justify-center items-center gap-6 bg-primary">
+        <SpyButton
+          href="/projects"
+          className="justify-center items-center gap-6 bg-primary"
+        >
           <Ionicons
             name="rose"
             size={36}

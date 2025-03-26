@@ -1,4 +1,6 @@
 import JPToolbar from "@/app/(root)/JPToolbar";
+import { checkRole } from "@/auth/auth";
+import RedirectNormalUser from "@/auth/RedirectNormalUser";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyEditableList from "@/components/spy/SpyEditableList";
 import SpyHeader from "@/components/spy/SpyHeader";
@@ -7,6 +9,7 @@ import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
 import SpyText from "@/components/spy/SpyText";
 import { useCurrentThemeColors } from "@/components/spy/themeHooks";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Redirect, router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
@@ -34,6 +37,11 @@ const ProjectView = (props: ProjectViewProps) => {
 };
 
 const ProjectsPage = () => {
+  const isAdmin = checkRole("admin");
+  if (!isAdmin) {
+    return <RedirectNormalUser />
+  }
+
   return (
     <SpySafeAreaView>
       <JPToolbar />

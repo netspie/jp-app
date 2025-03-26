@@ -9,9 +9,11 @@ import SpyHeader from "@/components/spy/SpyHeader";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import SpyText from "@/components/spy/SpyText";
 import { twMerge } from "tailwind-merge";
-import { useLocalSearchParams } from "expo-router";
+import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { getProject, getProjectCollections } from "../dialogues/data/getConv";
 import { useCurrentThemeColors } from "@/components/spy/themeHooks";
+import { checkRole } from "@/auth/auth";
+import RedirectNormalUser from "@/auth/RedirectNormalUser";
 
 type CollectionViewProps = {
   id: string;
@@ -39,6 +41,11 @@ const CollectionView = (props: CollectionViewProps) => {
 };
 
 const ProjectPage = () => {
+  const isAdmin = checkRole("admin");
+  if (!isAdmin) {
+    return <RedirectNormalUser />;
+  }
+
   const { id } = useLocalSearchParams();
 
   if (typeof id !== "string") return;

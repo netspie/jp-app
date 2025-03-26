@@ -2,7 +2,7 @@ import React from "react";
 import SpyStack, { createDefaultStackScreenOptions } from "@/components/spy/SpyStack";
 import { Stack } from "expo-router";
 
-const RootLayout = () => {
+const CollectionsLayout = () => {
   return (
     <SpyStack>
       <Stack.Screen name="[id]" options={createDefaultStackScreenOptions()} />
@@ -10,4 +10,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default CollectionsLayout;
