@@ -1,8 +1,10 @@
 import { ConversationDTO } from "../ConversationDTO";
 import yutaConv_1_1 from "./yuta/1_1";
+import yutaConv_n_n from "./yuta/n_n";
 
 export const yutaConversations_1: Record<string, ConversationDTO> = {
-  "550e8400-e29b-41d4-a716-446655440000": yutaConv_1_1,
+  "a1b2c3d4-e5f6-7890-1234-567890abcdef": yutaConv_1_1,
+  "550e8400-e29b-41d4-a716-446655440000": yutaConv_n_n,
 };
 
 function getYutaConv(id: string) {

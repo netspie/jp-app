@@ -15,6 +15,7 @@ export type ConversationLineDTO = {
 export type PhraseDTO = {
   phraseId: number;
   native: string;
+  nativeWithKana?: string;
   translation: string;
   wordIdxs: number[];
 };
@@ -22,8 +23,8 @@ export type PhraseDTO = {
 export type WordDTO = {
   wordId: number;
   native: string;
+  nativeWithKana?: string;
   translation: string;
-  fragments?: string[][];
 };
 
 export type ConversationConfigDTO = {

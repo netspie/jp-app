@@ -42,7 +42,7 @@ export const ConversationView = (props: ConversationViewProps) => {
           )}
           {props.config.words && (
             <View className="ml-4 mt-2">
-              {distinctFlatMap(line.phrases, (x) => x.defWordIdxs).map(
+              {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
                 (wordIdx) =>
                   !isJapanesePunctuation(
                     props.conversation.words[wordIdx].native
@@ -86,7 +86,7 @@ export const NativeConversationLineView = (
     <View className="flex-row">
       <Bullet />
       {props.speakersVisible && (
-        <View className="flex-row">
+        <View className="flex-row items-end">
           <WordView
             wordIdx={props.line.speakerIdx}
             words={props.words}
@@ -103,18 +103,21 @@ export const NativeConversationLineView = (
       )}
 
       {props.line.phrases.map((phrase, i) => (
-        <View key={i} className="flex-row">
-          {phrase.phraseWordIdxs.map((wordId, j) => (
-            <WordView
-              key={`${i}-${j}`}
-              wordIdx={wordId}
-              words={props.words}
-              furiganaVisible={props.furiganaVisible}
-              furiganaSpacePreferred={
-                props.furiganaVisible && props.furiganaSpacePreferred
-              }
-            />
-          ))}
+        <View key={i} className="flex-row items-end">
+          {getFragments(phrase.nativeWithKana ?? phrase.native).map(
+            (fragment, j) => (
+              <CharacterWithEmptyFurigana
+                furiganaSpacePreferred={props.furiganaSpacePreferred}
+              >
+                <FragmentView
+                  key={`${i}-${j}`}
+                  fragment={fragment}
+                  furiganaVisible={props.furiganaVisible}
+                  furiganaSpacePreferred={props.furiganaSpacePreferred}
+                />
+              </CharacterWithEmptyFurigana>
+            )
+          )}
         </View>
       ))}
     </View>
@@ -135,7 +138,7 @@ export const WordView = (props: WordViewProps) => {
 
   return (
     <View className={twMerge("flex-row", props.className)}>
-      {word.fragments === undefined &&
+      {word.nativeWithKana === undefined &&
         (props.furiganaVisible ? (
           <CharacterWithEmptyFurigana
             furiganaSpacePreferred={props.furiganaSpacePreferred}
@@ -146,8 +149,8 @@ export const WordView = (props: WordViewProps) => {
         ) : (
           <SpyText className={props.textClassName}>{word.native}</SpyText>
         ))}
-      {word.fragments &&
-        word.fragments.map((fragment, i) => (
+      {word.nativeWithKana &&
+        getFragments(word.nativeWithKana ?? word.native).map((fragment, i) => (
           <FragmentView
             key={i}
             fragment={fragment}
@@ -221,17 +224,13 @@ export function CharacterWithEmptyFurigana(props: CharacterWithFuriganaProps) {
 }
 
 function hasConversationAnyFurigana(conv: ConversationDTO) {
-  return conv.lines.some((x) => hasConversationLineAnyFurigana(x, conv.words));
+  return conv.lines.some(hasConversationLineAnyFurigana);
 }
 
-function hasConversationLineAnyFurigana(
-  line: ConversationLineDTO,
-  words: WordDTO[]
-) {
-  let wordIdxs = line.phrases.flatMap((x) => x.phraseWordIdxs);
-  wordIdxs = [...new Set(wordIdxs)];
-
-  return words.some((word) => word.fragments && word.fragments.length > 1);
+function hasConversationLineAnyFurigana(line: ConversationLineDTO) {
+  return line.phrases
+    .flatMap((x) => x.nativeWithKana)
+    .some((x) => x !== undefined);
 }
 
 export default ConversationView;
@@ -315,4 +314,28 @@ export function isJapanesePunctuation(char: string): boolean {
   const japanesePunctuationRegex =
     /^[、。・「」『』（）［］｛｝〈〉《》【】！？：；〜…—￥]+$/;
   return japanesePunctuationRegex.test(char);
+}
+
+function getFragments(phrase: string): string[][] {
+  let i = 0;
+  let result: string[][] = [];
+
+  while (i < phrase.length) {
+    if (phrase[i] === "(") {
+      let j = i + 1;
+      let kana = "";
+      while (phrase[j] !== ")") {
+        kana += phrase[j];
+        j++;
+      }
+      i = j;
+      result.at(-1)?.push(kana);
+    } else {
+      result.push([phrase[i]]);
+    }
+
+    i++;
+  }
+
+  return result;
 }

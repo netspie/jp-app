@@ -1,148 +1,95 @@
 import { ConversationDTO } from "../../ConversationDTO";
 
 const yutaConv_1_1: ConversationDTO = {
-  id: "550e8400-e29b-41d4-a716-446655440000",
-  nameNative: "これやってくれる？",
-  nameTranslation: "Can you do this for me?",
+  id: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+  nameNative: "仕事が終わらない vs 終わった",
+  nameTranslation: "Work never ends vs. Finished work",
   lines: [
     {
-      speakerIdx: 18,
+      speakerIdx: 22, // Mina
       phrases: [
         {
           phraseId: 1,
-          native: "これやってくれる？",
-          translation: "Can you do this for me?",
-          phraseWordIdxs: [0, 1, 2, 16],
-          defWordIdxs: [0, 20, 1, 2, 16],
+          native: "あー仕事終わらない…。",
+          nativeWithKana: "あー仕(し)事(ごと)終(お)わらない…。",
+          translation: "Ahhh this job never ends...",
+          wordIdxs: [0, 6, 7, 8, 9, 10],
         },
       ],
     },
     {
-      speakerIdx: 19,
+      speakerIdx: 23, // Erika
       phrases: [
         {
           phraseId: 2,
-          native: "えー、自分でやって。",
-          translation: "Eh? Do it yourself.",
-          phraseWordIdxs: [3, 14, 4, 5, 1, 15],
-          defWordIdxs: [3, 14, 4, 5, 1, 15],
+          native: "私もう終わった～！",
+          nativeWithKana: "私(わたし)もう終(お)わった～！",
+          translation: "I've finished mine!",
+          wordIdxs: [11, 12, 7, 13, 14],
         },
       ],
     },
     {
-      speakerIdx: 18,
+      speakerIdx: 22, // Mina
       phrases: [
         {
-          phraseId: 1,
-          native: "やってよ！",
-          translation: "Do it!",
-          phraseWordIdxs: [1, 6, 17],
-          defWordIdxs: [20, 1, 6, 17],
-        },
-        {
-          phraseId: 1,
-          native: "いいじゃん！",
-          translation: "Come on!",
-          phraseWordIdxs: [7, 8, 17],
-          defWordIdxs: [7, 8, 17],
+          phraseId: 3,
+          native: "ええー！すごい！",
+          translation: "What?! That's amazing!",
+          wordIdxs: [15, 16, 14],
         },
       ],
     },
     {
-      speakerIdx: 19,
+      speakerIdx: 23, // Erika
       phrases: [
         {
-          phraseId: 2,
-          native: "自分でできるでしょ。",
-          translation: "You can do it yourself, right?",
-          phraseWordIdxs: [4, 5, 9, 10, 15],
-          defWordIdxs: [4, 5, 9, 10, 15],
+          phraseId: 4,
+          native: "あーもう帰りたい…。",
+          nativeWithKana: "あーもう帰(かえ)りたい…。",
+          translation: "I want to go home already....",
+          wordIdxs: [0, 7, 12, 3, 5],
         },
       ],
     },
     {
-      speakerIdx: 18,
+      speakerIdx: 22, // Mina
       phrases: [
         {
-          phraseId: 1,
-          native: "できない！",
-          translation: "I can't!",
-          phraseWordIdxs: [9, 17],
-          defWordIdxs: [9, 17],
-        },
-      ],
-    },
-    {
-      speakerIdx: 19,
-      phrases: [
-        {
-          phraseId: 2,
-          native: "子供みたい…。",
-          translation: "You're like a child…",
-          phraseWordIdxs: [12, 13, 15],
-          defWordIdxs: [12, 13, 15],
+          phraseId: 5,
+          native: "やってもらいたい…。私の仕事も…。",
+          nativeWithKana: "やってもらいたい…。私(わたし)の仕(し)事(ごと)も…。",
+          translation: "I want you to do my job too....",
+          wordIdxs: [18, 19, 8, 20, 6, 21, 10],
         },
       ],
     },
   ],
   words: [
-    { wordId: 0, native: "これ", translation: "this" },
-    { wordId: 1, native: "やって", translation: "Do!; Do it!" },
-    {
-      wordId: 2,
-      native: "くれる",
-      translation: "to do something as a favor",
-    },
-    { wordId: 3, native: "えー", translation: "eh?; what?; well; yes" },
-    {
-      wordId: 4,
-      native: "自分",
-      translation: "oneself",
-      fragments: [
-        ["自", "じ"],
-        ["分", "ぶん"],
-      ],
-    },
-    { wordId: 5, native: "で", translation: "in; at; from; by" },
-    { wordId: 6, native: "よ", translation: "ASSERTION; REMINDING" },
-    { wordId: 7, native: "いい", translation: "good" },
-    { wordId: 8, native: "じゃん", translation: "isn't it" },
-    { wordId: 9, native: "できない", translation: "to NOT be able to do" },
-    { wordId: 10, native: "でしょ", translation: "I guess; isn't it?" },
-    { wordId: 11, native: "ない", translation: "not; nonexistent" },
-    {
-      wordId: 12,
-      native: "子供",
-      translation: "child",
-      fragments: [
-        ["子", "こ"],
-        ["供", "ども"],
-      ],
-    },
-    { wordId: 13, native: "みたい", translation: "like" },
-    { wordId: 14, native: "、", translation: "delimiter ','" },
-    { wordId: 15, native: "。", translation: "dot '.'" },
-    { wordId: 16, native: "？", translation: "question mark '?'" },
-    { wordId: 17, native: "！", translation: "exclamation mark '!'" },
-    {
-      wordId: 18,
-      native: "ナオト",
-      translation: "Naoto",
-      fragments: [
-        ["直", "ナ"],
-        ["人", "オト"],
-      ],
-    },
-    {
-      wordId: 19,
-      native: "ユリ",
-      translation: "Yuri",
-      fragments: [
-        ["百", "ユ"],
-        ["合", "リ"],
-      ],
-    },
-    { wordId: 20, native: "やる", translation: "to do" },
+    { wordId: 0, native: "あー", translation: "Ahhh" },
+    { wordId: 1, native: "仕事", translation: "work; job" },
+    { wordId: 2, native: "終わら", translation: "not finish" },
+    { wordId: 3, native: "…", translation: "..." },
+    { wordId: 4, native: "ない", translation: "not; nonexistent" },
+    { wordId: 5, native: "。", translation: "dot '.'" },
+    { wordId: 6, native: "仕事", nativeWithKana: "仕(し)事(ごと)", translation: "work, job; to work" },
+    { wordId: 7, native: "もう", translation: "already; soon; again" },
+    { wordId: 8, native: "終わっ", translation: "finished" },
+    { wordId: 9, native: "た", translation: "past tense marker" },
+    { wordId: 10, native: "～！", translation: "exclamation with elongation" },
+    { wordId: 11, native: "私", translation: "I" },
+    { wordId: 12, native: "帰りたい", translation: "want to return" },
+    { wordId: 13, native: "～", translation: "elongation mark" },
+    { wordId: 14, native: "ええ", translation: "eh?; what?; well; yes" },
+    { wordId: 15, native: "すごい", translation: "fantastic; wonderful; terrible" },
+    { wordId: 16, native: "も", translation: "too; also" },
+    { wordId: 17, native: "帰る", translation: "to return" },
+    { wordId: 18, native: "やっ", translation: "do" },
+    { wordId: 19, native: "てもらい", translation: "receive a favor" },
+    { wordId: 20, native: "たい", translation: "want to" },
+    { wordId: 21, native: "の", translation: "possessive particle" },
+    { wordId: 22, native: "ミナ", translation: "Mina" },
+    { wordId: 23, native: "エリカ", translation: "Erika" },
   ],
 };
 
