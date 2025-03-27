@@ -14,6 +14,7 @@ import {
   getCollectionConversations,
 } from "../dialogues/data/getConv";
 import { useCurrentThemeColors } from "@/components/spy/themeHooks";
+import { authorize } from "@/auth/auth";
 
 type DialogueViewProps = {
   id: string;
@@ -44,6 +45,9 @@ const DialogueView = (props: DialogueViewProps) => {
 };
 
 const CollectionPage = () => {
+  const authRes = authorize();
+  if (authRes !== undefined) return authRes;
+
   const { id } = useLocalSearchParams();
 
   if (typeof id !== "string") return;

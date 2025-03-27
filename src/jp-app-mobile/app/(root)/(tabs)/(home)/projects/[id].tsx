@@ -12,8 +12,9 @@ import { twMerge } from "tailwind-merge";
 import { Redirect, router, useLocalSearchParams } from "expo-router";
 import { getProject, getProjectCollections } from "../dialogues/data/getConv";
 import { useCurrentThemeColors } from "@/components/spy/themeHooks";
-import { checkRole } from "@/auth/auth";
+import { authorize, checkRole } from "@/auth/auth";
 import RedirectNormalUser from "@/auth/RedirectNormalUser";
+import { useAuth } from "@clerk/clerk-expo";
 
 type CollectionViewProps = {
   id: string;
@@ -41,10 +42,8 @@ const CollectionView = (props: CollectionViewProps) => {
 };
 
 const ProjectPage = () => {
-  const isAdmin = checkRole("admin");
-  if (!isAdmin) {
-    return <RedirectNormalUser />;
-  }
+  const authRes = authorize("admin");
+  if (authRes !== undefined) return authRes;
 
   const { id } = useLocalSearchParams();
 

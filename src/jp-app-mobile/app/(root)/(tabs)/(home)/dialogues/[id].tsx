@@ -11,8 +11,12 @@ import { useConversationConfigStore } from "./conversationConfigStore";
 import ConversationView from "./ConversationView";
 import getConversation from "./data/getConv";
 import VocabularyView from "./VocabularyView";
+import { authorize } from "@/auth/auth";
 
 const DialoguePage = () => {
+  const authRes = authorize();
+  if (authRes !== undefined) return authRes;
+
   const { id } = useLocalSearchParams();
   if (typeof id !== "string") return;
 

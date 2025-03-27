@@ -1,4 +1,4 @@
-import { checkRole } from "@/auth/auth";
+import { authorize, checkRole } from "@/auth/auth";
 import RedirectNormalUser from "@/auth/RedirectNormalUser";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyPageContent from "@/components/spy/SpyPageContent";
@@ -10,10 +10,8 @@ import React from "react";
 import JPToolbar from "../../JPToolbar";
 
 const IndexPage = () => {
-  const isAdmin = checkRole("admin");
-  if (!isAdmin) {
-    return <RedirectNormalUser />
-  }
+  const authRes = authorize("admin");
+  if (authRes !== undefined) return authRes;
 
   var { currentThemeColors } = useCurrentThemeColors();
   return (

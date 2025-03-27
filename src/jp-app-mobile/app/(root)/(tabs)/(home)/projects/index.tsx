@@ -1,5 +1,5 @@
 import JPToolbar from "@/app/(root)/JPToolbar";
-import { checkRole } from "@/auth/auth";
+import { authorize, checkRole } from "@/auth/auth";
 import RedirectNormalUser from "@/auth/RedirectNormalUser";
 import SpyButton from "@/components/spy/SpyButton";
 import SpyEditableList from "@/components/spy/SpyEditableList";
@@ -37,10 +37,8 @@ const ProjectView = (props: ProjectViewProps) => {
 };
 
 const ProjectsPage = () => {
-  const isAdmin = checkRole("admin");
-  if (!isAdmin) {
-    return <RedirectNormalUser />
-  }
+  const authRes = authorize("admin");
+  if (authRes !== undefined) return authRes;
 
   return (
     <SpySafeAreaView>
