@@ -1,15 +1,16 @@
+import { authorize } from "@/auth/auth";
+import SpyButton from "@/components/spy/SpyButton";
 import SpyHeader from "@/components/spy/SpyHeader";
 import SpyPageContent from "@/components/spy/SpyPageContent";
 import SpySafeAreaView from "@/components/spy/SpySafeAreaView";
-import React from "react";
-import { useWindowDimensions, View } from "react-native";
-import JPToolbar from "../JPToolbar";
-import SpyView from "@/components/spy/SpyView";
 import SpySwitch from "@/components/spy/SpySwitch";
 import SpyText from "@/components/spy/SpyText";
+import SpyView from "@/components/spy/SpyView";
+import { useClerk } from "@clerk/clerk-react";
+import React from "react";
+import { View } from "react-native";
+import JPToolbar from "../JPToolbar";
 import { useConversationConfigStore } from "./(home)/dialogues/conversationConfigStore";
-import { SignOutButton, useClerk } from "@clerk/clerk-react";
-import SpyButton from "@/components/spy/SpyButton";
 
 type SettingSwitchProps = {
   iconCharacter: string;
@@ -28,17 +29,19 @@ const SettingSwitch = (props: SettingSwitchProps) => {
       <SpySwitch value={props.value} onValueChanged={props.onValueChanged} />
     </SpyView>
   );
-  ``;
 };
 
 const SettingsPage = () => {
+  const authRes = authorize();
+  if (authRes !== undefined) return authRes;
+
   const configStore = useConversationConfigStore();
   const { signOut } = useClerk()
 
   return (
-    <SpySafeAreaView>
+    <SpySafeAreaView className="h-full bg-white">
       <JPToolbar addButton={false} />
-      <SpyPageContent safe={false}>
+      <SpyPageContent safe={false} className="bg-white">
         <SpyHeader>Settings</SpyHeader>
         <View className="gap-8">
           <SpyView className="gap-4">

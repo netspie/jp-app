@@ -42,7 +42,7 @@ export const ConversationView = (props: ConversationViewProps) => {
           )}
           {props.config.words && (
             <View className="ml-4 mt-2">
-              {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
+              {distinctFlatMap(line.phrases, (x) => x.defWordIdxs).map(
                 (wordIdx) =>
                   !isJapanesePunctuation(
                     props.conversation.words[wordIdx].native
@@ -104,7 +104,7 @@ export const NativeConversationLineView = (
 
       {props.line.phrases.map((phrase, i) => (
         <View key={i} className="flex-row">
-          {phrase.wordIdxs.map((wordId, j) => (
+          {phrase.phraseWordIdxs.map((wordId, j) => (
             <WordView
               key={`${i}-${j}`}
               wordIdx={wordId}
@@ -228,7 +228,7 @@ function hasConversationLineAnyFurigana(
   line: ConversationLineDTO,
   words: WordDTO[]
 ) {
-  let wordIdxs = line.phrases.flatMap((x) => x.wordIdxs);
+  let wordIdxs = line.phrases.flatMap((x) => x.phraseWordIdxs);
   wordIdxs = [...new Set(wordIdxs)];
 
   return words.some((word) => word.fragments && word.fragments.length > 1);
