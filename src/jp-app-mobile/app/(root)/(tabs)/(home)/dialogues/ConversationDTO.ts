@@ -17,7 +17,7 @@ export type PhraseDTO = {
   native: string;
   nativeWithKana?: string;
   translation: string;
-  wordIdxs: number[];
+  wordIds: number[];
 };
 
 export type WordDTO = {

@@ -47,7 +47,7 @@ export const ConversationView = (props: ConversationViewProps) => {
           )}
           {props.config.words && (
             <View className="ml-4 mt-2">
-              {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
+              {distinctFlatMap(line.phrases, (x) => x.wordIds).map(
                 (wordId) =>
                   !isJapanesePunctuation(
                     props.conversation.words[wordId].native
