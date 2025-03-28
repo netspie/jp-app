@@ -19,7 +19,7 @@ const VocabularyView = (props: VocabularyViewProps) => {
           <View className="flex-row items-end" key={i}>
             <Bullet color="gray"/>
             <WordView
-              wordIdx={i}
+              wordId={i}
               words={props.words}
               furiganaVisible={props.furiganaVisible}
               furiganaSpacePreferred={false}

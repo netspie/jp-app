@@ -6,7 +6,7 @@ const yutaConv_n_n: ConversationDTO = {
   nameTranslation: "Can you do this for me?",
   lines: [
     {
-      speakerIdx: 18,
+      speakerId: 18,
       phrases: [
         {
           phraseId: 1,
@@ -17,7 +17,7 @@ const yutaConv_n_n: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 19,
+      speakerId: 19,
       phrases: [
         {
           phraseId: 2,
@@ -29,7 +29,7 @@ const yutaConv_n_n: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 18,
+      speakerId: 18,
       phrases: [
         {
           phraseId: 1,
@@ -46,7 +46,7 @@ const yutaConv_n_n: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 19,
+      speakerId: 19,
       phrases: [
         {
           phraseId: 2,
@@ -58,7 +58,7 @@ const yutaConv_n_n: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 18,
+      speakerId: 18,
       phrases: [
         {
           phraseId: 1,
@@ -69,7 +69,7 @@ const yutaConv_n_n: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 19,
+      speakerId: 19,
       phrases: [
         {
           phraseId: 2,

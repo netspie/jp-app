@@ -18,6 +18,11 @@ export type ConversationViewProps = {
 export const ConversationView = (props: ConversationViewProps) => {
   const hasAnyFurigana = hasConversationAnyFurigana(props.conversation);
 
+  const words: Record<number, WordDTO> = props.conversation.words.reduce((acc, word) => {
+    acc[word.wordId] = word;
+    return acc;
+  }, {} as Record<number, WordDTO>);
+
   return (
     <>
       {props.conversation.lines.map((line, i) => (
@@ -26,7 +31,7 @@ export const ConversationView = (props: ConversationViewProps) => {
             <NativeConversationLineView
               key={i}
               line={line}
-              words={props.conversation.words}
+              words={words}
               speakersVisible={props.config.speakers}
               furiganaVisible={props.config.furigana}
               furiganaSpacePreferred={props.config.furigana && hasAnyFurigana}
@@ -37,28 +42,28 @@ export const ConversationView = (props: ConversationViewProps) => {
               key={props.conversation.lines.length + i}
               line={line}
               speakersVisible={props.config.speakers}
-              words={props.conversation.words}
+              words={words}
             />
           )}
           {props.config.words && (
             <View className="ml-4 mt-2">
               {distinctFlatMap(line.phrases, (x) => x.wordIdxs).map(
-                (wordIdx) =>
+                (wordId) =>
                   !isJapanesePunctuation(
-                    props.conversation.words[wordIdx].native
+                    props.conversation.words[wordId].native
                   ) && (
-                    <SpyView key={wordIdx} row className="items-end gap-1 mb-1">
+                    <SpyView key={wordId} row className="items-end gap-1 mb-1">
                       <Bullet color="gray" className="mr-1" />
                       <WordView
-                        wordIdx={wordIdx}
-                        words={props.conversation.words}
+                        wordId={wordId}
+                        words={words}
                         furiganaVisible={props.config.furigana}
                         furiganaSpacePreferred={false}
                         textClassName="text-gray-700"
                       />
                       <SpyText className="text-gray-700">-</SpyText>
                       <SpyText className="text-gray-700">
-                        {props.conversation.words[wordIdx].translation}
+                        {words[wordId].translation}
                       </SpyText>
                     </SpyView>
                   )
@@ -73,7 +78,7 @@ export const ConversationView = (props: ConversationViewProps) => {
 
 export type NativeConversationLineViewProps = {
   line: ConversationLineDTO;
-  words: WordDTO[];
+  words: Record<number, WordDTO>;
   speakersVisible: boolean;
   furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
@@ -88,7 +93,7 @@ export const NativeConversationLineView = (
       {props.speakersVisible && (
         <View className="flex-row items-end">
           <WordView
-            wordIdx={props.line.speakerIdx}
+            wordId={props.line.speakerId}
             words={props.words}
             furiganaVisible={props.furiganaVisible}
             furiganaSpacePreferred={
@@ -107,6 +112,7 @@ export const NativeConversationLineView = (
           {getFragments(phrase.nativeWithKana ?? phrase.native).map(
             (fragment, j) => (
               <CharacterWithEmptyFurigana
+                key={j}
                 furiganaSpacePreferred={props.furiganaSpacePreferred}
               >
                 <FragmentView
@@ -125,8 +131,8 @@ export const NativeConversationLineView = (
 };
 
 export type WordViewProps = {
-  wordIdx: number;
-  words: WordDTO[];
+  wordId: number;
+  words: Record<number, WordDTO>;
   furiganaVisible: boolean;
   furiganaSpacePreferred: boolean;
   className?: string;
@@ -134,22 +140,22 @@ export type WordViewProps = {
 };
 
 export const WordView = (props: WordViewProps) => {
-  const word = props.words[props.wordIdx];
+  const word = props.words[props.wordId];
 
   return (
     <View className={twMerge("flex-row", props.className)}>
-      {word.nativeWithKana === undefined &&
+      {word?.nativeWithKana === undefined &&
         (props.furiganaVisible ? (
           <CharacterWithEmptyFurigana
             furiganaSpacePreferred={props.furiganaSpacePreferred}
             className={props.textClassName}
           >
-            {word.native}
+            {word?.native}
           </CharacterWithEmptyFurigana>
         ) : (
-          <SpyText className={props.textClassName}>{word.native}</SpyText>
+          <SpyText className={props.textClassName}>{word?.native}</SpyText>
         ))}
-      {word.nativeWithKana &&
+      {word?.nativeWithKana &&
         getFragments(word.nativeWithKana ?? word.native).map((fragment, i) => (
           <FragmentView
             key={i}
@@ -242,7 +248,7 @@ export default ConversationView;
 export type TranslationConversationLineViewProps = {
   line: ConversationLineDTO;
   speakersVisible: boolean;
-  words: WordDTO[];
+  words: Record<number, WordDTO>;
 };
 
 export const TranslationConversationLineView = (
@@ -254,7 +260,7 @@ export const TranslationConversationLineView = (
       {props.speakersVisible && (
         <View className="flex-row items-end">
           <SpyText className="font-bold">
-            {props.words[props.line.speakerIdx].translation}
+            {props.words[props.line.speakerId].translation}
           </SpyText>
           <SpyText className="font-bold mr-2">:</SpyText>
         </View>

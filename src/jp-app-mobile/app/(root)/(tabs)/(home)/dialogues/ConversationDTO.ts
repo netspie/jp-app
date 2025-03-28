@@ -8,7 +8,7 @@ export type ConversationDTO = {
 };
 
 export type ConversationLineDTO = {
-  speakerIdx: number;
+  speakerId: number;
   phrases: PhraseDTO[];
 };
 

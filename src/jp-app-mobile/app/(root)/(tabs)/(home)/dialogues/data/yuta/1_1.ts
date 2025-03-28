@@ -6,7 +6,7 @@ const yutaConv_1_1: ConversationDTO = {
   nameTranslation: "Work never ends vs. Finished work",
   lines: [
     {
-      speakerIdx: 22, // Mina
+      speakerId: 22, // Mina
       phrases: [
         {
           phraseId: 1,
@@ -18,7 +18,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 23, // Erika
+      speakerId: 23, // Erika
       phrases: [
         {
           phraseId: 2,
@@ -30,7 +30,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 22, // Mina
+      speakerId: 22, // Mina
       phrases: [
         {
           phraseId: 3,
@@ -41,7 +41,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 23, // Erika
+      speakerId: 23, // Erika
       phrases: [
         {
           phraseId: 4,
@@ -53,7 +53,7 @@ const yutaConv_1_1: ConversationDTO = {
       ],
     },
     {
-      speakerIdx: 22, // Mina
+      speakerId: 22, // Mina
       phrases: [
         {
           phraseId: 5,
