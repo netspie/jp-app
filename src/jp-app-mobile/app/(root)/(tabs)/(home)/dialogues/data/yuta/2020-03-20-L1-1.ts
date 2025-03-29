@@ -1,8 +1,8 @@
 import { ConversationDTO } from "../../ConversationDTO";
 
-const yutaConv_n_n: ConversationDTO = {
+const yutaConv_2020_03_20_L1_1: ConversationDTO = {
   id: "550e8400-e29b-41d4-a716-446655440000",
-  nameNative: "これやってくれる？",
+  nameNative: "2020年 3月 30日 Level 1 - これやってくれる？",
   nameTranslation: "Can you do this for me?",
   lines: [
     {
@@ -128,4 +128,4 @@ const yutaConv_n_n: ConversationDTO = {
   ],
 };
 
-export default yutaConv_n_n;
+export default yutaConv_2020_03_20_L1_1;

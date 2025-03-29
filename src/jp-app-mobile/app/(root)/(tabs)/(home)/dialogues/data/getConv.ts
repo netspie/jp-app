@@ -1,10 +1,10 @@
 import { ConversationDTO } from "../ConversationDTO";
-import yutaConv_1_1 from "./yuta/1_1";
-import yutaConv_n_n from "./yuta/n_n";
+import yutaConv_2020_03_20_L1_1 from "./yuta/2020-03-20-L1-1";
+import yutaConv_2020_04_06_L1_1 from "./yuta/2020-04-06-L1-1";
 
 export const yutaConversations_1: Record<string, ConversationDTO> = {
-  "a1b2c3d4-e5f6-7890-1234-567890abcdef": yutaConv_1_1,
-  "550e8400-e29b-41d4-a716-446655440000": yutaConv_n_n,
+  "550e8400-e29b-41d4-a716-446655440000": yutaConv_2020_03_20_L1_1,
+  "a1b2c3d4-e5f6-7890-1234-567890abcdef": yutaConv_2020_04_06_L1_1,
 };
 
 function getYutaConv(id: string) {

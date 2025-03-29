@@ -1,9 +1,9 @@
 import { ConversationDTO } from "../../ConversationDTO";
 
-const yutaConv_1_1: ConversationDTO = {
+const yutaConv_2020_04_06_L1_1: ConversationDTO = {
   id: "a1b2c3d4-e5f6-7890-1234-567890abcdef",
-  nameNative: "仕事が終わらない vs 終わった",
-  nameTranslation: "Work never ends vs. Finished work",
+  nameNative: "2020年 4月 6日 - Level 1 - 仕事が終わらない",
+  nameTranslation: "Work does not end",
   lines: [
     {
       speakerId: 22, // Mina
@@ -89,4 +89,4 @@ const yutaConv_1_1: ConversationDTO = {
   ],
 };
 
-export default yutaConv_1_1;
+export default yutaConv_2020_04_06_L1_1;
